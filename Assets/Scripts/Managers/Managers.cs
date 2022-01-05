@@ -1,0 +1,59 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[RequireComponent(typeof(MissionManager))]
+[RequireComponent(typeof(AudioManager))]
+public class Managers : MonoBehaviour
+{
+    public static AudioManager Audio { get; private set; }
+    public static MissionManager Mission { get; private set; }
+    private List<IGameManager> _startSequence; // список диспетчеров, который просматривается в цикле во время стартовой последовательности
+
+    private void Awake() {
+        DontDestroyOnLoad(gameObject); // команда Unity для сохранения объекта между сценами
+
+        Audio = GetComponent<AudioManager>();
+        Mission = GetComponent<MissionManager>();
+
+        _startSequence = new List<IGameManager>();
+        _startSequence.Add(Mission);
+        _startSequence.Add(Audio);
+
+        StartCoroutine(StartupManagers()); // асинхронно загружаем стартовую последовательность
+    }
+
+    private IEnumerator StartupManagers() {
+        NetworkService network = new NetworkService();
+
+        foreach(IGameManager manager in _startSequence) {
+            manager.Startup(network);
+        }
+
+        yield return null;
+
+        int numModules = _startSequence.Count;
+        int numReady = 0;
+
+        while(numReady < numModules) { // продолжаем цикл, пока не начнут работать все диспетчеры
+            int lastReady = numReady;
+            numReady = 0;
+
+            foreach(IGameManager manager in _startSequence) {
+                if (manager.status == ManagerStatus.Started) {
+                    numReady++;
+                }
+            }
+
+            if (numReady > lastReady) {
+                Debug.Log("Progress: " + numReady + "/" + numModules);
+                Messenger<int, int>.Broadcast(StartupEvent.MANAGERS_PROGRESS, numReady, numModules); // событие загрузки рассылается вместе с параметрами
+            }
+
+            yield return null; // остановка на один кадр перед следующей проверкой
+        }
+
+        Debug.Log("All managers started up");
+        Messenger.Broadcast(StartupEvent.MANAGERS_STARTED); // событие загрузки рассылается без параметров
+    }
+}
