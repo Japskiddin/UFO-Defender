@@ -14,7 +14,7 @@ public class MissionManager : MonoBehaviour, IGameManager
     {
         Debug.Log("Mission manager starting...");
         _network = service;
-        UpdateData(0, 3);
+        UpdateData(0, 1);
 
         status = ManagerStatus.Started;
     }

@@ -12,6 +12,6 @@ public class MainMenuController : MonoBehaviour
 
     public void OnStartClick()
     {
-
+        Managers.Mission.GoToNext();
     }
 }
