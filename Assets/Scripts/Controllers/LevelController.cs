@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
-    public const float offsetX = 2.2f;
+    public const float offsetX = 2.5f;
+    private float _timer;
+    public float secondsForSpawn = 3f;
+    public int enemyCount = 10;
     [SerializeField] private Home originalHome;
     [SerializeField] private Explosion originalExplosion;
+    [SerializeField] private UfoMob originalUfoMob;
 
     private void Awake()
     {
@@ -20,6 +24,16 @@ public class LevelController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
+    {
+        CreateHouses();
+    }
+
+    private void Update()
+    {
+        CheckSpawn();
+    }
+
+    private void CreateHouses()
     {
         Vector3 startPos = originalHome.transform.position;
         for (int i = 0; i < 4; i++)
@@ -44,5 +58,15 @@ public class LevelController : MonoBehaviour
         Explosion explosion = Instantiate(originalExplosion) as Explosion;
         explosion.transform.position = new Vector3(position.x, position.y, position.z - 1);
         Debug.Log("EXPLOSION!!! at " + explosion.transform.position);
+    }
+
+    private void CheckSpawn()
+    {
+        _timer += Time.deltaTime;
+        if (_timer > secondsForSpawn)
+        {
+            UfoMob mob = Instantiate(originalUfoMob) as UfoMob;
+            _timer = 0;
+        }
     }
 }

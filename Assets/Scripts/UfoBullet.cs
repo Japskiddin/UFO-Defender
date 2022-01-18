@@ -23,13 +23,16 @@ public class UfoBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Home home = collision.GetComponent<Home>();
-        if (home != null)
+        if (collision.tag == "Homes")
         {
-            home.TakeDamage();
-            Messenger<Vector3>.Broadcast(GameEvent.CREATE_EXPLOSION, collision.transform.position);
+            Home home = collision.GetComponent<Home>();
+            if (home != null && !home.isDead)
+            {
+                home.TakeDamage();
+                Messenger<Vector3>.Broadcast(GameEvent.CREATE_EXPLOSION, collision.transform.position);
+                Destroy(this.gameObject);
+            }
         }
-        Destroy(this.gameObject);
     }
 
     private void OnBecameInvisible()
