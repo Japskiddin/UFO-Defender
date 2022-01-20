@@ -29,7 +29,8 @@ public class UfoMob : MonoBehaviour, IEnemy
 
     public void Die()
     {
-
+        Messenger.Broadcast(GameEvent.ENEMY_MOB_KILLED);
+        Destroy(this.gameObject);
     }
 
     public void Shoot()
@@ -47,10 +48,6 @@ public class UfoMob : MonoBehaviour, IEnemy
             Y = Random.Range(0, 1) == 1 ? Direction.DIRECTION_TOP : Direction.DIRECTION_BOTTOM
         };
         Health = defaultHp;
-    }
-
-    private void Start()
-    {
     }
 
     // Update is called once per frame
