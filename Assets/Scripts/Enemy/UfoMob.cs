@@ -6,10 +6,11 @@ public class UfoMob : MonoBehaviour, IEnemy
 {
     [SerializeField] UfoBullet ufoBullet;
     private const int defaultHp = 1;
+    private const float secondsForDirection = 1f;
     public float speed = 1f;
     public Direction EnemyDirection { get; private set; }
     public int Health { get; private set; }
-    private float _timer;
+    private float _timer, _directionTimer;
     public float secondsForShoot = 3f;
     private const float maxPosX = 8f;
     private const float minPosX = -8f;
@@ -60,12 +61,26 @@ public class UfoMob : MonoBehaviour, IEnemy
 
     private void CheckScreenEdges()
     {
+        _directionTimer += Time.deltaTime;
         if (transform.position.y >= maxPosY)
         {
             EnemyDirection.Y = Direction.DIRECTION_BOTTOM;
         } else if (transform.position.y <= minPosY)
         {
             EnemyDirection.Y = Direction.DIRECTION_TOP;
+        } else
+        {
+            if (_directionTimer > secondsForDirection)
+            {
+                if (Random.value < 0.5f)
+                {
+                    EnemyDirection.Y = Direction.DIRECTION_BOTTOM;
+                } else
+                {
+                    EnemyDirection.Y = Direction.DIRECTION_TOP;
+                }
+                _directionTimer = 0;
+            }
         }
 
         if (transform.position.x >= maxPosX)
