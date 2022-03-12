@@ -7,6 +7,18 @@ public class UfoBullet : MonoBehaviour
     public float minAngle = 130;
     public float maxAngle = 230;
     public float speed = 1.0f;
+    private bool _pause = false;
+
+    private void Awake()
+    {
+        _pause = false;
+        Messenger<bool>.AddListener(GameEvent.GAME_PAUSE, OnGamePause);
+    }
+
+    private void OnDestroy()
+    {
+        Messenger<bool>.RemoveListener(GameEvent.GAME_PAUSE, OnGamePause);
+    }
 
     private void Start()
     {
@@ -18,7 +30,7 @@ public class UfoBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(0, speed * Time.deltaTime, 0);
+        if (!_pause) transform.Translate(0, speed * Time.deltaTime, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -29,7 +41,6 @@ public class UfoBullet : MonoBehaviour
             if (home != null && !home.isDead)
             {
                 home.TakeDamage();
-                Messenger<Vector3>.Broadcast(GameEvent.CREATE_EXPLOSION, collision.transform.position);
                 Destroy(this.gameObject);
             }
         }
@@ -37,6 +48,17 @@ public class UfoBullet : MonoBehaviour
 
     private void OnBecameInvisible()
     {
+        Destroy(this.gameObject);
+    }
+
+    private void OnGamePause(bool value)
+    {
+        _pause = value;
+    }
+
+    public void Destroy()
+    {
+        Messenger<Vector3>.Broadcast(GameEvent.CREATE_EXPLOSION, transform.position);
         Destroy(this.gameObject);
     }
 }

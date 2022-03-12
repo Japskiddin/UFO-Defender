@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Homes
   - Enemy
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX

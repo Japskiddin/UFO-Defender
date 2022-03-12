@@ -10,9 +10,12 @@ public class EnemyController : MonoBehaviour
     public int enemySpawnCount = 10;
     private int _mobSpawned = 0;
     public int mobTotal = 20;
+    private bool _pause;
 
     private void Awake()
     {
+        _pause = false;
+        Messenger<bool>.AddListener(GameEvent.GAME_PAUSE, OnGamePause);
         Messenger.AddListener(GameEvent.ENEMY_MOB_KILLED, OnEnemyMobKilled);
         UIController uiController = GetComponent<UIController>();
         if (uiController != null)
@@ -23,12 +26,13 @@ public class EnemyController : MonoBehaviour
 
     private void OnDestroy()
     {
+        Messenger<bool>.RemoveListener(GameEvent.GAME_PAUSE, OnGamePause);
         Messenger.RemoveListener(GameEvent.ENEMY_MOB_KILLED, OnEnemyMobKilled);
     }
 
     private void Update()
     {
-        CheckSpawn();
+        if (!_pause) CheckSpawn();
     }
 
     private void CheckSpawn()
@@ -53,5 +57,10 @@ public class EnemyController : MonoBehaviour
         {
             uiController.UpdateMobTotal(mobTotal);
         }
+    }
+
+    private void OnGamePause(bool value)
+    {
+        _pause = value;
     }
 }

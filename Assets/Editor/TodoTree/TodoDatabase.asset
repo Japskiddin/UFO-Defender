@@ -106,6 +106,17 @@ MonoBehaviour:
         color: {r: 0, g: 1, b: 0.32, a: 1}
         index: 2
       isVisible: 1
+    - title: TODO 3
+      description: Learn how to localize application
+      progress:
+        status: Active
+        color: {r: 0, g: 1, b: 0.67, a: 1}
+        index: 1
+      priority:
+        name: Medium
+        color: {r: 0, g: 1, b: 0.32, a: 1}
+        index: 2
+      isVisible: 1
   - title: Code Review
     note: 
     tag:

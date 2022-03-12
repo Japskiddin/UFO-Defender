@@ -17,9 +17,11 @@ public class UfoMob : MonoBehaviour, IEnemy
     private const float maxPosY = 4.33f;
     private const float minPosY = 0.78f;
     private const float startPosX = 10.5f;
+    private bool _pause;
 
     public void TakeDamage()
     {
+        Messenger<Vector3>.Broadcast(GameEvent.CREATE_EXPLOSION, transform.position);
         Health--;
         Debug.Log("UFO Mob take damage, hp - " + Health);
         if (Health <= 0)
@@ -42,6 +44,8 @@ public class UfoMob : MonoBehaviour, IEnemy
 
     private void Awake()
     {
+        _pause = false;
+        Messenger<bool>.AddListener(GameEvent.GAME_PAUSE, OnGamePause);
         transform.position = new Vector3(startPosX, Random.Range(minPosY, maxPosY), transform.position.z);
         EnemyDirection = new Direction
         {
@@ -51,12 +55,20 @@ public class UfoMob : MonoBehaviour, IEnemy
         Health = defaultHp;
     }
 
+    private void OnDestroy()
+    {
+        Messenger<bool>.RemoveListener(GameEvent.GAME_PAUSE, OnGamePause);
+    }
+
     // Update is called once per frame
     void Update()
     {
-        CheckScreenEdges();
-        Move();
-        CheckShoot();
+        if (!_pause)
+        {
+            CheckScreenEdges();
+            Move();
+            CheckShoot();
+        }
     }
 
     private void CheckScreenEdges()
@@ -108,5 +120,10 @@ public class UfoMob : MonoBehaviour, IEnemy
         float posY = (EnemyDirection.Y == Direction.DIRECTION_BOTTOM ? -1 : 1) * speed * Time.deltaTime;
         transform.Translate(posX, posY, transform.position.z);
         Debug.Log("UFO Move = " + transform.position + " Screen width = " + Screen.width);
+    }
+
+    private void OnGamePause(bool value)
+    {
+        _pause = value;
     }
 }

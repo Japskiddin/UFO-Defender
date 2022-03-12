@@ -7,15 +7,20 @@ public class LevelController : MonoBehaviour
     public const float offsetX = 2.5f;
     [SerializeField] private Home originalHome;
     [SerializeField] private Explosion originalExplosion;
+    public int homeCount = 4;
+    private int _homeAlive;
 
     private void Awake()
     {
+        _homeAlive = homeCount;
         Messenger<Vector3>.AddListener(GameEvent.CREATE_EXPLOSION, OnCreateExplosion);
+        Messenger.AddListener(GameEvent.HOME_DESTROYED, OnHomeDestroyed);
     }
 
     private void OnDestroy()
     {
         Messenger<Vector3>.RemoveListener(GameEvent.CREATE_EXPLOSION, OnCreateExplosion);
+        Messenger.RemoveListener(GameEvent.HOME_DESTROYED, OnHomeDestroyed);
     }
 
     // Start is called before the first frame update
@@ -27,7 +32,7 @@ public class LevelController : MonoBehaviour
     private void CreateHouses()
     {
         Vector3 startPos = originalHome.transform.position;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < homeCount; i++)
         {
             Home home;
             if (i == 0)
@@ -49,5 +54,18 @@ public class LevelController : MonoBehaviour
         Explosion explosion = Instantiate(originalExplosion) as Explosion;
         explosion.transform.position = new Vector3(position.x, position.y, position.z - 1);
         Debug.Log("EXPLOSION!!! at " + explosion.transform.position);
+    }
+
+    private void OnHomeDestroyed()
+    {
+        _homeAlive--;
+        if (_homeAlive <= 0)
+        {
+            UIController uiController = GetComponent<UIController>();
+            if (uiController != null)
+            {
+                uiController.OnGameOver();
+            }
+        }
     }
 }

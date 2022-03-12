@@ -31,6 +31,7 @@ public class MissionManager : MonoBehaviour, IGameManager
         string name = "MainMenu";
         Debug.Log("Loading " + name);
         SceneManager.LoadScene(name);
+        UpdateData(0, 1);
     }
 
     public void GoToNext()
