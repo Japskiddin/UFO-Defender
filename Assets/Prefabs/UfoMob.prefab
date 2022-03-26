@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 593464300040885147}
   - component: {fileID: 593464300040885220}
-  - component: {fileID: 593464300040885221}
   - component: {fileID: -5864152385181530612}
   - component: {fileID: 2889527019517774065}
+  - component: {fileID: 5643702488808301155}
   m_Layer: 0
   m_Name: UfoMob
   m_TagString: Enemy
@@ -85,21 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &593464300040885221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 593464300040885222}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfe36747083789b4492ca0fee63bf606, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ufoBullet: {fileID: 7662728672020410289, guid: ef6bc7a84d2a8994eb29167a2a42e189, type: 3}
-  speed: 1
-  secondsForShoot: 3
 --- !u!50 &-5864152385181530612
 Rigidbody2D:
   serializedVersion: 4
@@ -147,3 +132,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.8, y: 1.73}
   m_EdgeRadius: 0
+--- !u!114 &5643702488808301155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593464300040885222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c57913e3933a65741bf7106e78c56ef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ufoBullet: {fileID: 7662728672020410289, guid: ef6bc7a84d2a8994eb29167a2a42e189, type: 3}
+  speed: 1.5
+  secondsForShoot: 3
+  defaultHp: 1

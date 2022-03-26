@@ -3,35 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Image))]
 public class MenuButton : MonoBehaviour
 {
     [SerializeField] private Sprite[] backgrounds;
+    private Image image;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        image = GetComponent<Image>();
+    }
+
     void Start()
     {
-        Image image = GetComponent<Image>();
-        if (image != null)
-        {
-            image.sprite = backgrounds[0];
-        }
+        image.sprite = backgrounds[0];
     }
 
     private void OnMouseUp()
     {
-        Image image = GetComponent<Image>();
-        if (image != null)
-        {
-            image.sprite = backgrounds[0];
-        }
+        image.sprite = backgrounds[0];
     }
 
     private void OnMouseDown()
     {
-        Image image = GetComponent<Image>();
-        if (image != null)
-        {
-            image.sprite = backgrounds[1];
-        }
+        image.sprite = backgrounds[1];
     }
 }

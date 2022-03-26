@@ -2,42 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class Home : MonoBehaviour
 {
     [SerializeField] Sprite[] sprites;
     private const int defaultHp = 4;
-    private int _hp;
-    public bool isDead {
+    private SpriteRenderer sprite;
+    public bool isDead
+    {
         get
         {
-            return _hp == 0;
+            return Health == 0;
         }
     }
+    public int Health { get; set; }
 
     private void Awake()
     {
-        _hp = defaultHp;
+        sprite = GetComponent<SpriteRenderer>();
+        Health = defaultHp;
         UpdateData();
     }
 
     private void UpdateData()
     {
-        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
-        if (sprite != null)
-        {
-            sprite.sprite = sprites[_hp];
-        }
+        sprite.sprite = sprites[Health];
     }
 
     public void TakeDamage()
     {
         if (isDead) return;
         Messenger<Vector3>.Broadcast(GameEvent.CREATE_EXPLOSION, transform.position);
-        _hp--;
+        Health--;
         UpdateData();
-        if (isDead)
-        {
-            Messenger.Broadcast(GameEvent.HOME_DESTROYED);
-        }
+        if (isDead) Messenger.Broadcast(GameEvent.HOME_DESTROYED);
     }
 }

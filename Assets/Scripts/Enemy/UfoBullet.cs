@@ -27,7 +27,6 @@ public class UfoBullet : MonoBehaviour
         Debug.Log("UFO Bullet angle = " + angle);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!_pause) transform.Translate(0, speed * Time.deltaTime, 0);

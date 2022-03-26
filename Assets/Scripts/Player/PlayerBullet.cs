@@ -28,7 +28,7 @@ public class PlayerBullet : MonoBehaviour
     {
         if (collision.tag == "Enemy")
         {
-            UfoMob mob = collision.GetComponent<UfoMob>();
+            Enemy mob = collision.GetComponent<Enemy>();
             if (mob != null)
             {
                 mob.TakeDamage();

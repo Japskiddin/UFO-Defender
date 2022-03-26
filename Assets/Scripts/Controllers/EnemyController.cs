@@ -2,26 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(UIController))]
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] private UfoMob originalUfoMob;
+    [SerializeField] private Enemy originalMob;
     private float _timer;
     public float secondsForSpawn = 3f;
     public int enemySpawnCount = 10;
     private int _mobSpawned = 0;
     public int mobTotal = 20;
     private bool _pause;
+    private UIController uiController;
 
     private void Awake()
     {
+        uiController = GetComponent<UIController>();
         _pause = false;
         Messenger<bool>.AddListener(GameEvent.GAME_PAUSE, OnGamePause);
         Messenger.AddListener(GameEvent.ENEMY_MOB_KILLED, OnEnemyMobKilled);
-        UIController uiController = GetComponent<UIController>();
-        if (uiController != null)
-        {
-            uiController.UpdateMobTotal(mobTotal);
-        }
+        uiController.UpdateMobTotal(mobTotal);
     }
 
     private void OnDestroy()
@@ -41,7 +40,7 @@ public class EnemyController : MonoBehaviour
         _timer += Time.deltaTime;
         if (_timer > secondsForSpawn && canSpawn)
         {
-            UfoMob mob = Instantiate(originalUfoMob) as UfoMob;
+            Enemy mob = Instantiate(originalMob) as Enemy;
             _mobSpawned++;
             _timer = 0;
         }
@@ -52,11 +51,7 @@ public class EnemyController : MonoBehaviour
         if (_mobSpawned == 0 || mobTotal == 0) return;
         _mobSpawned--;
         mobTotal--;
-        UIController uiController = GetComponent<UIController>();
-        if (uiController != null)
-        {
-            uiController.UpdateMobTotal(mobTotal);
-        }
+        uiController.UpdateMobTotal(mobTotal);
     }
 
     private void OnGamePause(bool value)

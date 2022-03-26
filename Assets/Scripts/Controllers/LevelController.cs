@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(UIController))]
 public class LevelController : MonoBehaviour
 {
     public const float offsetX = 2.5f;
@@ -9,9 +10,11 @@ public class LevelController : MonoBehaviour
     [SerializeField] private Explosion originalExplosion;
     public int homeCount = 4;
     private int _homeAlive;
+    private UIController uiController;
 
     private void Awake()
     {
+        uiController = GetComponent<UIController>();
         _homeAlive = homeCount;
         Messenger<Vector3>.AddListener(GameEvent.CREATE_EXPLOSION, OnCreateExplosion);
         Messenger.AddListener(GameEvent.HOME_DESTROYED, OnHomeDestroyed);
@@ -61,11 +64,7 @@ public class LevelController : MonoBehaviour
         _homeAlive--;
         if (_homeAlive <= 0)
         {
-            UIController uiController = GetComponent<UIController>();
-            if (uiController != null)
-            {
-                uiController.OnGameOver();
-            }
+            uiController.OnGameOver();
         }
     }
 }

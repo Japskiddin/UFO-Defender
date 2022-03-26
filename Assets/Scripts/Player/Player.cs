@@ -5,8 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] PlayerBullet bulletPrefab;
-    private float _timer;
     public float secondsForShoot = 0.5f;
+    private float _timer;
     private bool _pause;
 
     private void Awake()

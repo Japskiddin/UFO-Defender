@@ -16,9 +16,11 @@ public class Managers : MonoBehaviour
         Audio = GetComponent<AudioManager>();
         Mission = GetComponent<MissionManager>();
 
-        _startSequence = new List<IGameManager>();
-        _startSequence.Add(Mission);
-        _startSequence.Add(Audio);
+        _startSequence = new List<IGameManager>
+        {
+            Mission,
+            Audio
+        };
 
         StartCoroutine(StartupManagers()); // асинхронно загружаем стартовую последовательность
     }

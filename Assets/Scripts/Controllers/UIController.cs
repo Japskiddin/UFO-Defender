@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField] Text mobTotal;
-    [SerializeField] Image gameOver;
+    [SerializeField] private Text mobTotal;
+    [SerializeField] private Image gameOver;
 
     private void Awake()
     {
