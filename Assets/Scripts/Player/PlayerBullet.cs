@@ -18,7 +18,6 @@ public class PlayerBullet : MonoBehaviour
         Messenger<bool>.RemoveListener(GameEvent.GAME_PAUSE, OnGamePause);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!_pause) transform.Translate(0, speed * Time.deltaTime, 0);

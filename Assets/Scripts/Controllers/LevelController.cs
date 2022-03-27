@@ -32,6 +32,14 @@ public class LevelController : MonoBehaviour
         CreateHouses();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            uiController.OnGamePause();
+        }
+    }
+
     private void CreateHouses()
     {
         Vector3 startPos = originalHome.transform.position;

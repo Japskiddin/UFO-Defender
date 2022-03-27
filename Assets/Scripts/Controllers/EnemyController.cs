@@ -52,6 +52,7 @@ public class EnemyController : MonoBehaviour
         _mobSpawned--;
         mobTotal--;
         uiController.UpdateMobTotal(mobTotal);
+        if (mobTotal == 0) uiController.OnLevelComplete();
     }
 
     private void OnGamePause(bool value)

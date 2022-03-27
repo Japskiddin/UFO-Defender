@@ -98,9 +98,9 @@ MonoBehaviour:
     - title: TODO 2
       description: Add complete level window
       progress:
-        status: Active
-        color: {r: 0, g: 1, b: 0.67, a: 1}
-        index: 1
+        status: Completed
+        color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+        index: 3
       priority:
         name: Medium
         color: {r: 0, g: 1, b: 0.32, a: 1}
@@ -120,9 +120,9 @@ MonoBehaviour:
     - title: TODO 4
       description: Add pause menu on Esc
       progress:
-        status: Active
-        color: {r: 0, g: 1, b: 0.67, a: 1}
-        index: 1
+        status: Completed
+        color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+        index: 3
       priority:
         name: Minor
         color: {r: 1, g: 0.72, b: 0, a: 1}
