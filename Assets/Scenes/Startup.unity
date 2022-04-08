@@ -1188,8 +1188,9 @@ MonoBehaviour:
   music1Source: {fileID: 433767208}
   music2Source: {fileID: 401699471}
   soundSource: {fileID: 2017710784}
-  introBGMusic: 
-  levelBGMusic: 
+  mainMenuBGMusic: main_menu
+  levelBGMusic: game_music
+  levelMenuBGMusic: level_menu
   crossFadeRate: 1.5
 --- !u!1 &1899459628
 GameObject:

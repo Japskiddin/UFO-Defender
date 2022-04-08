@@ -128,6 +128,17 @@ MonoBehaviour:
         color: {r: 1, g: 0.72, b: 0, a: 1}
         index: 1
       isVisible: 1
+    - title: TODO 5
+      description: Customize sliders
+      progress:
+        status: Active
+        color: {r: 0, g: 1, b: 0.67, a: 1}
+        index: 1
+      priority:
+        name: Minor
+        color: {r: 1, g: 0.72, b: 0, a: 1}
+        index: 1
+      isVisible: 1
   - title: Code Review
     note: 
     tag:

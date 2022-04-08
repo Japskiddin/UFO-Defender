@@ -7,8 +7,9 @@ public class AudioManager : MonoBehaviour, IGameManager
     [SerializeField] private AudioSource music1Source;
     [SerializeField] private AudioSource music2Source;
     [SerializeField] private AudioSource soundSource; // ячейка переменной на панели для ссылки на новый источник звука
-    [SerializeField] private string introBGMusic; // строки указывают имена музыкальных клипов
+    [SerializeField] private string mainMenuBGMusic; // строки указывают имена музыкальных клипов
     [SerializeField] private string levelBGMusic;
+    [SerializeField] private string levelMenuBGMusic;
     private AudioSource _activeMusic;
     private AudioSource _inactiveMusic; // следим за тем, какой из источников активен, а какой нет
 
@@ -16,7 +17,6 @@ public class AudioManager : MonoBehaviour, IGameManager
     private bool _crossFading; // переключатель, позволяющий избежать ошибок в процессе перехода
 
     public ManagerStatus status { get; private set; }
-    private NetworkService _network;
     private float _musicVolume; // непосредственный доступ к закрытой переменной невозможен, только через функцию задания свойства
     public float musicVolume
     {
@@ -68,10 +68,9 @@ public class AudioManager : MonoBehaviour, IGameManager
         set { AudioListener.pause = value; }
     }
 
-    public void Startup(NetworkService service)
+    public void Startup()
     {
         Debug.Log("Audio manager starting...");
-        _network = service;
 
         music1Source.ignoreListenerVolume = true; // свойства заставляют AudioSource игнорировать громкость компонента AudioListener
         music1Source.ignoreListenerPause = true;
@@ -92,9 +91,14 @@ public class AudioManager : MonoBehaviour, IGameManager
         soundSource.PlayOneShot(clip);
     }
 
-    public void PlayIntroMusic()
+    public void PlayMainMenuMusic()
     { // загрузка музыки intro из папки Resources
-        PlayMusic(Resources.Load("Music/" + introBGMusic) as AudioClip);
+        PlayMusic(Resources.Load("Music/" + mainMenuBGMusic) as AudioClip);
+    }
+
+    public void PlayLevelMenuMusic()
+    {
+        PlayMusic(Resources.Load("Music/" + levelMenuBGMusic) as AudioClip);
     }
 
     public void PlayLevelMusic()

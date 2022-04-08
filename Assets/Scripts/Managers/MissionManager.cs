@@ -8,12 +8,10 @@ public class MissionManager : MonoBehaviour, IGameManager
     public ManagerStatus status { get; private set; }
     public int curLevel { get; private set; }
     public int maxLevel { get; private set; }
-    private NetworkService _network;
 
-    public void Startup(NetworkService service)
+    public void Startup()
     {
         Debug.Log("Mission manager starting...");
-        _network = service;
         UpdateData(0, 1);
 
         status = ManagerStatus.Started;
@@ -27,7 +25,7 @@ public class MissionManager : MonoBehaviour, IGameManager
 
     public void OpenMainMenu()
     {
-        Managers.Audio.PlayIntroMusic();
+        Managers.Audio.PlayMainMenuMusic();
         string name = "MainMenu";
         Debug.Log("Loading " + name);
         SceneManager.LoadScene(name);
