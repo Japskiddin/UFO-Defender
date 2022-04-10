@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class StartupController : MonoBehaviour
 {
-    [SerializeField] private Slider progressBar;
+    [SerializeField] private ProgressBarController progressBar;
 
     private void Awake()
     {
@@ -21,9 +20,9 @@ public class StartupController : MonoBehaviour
 
     private void OnManagersProgress(int numReady, int numModules)
     {
-        float progress = (float)numReady / numModules;
         // Обновляем ползунок данными о процессе загрузки.
-        progressBar.value = progress;
+        progressBar.SetMaxValue(numModules);
+        progressBar.SetValue(numReady);
     }
 
     private void OnManagersStarted()
