@@ -5,16 +5,16 @@ using UnityEngine;
 [RequireComponent(typeof(UIController))]
 public class LevelController : MonoBehaviour
 {
-    public const float offsetX = 2.5f;
+    private const float _offsetX = 2.5f;
     [SerializeField] private Home originalHome;
     [SerializeField] private Explosion originalExplosion;
     public int homeCount = 4;
     private int _homeAlive;
-    private UIController uiController;
+    private UIController _uiController;
 
     private void Awake()
     {
-        uiController = GetComponent<UIController>();
+        _uiController = GetComponent<UIController>();
         _homeAlive = homeCount;
         Messenger<Vector3>.AddListener(GameEvent.CREATE_EXPLOSION, OnCreateExplosion);
         Messenger.AddListener(GameEvent.HOME_DESTROYED, OnHomeDestroyed);
@@ -36,7 +36,7 @@ public class LevelController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            uiController.OnGamePause();
+            _uiController.OnGamePause();
         }
     }
 
@@ -54,7 +54,7 @@ public class LevelController : MonoBehaviour
                 home = Instantiate(originalHome) as Home;
             }
 
-            float posX = (offsetX * i) + startPos.x;
+            float posX = (_offsetX * i) + startPos.x;
             float posY = startPos.y;
             home.transform.position = new Vector3(posX, posY, startPos.z);
         }
@@ -72,7 +72,7 @@ public class LevelController : MonoBehaviour
         _homeAlive--;
         if (_homeAlive <= 0)
         {
-            uiController.OnGameOver();
+            _uiController.OnGameOver();
         }
     }
 }

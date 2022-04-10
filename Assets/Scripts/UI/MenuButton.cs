@@ -7,25 +7,25 @@ using UnityEngine.UI;
 public class MenuButton : MonoBehaviour
 {
     [SerializeField] private Sprite[] backgrounds;
-    private Image image;
+    private Image _image;
 
     private void Awake()
     {
-        image = GetComponent<Image>();
+        _image = GetComponent<Image>();
     }
 
     void Start()
     {
-        image.sprite = backgrounds[0];
+        _image.sprite = backgrounds[0];
     }
 
     private void OnMouseUp()
     {
-        image.sprite = backgrounds[0];
+        _image.sprite = backgrounds[0];
     }
 
     private void OnMouseDown()
     {
-        image.sprite = backgrounds[1];
+        _image.sprite = backgrounds[1];
     }
 }

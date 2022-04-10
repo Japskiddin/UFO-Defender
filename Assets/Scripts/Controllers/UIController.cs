@@ -46,8 +46,8 @@ public class UIController : MonoBehaviour
             OnGameResume();
         } else
         {
-            _prevMusicVolume = Managers.Audio.musicVolume;
-            Managers.Audio.musicVolume = 0f;
+            _prevMusicVolume = Managers.Audio.MusicVolume;
+            Managers.Audio.MusicVolume = 0f;
             Managers.Audio.PlaySound(sound);
             levelPause.gameObject.SetActive(true);
             Messenger<bool>.Broadcast(GameEvent.GAME_PAUSE, true);
@@ -56,7 +56,7 @@ public class UIController : MonoBehaviour
 
     public void OnGameResume()
     {
-        Managers.Audio.musicVolume = _prevMusicVolume;
+        Managers.Audio.MusicVolume = _prevMusicVolume;
         Managers.Audio.PlaySound(sound);
         levelPause.gameObject.SetActive(false);
         Messenger<bool>.Broadcast(GameEvent.GAME_PAUSE, false);

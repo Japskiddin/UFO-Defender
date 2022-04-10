@@ -22,11 +22,13 @@ public class StartupController : MonoBehaviour
     private void OnManagersProgress(int numReady, int numModules)
     {
         float progress = (float)numReady / numModules;
-        progressBar.value = progress; // обновляем ползунок данными о процессе загрузки
+        // Обновляем ползунок данными о процессе загрузки.
+        progressBar.value = progress;
     }
 
     private void OnManagersStarted()
     {
-       Managers.Mission.OpenMainMenu(); // после загрузки диспетчеров загружаем следующую сцену
+        // После загрузки диспетчеров загружаем следующую сцену.
+        Managers.Mission.OpenMainMenu();
     }
 }

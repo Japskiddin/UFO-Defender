@@ -5,10 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Home : MonoBehaviour
 {
-    [SerializeField] Sprite[] sprites;
-    private const int defaultHp = 4;
+    [SerializeField] private Sprite[] sprites;
+    private const int _defaultHp = 4;
     private SpriteRenderer sprite;
-    public bool isDead
+    public bool IsDead
     {
         get
         {
@@ -20,7 +20,7 @@ public class Home : MonoBehaviour
     private void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
-        Health = defaultHp;
+        Health = _defaultHp;
         UpdateData();
     }
 
@@ -31,10 +31,10 @@ public class Home : MonoBehaviour
 
     public void TakeDamage()
     {
-        if (isDead) return;
+        if (IsDead) return;
         Messenger<Vector3>.Broadcast(GameEvent.CREATE_EXPLOSION, transform.position);
         Health--;
         UpdateData();
-        if (isDead) Messenger.Broadcast(GameEvent.HOME_DESTROYED);
+        if (IsDead) Messenger.Broadcast(GameEvent.HOME_DESTROYED);
     }
 }

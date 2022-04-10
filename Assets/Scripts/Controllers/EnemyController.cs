@@ -12,15 +12,15 @@ public class EnemyController : MonoBehaviour
     private int _mobSpawned = 0;
     public int mobTotal = 20;
     private bool _pause;
-    private UIController uiController;
+    private UIController _uiController;
 
     private void Awake()
     {
-        uiController = GetComponent<UIController>();
+        _uiController = GetComponent<UIController>();
         _pause = false;
         Messenger<bool>.AddListener(GameEvent.GAME_PAUSE, OnGamePause);
         Messenger.AddListener(GameEvent.ENEMY_MOB_KILLED, OnEnemyMobKilled);
-        uiController.UpdateMobTotal(mobTotal);
+        _uiController.UpdateMobTotal(mobTotal);
     }
 
     private void OnDestroy()
@@ -31,7 +31,10 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        if (!_pause) CheckSpawn();
+        if (!_pause)
+        {
+            CheckSpawn();
+        }
     }
 
     private void CheckSpawn()
@@ -51,8 +54,8 @@ public class EnemyController : MonoBehaviour
         if (_mobSpawned == 0 || mobTotal == 0) return;
         _mobSpawned--;
         mobTotal--;
-        uiController.UpdateMobTotal(mobTotal);
-        if (mobTotal == 0) uiController.OnLevelComplete();
+        _uiController.UpdateMobTotal(mobTotal);
+        if (mobTotal == 0) _uiController.OnLevelComplete();
     }
 
     private void OnGamePause(bool value)

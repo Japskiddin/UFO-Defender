@@ -6,19 +6,24 @@ public class AudioManager : MonoBehaviour, IGameManager
 {
     [SerializeField] private AudioSource music1Source;
     [SerializeField] private AudioSource music2Source;
-    [SerializeField] private AudioSource soundSource; // ячейка переменной на панели для ссылки на новый источник звука
-    [SerializeField] private string mainMenuBGMusic; // строки указывают имена музыкальных клипов
+    // Ячейка переменной на панели для ссылки на новый источник звука.
+    [SerializeField] private AudioSource soundSource;
+    // Строки указывают имена музыкальных клипов.
+    [SerializeField] private string mainMenuBGMusic;
     [SerializeField] private string levelBGMusic;
     [SerializeField] private string levelMenuBGMusic;
     private AudioSource _activeMusic;
-    private AudioSource _inactiveMusic; // следим за тем, какой из источников активен, а какой нет
+    // Следим за тем, какой из источников активен, а какой нет.
+    private AudioSource _inactiveMusic;
 
     public float crossFadeRate = 1.5f;
-    private bool _crossFading; // переключатель, позволяющий избежать ошибок в процессе перехода
+    // Переключатель, позволяющий избежать ошибок в процессе перехода.
+    private bool _crossFading;
 
-    public ManagerStatus status { get; private set; }
-    private float _musicVolume; // непосредственный доступ к закрытой переменной невозможен, только через функцию задания свойства
-    public float musicVolume
+    public ManagerStatus Status { get; private set; }
+    // Непосредственный доступ к закрытой переменной невозможен, только через функцию задания свойства.
+    private float _musicVolume;
+    public float MusicVolume
     {
         get
         {
@@ -29,14 +34,16 @@ public class AudioManager : MonoBehaviour, IGameManager
             _musicVolume = value;
 
             if (music1Source != null && !_crossFading)
-            { // напрямую регулируем громкость источника звука
+            {
+                // Напрямую регулируем громкость источника звука.
                 music1Source.volume = _musicVolume;
-                music2Source.volume = _musicVolume; // регулировка громкости обоих источников звука
+                // Регулировка громкости обоих источников звука.
+                music2Source.volume = _musicVolume;
             }
         }
     }
 
-    public bool musicMute
+    public bool MusicMute
     {
         get
         {
@@ -44,7 +51,8 @@ public class AudioManager : MonoBehaviour, IGameManager
             {
                 return music1Source.mute;
             }
-            return false; // значение по умолчанию если AudioSource отсутствует
+            // Значение по умолчанию если AudioSource отсутствует.
+            return false;
         }
         set
         {
@@ -56,14 +64,17 @@ public class AudioManager : MonoBehaviour, IGameManager
         }
     }
 
-    public float soundVolume
-    { // свойство для громкости с функцией чтения и функцией доступа
-        get { return AudioListener.volume; } // реализуем функции чтения/доступа с помощью AudioListener
+    public float SoundVolume
+    {
+        // Свойство для громкости с функцией чтения и функцией доступа.
+        // Реализуем функции чтения/доступа с помощью AudioListener.
+        get { return AudioListener.volume; }
         set { AudioListener.volume = value; }
     }
 
-    public bool soundMute
-    { // добавляем аналогичное свойство для выключения звука
+    public bool SoundMute
+    { 
+        // Добавляем аналогичное свойство для выключения звука.
         get { return AudioListener.pause; }
         set { AudioListener.pause = value; }
     }
@@ -72,27 +83,32 @@ public class AudioManager : MonoBehaviour, IGameManager
     {
         Debug.Log("Audio manager starting...");
 
-        music1Source.ignoreListenerVolume = true; // свойства заставляют AudioSource игнорировать громкость компонента AudioListener
+        // Свойства заставляют AudioSource игнорировать громкость компонента AudioListener.
+        music1Source.ignoreListenerVolume = true;
         music1Source.ignoreListenerPause = true;
         music2Source.ignoreListenerVolume = true;
         music2Source.ignoreListenerPause = true;
 
-        musicVolume = 1;
-        soundVolume = 1f; // 1 - полная громкость
+        // 1 - полная громкость.
+        MusicVolume = 1f;
+        SoundVolume = 1f;
 
-        _activeMusic = music1Source; // инициализируем один из источников как активный
+        // Инициализируем один из источников как активный.
+        _activeMusic = music1Source;
         _inactiveMusic = music2Source;
 
-        status = ManagerStatus.Started;
+        Status = ManagerStatus.Started;
     }
 
     public void PlaySound(AudioClip clip)
-    { // воспроизводим звуки, не имеющие другого источника
+    { 
+        // Воспроизводим звуки, не имеющие другого источника.
         soundSource.PlayOneShot(clip);
     }
 
     public void PlayMainMenuMusic()
-    { // загрузка музыки intro из папки Resources
+    { 
+        // Загрузка музыки intro из папки Resources.
         PlayMusic(Resources.Load("Music/" + mainMenuBGMusic) as AudioClip);
     }
 
@@ -102,14 +118,16 @@ public class AudioManager : MonoBehaviour, IGameManager
     }
 
     public void PlayLevelMusic()
-    { // загрузка основной музыки из папки Resources
+    { 
+        // Загрузка основной музыки из папки Resources.
         PlayMusic(Resources.Load("Music/" + levelBGMusic) as AudioClip);
     }
 
     private void PlayMusic(AudioClip clip)
     {
         if (_crossFading) return;
-        StartCoroutine(CrossFadeMusic(clip)); // при изменении музыкальной композиции вызываем сопрограмму
+        // При изменении музыкальной композиции вызываем сопрограмму.
+        StartCoroutine(CrossFadeMusic(clip));
     }
 
     private IEnumerator CrossFadeMusic(AudioClip clip)
@@ -126,10 +144,12 @@ public class AudioManager : MonoBehaviour, IGameManager
             _activeMusic.volume -= scaledRate * Time.deltaTime;
             _inactiveMusic.volume += scaledRate * Time.deltaTime;
 
-            yield return null; // оператор yield останавливает операции на один кадр
+            // Оператор yield останавливает операции на один кадр.
+            yield return null;
         }
 
-        AudioSource temp = _activeMusic; // временная переменная, используемая когда мы меняем местами _active и _inactive
+        // Временная переменная, используемая когда мы меняем местами _active и _inactive.
+        AudioSource temp = _activeMusic;
 
         _activeMusic = _inactiveMusic;
         _activeMusic.volume = _musicVolume;

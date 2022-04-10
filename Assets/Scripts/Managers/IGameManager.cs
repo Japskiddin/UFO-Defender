@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public interface IGameManager
 {
-    ManagerStatus status { get; } // перечисление, которое нужно обрабатывать
+    // Перечисление, которое нужно обрабатывать.
+    ManagerStatus Status { get; }
     void Startup();
 }

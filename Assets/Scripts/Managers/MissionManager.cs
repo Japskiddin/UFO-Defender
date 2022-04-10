@@ -5,22 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class MissionManager : MonoBehaviour, IGameManager
 {
-    public ManagerStatus status { get; private set; }
-    public int curLevel { get; private set; }
-    public int maxLevel { get; private set; }
+    public ManagerStatus Status { get; private set; }
+    public int CurrentLevel { get; private set; }
+    public int MaxLevel { get; private set; }
 
     public void Startup()
     {
         Debug.Log("Mission manager starting...");
         UpdateData(0, 1);
 
-        status = ManagerStatus.Started;
+        Status = ManagerStatus.Started;
     }
 
     public void UpdateData(int curLevel, int maxLevel)
     {
-        this.curLevel = curLevel;
-        this.maxLevel = maxLevel;
+        CurrentLevel = curLevel;
+        MaxLevel = maxLevel;
     }
 
     public void OpenMainMenu()
@@ -34,13 +34,15 @@ public class MissionManager : MonoBehaviour, IGameManager
 
     public void GoToNext()
     {
-        if (curLevel < maxLevel) // провер€ем, достигнут ли последний уровень
+        // ѕровер€ем, достигнут ли последний уровень.
+        if (CurrentLevel < MaxLevel)
         {
             Managers.Audio.PlayLevelMusic();
-            curLevel++;
-            string name = "Level" + curLevel;
+            CurrentLevel++;
+            string name = "Level" + CurrentLevel;
             Debug.Log("Loading " + name);
-            SceneManager.LoadScene(name); // команда загрузки сцены
+            //  оманда загрузки сцены.
+            SceneManager.LoadScene(name);
         } else
         {
             Debug.Log("Last level");
@@ -50,13 +52,13 @@ public class MissionManager : MonoBehaviour, IGameManager
 
     public void ReachObjective()
     {
-        // здесь может быть код обработки нескольких целей
+        // «десь может быть код обработки нескольких целей.
         Messenger.Broadcast(GameEvent.LEVEL_COMPLETE);
     }
 
     public void RestartCurrent()
     {
-        string name = "Level" + curLevel;
+        string name = "Level" + CurrentLevel;
         Debug.Log("Loading " + name);
         SceneManager.LoadScene(name);
     }

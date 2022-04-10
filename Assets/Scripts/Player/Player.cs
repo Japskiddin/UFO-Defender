@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] PlayerBullet bulletPrefab;
+    [SerializeField] private PlayerBullet bulletPrefab;
     public float secondsForShoot = 0.5f;
     private float _timer;
     private bool _pause;
@@ -25,23 +25,26 @@ public class Player : MonoBehaviour
     {
         if (!_pause)
         {
-            _timer += Time.deltaTime;
+            CheckPlayerShoot();
+        }
+    }
 
-            Vector3 mousePos = Input.mousePosition;
-            float angle = Mathf.Clamp(Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg, 0, 90);
+    private void CheckPlayerShoot() {
+        _timer += Time.deltaTime;
 
-            Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-            transform.rotation = rotation;
+        Vector3 mousePos = Input.mousePosition;
+        float angle = Mathf.Clamp(Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg, 0, 90);
 
-            if (Input.GetMouseButtonDown(0) && _timer > secondsForShoot)
-            {
-                Quaternion bulletRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-                PlayerBullet bullet = Instantiate(bulletPrefab) as PlayerBullet;
-                bullet.transform.position = transform.position;
-                bullet.transform.rotation = bulletRotation;
+        Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        transform.rotation = rotation;
 
-                _timer = 0;
-            }
+        if (Input.GetMouseButtonDown(0) && _timer > secondsForShoot) {
+            Quaternion bulletRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+            PlayerBullet bullet = Instantiate(bulletPrefab) as PlayerBullet;
+            bullet.transform.position = transform.position;
+            bullet.transform.rotation = bulletRotation;
+
+            _timer = 0;
         }
     }
 

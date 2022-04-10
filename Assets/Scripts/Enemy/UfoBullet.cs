@@ -34,10 +34,10 @@ public class UfoBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Homes")
+        if (collision.CompareTag("Homes"))
         {
             Home home = collision.GetComponent<Home>();
-            if (home != null && !home.isDead)
+            if (home != null && !home.IsDead)
             {
                 home.TakeDamage();
                 Destroy(this.gameObject);

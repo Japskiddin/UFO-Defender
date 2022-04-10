@@ -25,7 +25,7 @@ public class PlayerBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy")
+        if (collision.CompareTag("Enemy"))
         {
             Enemy mob = collision.GetComponent<Enemy>();
             if (mob != null)
@@ -33,7 +33,7 @@ public class PlayerBullet : MonoBehaviour
                 mob.TakeDamage();
                 Destroy(this.gameObject);
             }
-        } else if (collision.tag == "EnemyBullet")
+        } else if (collision.CompareTag("EnemyBullet"))
         {
             UfoBullet bullet = collision.GetComponent<UfoBullet>();
             if (bullet != null)
