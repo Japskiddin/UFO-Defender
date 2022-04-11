@@ -12,8 +12,6 @@ public class UIController : MonoBehaviour
     [SerializeField] private Image levelPause;
     [SerializeField] private Image settingsMenu;
 
-    private float _prevMusicVolume = 100f;
-
     private void Awake()
     {
         gameOver.gameObject.SetActive(false);
@@ -41,13 +39,19 @@ public class UIController : MonoBehaviour
 
     public void OnGamePause()
     {
+        if (settingsMenu.gameObject.activeSelf
+            || levelComplete.gameObject.activeSelf
+            || gameOver.gameObject.activeSelf)
+        {
+            return;
+        }
+
         if (levelPause.gameObject.activeSelf)
         {
             OnGameResume();
-        } else
+        }
+        else
         {
-            _prevMusicVolume = Managers.Audio.MusicVolume;
-            Managers.Audio.MusicVolume = 0f;
             Managers.Audio.PlaySound(sound);
             levelPause.gameObject.SetActive(true);
             Messenger<bool>.Broadcast(GameEvent.GAME_PAUSE, true);
@@ -56,10 +60,23 @@ public class UIController : MonoBehaviour
 
     public void OnGameResume()
     {
-        Managers.Audio.MusicVolume = _prevMusicVolume;
         Managers.Audio.PlaySound(sound);
         levelPause.gameObject.SetActive(false);
         Messenger<bool>.Broadcast(GameEvent.GAME_PAUSE, false);
+    }
+
+    public void OnSettingsClick()
+    {
+        Managers.Audio.PlaySound(sound);
+        levelPause.gameObject.SetActive(false);
+        settingsMenu.gameObject.SetActive(true);
+    }
+
+    public void OnSettingsClose()
+    {
+        Managers.Audio.PlaySound(sound);
+        levelPause.gameObject.SetActive(true);
+        settingsMenu.gameObject.SetActive(false);
     }
 
     public void OnExitClick()

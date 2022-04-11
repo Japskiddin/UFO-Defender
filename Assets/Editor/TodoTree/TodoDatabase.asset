@@ -67,9 +67,9 @@ MonoBehaviour:
     - title: TODO 1
       description: Add collision with enemy bullets
       progress:
-        status: Active
-        color: {r: 0, g: 1, b: 0.67, a: 1}
-        index: 1
+        status: Completed
+        color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+        index: 3
       priority:
         name: Major
         color: {r: 1, g: 0.2, b: 0.2, a: 1}
@@ -131,9 +131,9 @@ MonoBehaviour:
     - title: TODO 5
       description: Customize sliders
       progress:
-        status: Active
-        color: {r: 0, g: 1, b: 0.67, a: 1}
-        index: 1
+        status: Completed
+        color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+        index: 3
       priority:
         name: Minor
         color: {r: 1, g: 0.72, b: 0, a: 1}
@@ -151,9 +151,9 @@ MonoBehaviour:
     - title: TODO 1
       description: Check mistakes in code
       progress:
-        status: Active
-        color: {r: 0, g: 1, b: 0.67, a: 1}
-        index: 1
+        status: OnHold
+        color: {r: 0.4, g: 0.5, b: 1, a: 1}
+        index: 2
       priority:
         name: Medium
         color: {r: 0, g: 1, b: 0.32, a: 1}
@@ -193,9 +193,9 @@ MonoBehaviour:
     - title: TODO 1
       description: Add settings
       progress:
-        status: Active
-        color: {r: 0, g: 1, b: 0.67, a: 1}
-        index: 1
+        status: Completed
+        color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+        index: 3
       priority:
         name: Minor
         color: {r: 1, g: 0.72, b: 0, a: 1}

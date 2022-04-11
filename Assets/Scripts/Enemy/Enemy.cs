@@ -23,18 +23,18 @@ public class Enemy : MonoBehaviour
     public float speed = 1.5f;
     public float secondsForShoot = 3;
     public int defaultHp = 1;
-    public int Health { get; set; }
-    public int DirectionVertical { get; set; }
-    public int DirectionHorizontal { get; set; }
+    private int _health;
+    private int _directionVertical;
+    private int _directionHorizontal;
 
     private void Awake()
     {
         _pause = false;
         Messenger<bool>.AddListener(GameEvent.GAME_PAUSE, OnGamePause);
         transform.position = new Vector3(_startPosX, Random.Range(_minPosY, _maxPosY), transform.position.z);
-        DirectionHorizontal = _directionLeft;
-        DirectionVertical = Random.Range(0, 1) == 1 ? _directionTop : _directionBottom;
-        Health = defaultHp;
+        _directionHorizontal = _directionLeft;
+        _directionVertical = Random.Range(0, 1) == 1 ? _directionTop : _directionBottom;
+        _health = defaultHp;
     }
 
     private void OnDestroy()
@@ -57,20 +57,20 @@ public class Enemy : MonoBehaviour
         _directionTimer += Time.deltaTime;
         if (transform.position.y >= _maxPosY)
         {
-            DirectionVertical = _directionBottom;
+            _directionVertical = _directionBottom;
         } else if (transform.position.y <= _minPosY)
         {
-            DirectionVertical = _directionTop;
+            _directionVertical = _directionTop;
         } else
         {
             if (_directionTimer > _secondsForDirection)
             {
                 if (Random.value < 0.5f)
                 {
-                    DirectionVertical = _directionBottom;
+                    _directionVertical = _directionBottom;
                 } else
                 {
-                    DirectionVertical = _directionTop;
+                    _directionVertical = _directionTop;
                 }
                 _directionTimer = 0;
             }
@@ -78,10 +78,10 @@ public class Enemy : MonoBehaviour
 
         if (transform.position.x >= _maxPosX)
         {
-            DirectionHorizontal = _directionRight;
+            _directionHorizontal = _directionRight;
         } else if (transform.position.x <= _minPosX)
         {
-            DirectionHorizontal = _directionLeft;
+            _directionHorizontal = _directionLeft;
         }
     }
 
@@ -97,9 +97,9 @@ public class Enemy : MonoBehaviour
 
     public void Move()
     {
-        float posX = (DirectionHorizontal == _directionRight ? -1 : 1) * speed * Time.deltaTime;
-        float posY = (DirectionVertical == _directionBottom ? -1 : 1) * speed * Time.deltaTime;
-        transform.Translate(posX, posY, transform.position.z);
+        float posX = (_directionHorizontal == _directionRight ? -1 : 1) * speed * Time.deltaTime;
+        float posY = (_directionVertical == _directionBottom ? -1 : 1) * speed * Time.deltaTime;
+        transform.Translate(posX, posY, 0);
         Debug.Log("UFO Move = " + transform.position + " Screen width = " + Screen.width);
     }
 
@@ -111,9 +111,9 @@ public class Enemy : MonoBehaviour
     public void TakeDamage()
     {
         Messenger<Vector3>.Broadcast(GameEvent.CREATE_EXPLOSION, transform.position);
-        Health--;
-        Debug.Log("UFO Mob take damage, hp - " + Health);
-        if (Health <= 0)
+        _health--;
+        Debug.Log("UFO Mob take damage, hp - " + _health);
+        if (_health <= 0)
         {
             Die();
         }
