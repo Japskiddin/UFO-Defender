@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
+    [SerializeField] private AudioClip explosionSound;
     public float explodeTime = 0.5f;
 
     void Start()
     {
+        Managers.Audio.PlaySound(explosionSound);
         StartCoroutine(Explode());
     }
 
