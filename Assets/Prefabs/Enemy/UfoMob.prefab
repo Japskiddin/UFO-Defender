@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97683191c2af41a4c871762677a1ee4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootSound: {fileID: 8300000, guid: 293de3597628a0d45a7507b81435e703, type: 3}
   ufoBullet: {fileID: 7662728672020410289, guid: ef6bc7a84d2a8994eb29167a2a42e189, type: 3}
   speed: 1.5
   secondsForShoot: 3

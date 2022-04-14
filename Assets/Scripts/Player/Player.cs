@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private AudioClip shootSound;
     [SerializeField] private PlayerBullet bulletPrefab;
     public float secondsForShoot = 0.5f;
     private float _timer;
@@ -43,7 +44,7 @@ public class Player : MonoBehaviour
             PlayerBullet bullet = Instantiate(bulletPrefab) as PlayerBullet;
             bullet.transform.position = transform.position;
             bullet.transform.rotation = bulletRotation;
-
+            Managers.Audio.PlaySound(shootSound);
             _timer = 0;
         }
     }

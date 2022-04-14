@@ -16,13 +16,14 @@ public class Ufo : MonoBehaviour
     private const float _startPosX = 10.5f;
     private const float _secondsForDirection = 1f;
 
+    [SerializeField] private AudioClip shootSound;
     [SerializeField] private UfoBullet ufoBullet;
-    private bool _pause;
-    private float _timer;
-    private float _directionTimer;
     public float speed = 1.5f;
-    public float secondsForShoot = 3;
-    public int defaultHp = 1;
+    public int defaultHealth = 1;
+    private float _secondsForShoot;
+    private bool _pause;
+    private float _shootTimer;
+    private float _directionTimer;
     private int _health;
     private int _directionVertical;
     private int _directionHorizontal;
@@ -34,7 +35,8 @@ public class Ufo : MonoBehaviour
         transform.position = new Vector3(_startPosX, Random.Range(_minPosY, _maxPosY), transform.position.z);
         _directionHorizontal = _directionLeft;
         _directionVertical = Random.Range(0, 1) == 1 ? _directionTop : _directionBottom;
-        _health = defaultHp;
+        _health = defaultHealth;
+        _secondsForShoot = Random.Range(2f, 3f);
     }
 
     private void OnDestroy()
@@ -87,11 +89,11 @@ public class Ufo : MonoBehaviour
 
     private void CheckShoot()
     {
-        _timer += Time.deltaTime;
-        if (_timer > secondsForShoot)
+        _shootTimer += Time.deltaTime;
+        if (_shootTimer > _secondsForShoot)
         {
             Shoot();
-            _timer = 0;
+            _shootTimer = 0;
         }
     }
 
@@ -129,5 +131,6 @@ public class Ufo : MonoBehaviour
     {
         UfoBullet bullet = Instantiate(ufoBullet) as UfoBullet;
         bullet.transform.position = transform.position;
+        Managers.Audio.PlaySound(shootSound);
     }
 }

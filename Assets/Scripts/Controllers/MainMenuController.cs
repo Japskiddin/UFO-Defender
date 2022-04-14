@@ -8,11 +8,13 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private AudioClip sound;
     [SerializeField] private Image mainMenu;
     [SerializeField] private Image settingsMenu;
+    [SerializeField] private Image about;
 
     private void Awake()
     {
         mainMenu.gameObject.SetActive(true);
         settingsMenu.gameObject.SetActive(false);
+        about.gameObject.SetActive(false);
     }
 
     public void OnExitClick()
