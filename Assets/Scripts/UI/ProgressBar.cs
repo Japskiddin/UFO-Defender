@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ProgressBarController : MonoBehaviour
+public class ProgressBar : MonoBehaviour
 {
     [Header("UI Elements")]
     [SerializeField] private Image image;
@@ -21,7 +21,7 @@ public class ProgressBarController : MonoBehaviour
         }
         else
         {
-            Debug.Log("{GameLog} => [ProgressBarController] - (<color=red>Error</color>) -> Components Parameters Are Incorrectly Configured! \n " +
+            Debug.Log("{GameLog} => [ProgressBar] - (<color=red>Error</color>) -> Components Parameters Are Incorrectly Configured! \n " +
                 "Required Type Filled \n" +
                 "Required FillMethod Horizontal");
         }

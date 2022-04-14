@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Ufo : MonoBehaviour
 {
     private const int _directionLeft = 0;
     private const int _directionRight = 1;

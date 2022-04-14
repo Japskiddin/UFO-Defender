@@ -2841,7 +2841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13315b25dd54aa84f9f271c98d21fee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalMob: {fileID: 5643702488808301155, guid: 506404dbdaa3bff419cfd39330ebb052, type: 3}
+  ufoPrefab: {fileID: 5643702488808301155, guid: 506404dbdaa3bff419cfd39330ebb052, type: 3}
   secondsForSpawn: 3
   enemySpawnCount: 10
   mobTotal: 20
@@ -3411,7 +3411,7 @@ GameObject:
   - component: {fileID: 1579969972}
   - component: {fileID: 1579969971}
   m_Layer: 5
-  m_Name: Level UI
+  m_Name: HUD Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

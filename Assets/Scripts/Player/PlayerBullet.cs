@@ -27,7 +27,7 @@ public class PlayerBullet : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
-            Enemy mob = collision.GetComponent<Enemy>();
+            Ufo mob = collision.GetComponent<Ufo>();
             if (mob != null)
             {
                 mob.TakeDamage();

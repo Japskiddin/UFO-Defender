@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(UIController))]
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] private Enemy originalMob;
+    [SerializeField] private Ufo ufoPrefab;
     private float _timer;
     public float secondsForSpawn = 3f;
     public int enemySpawnCount = 10;
@@ -43,7 +43,7 @@ public class EnemyController : MonoBehaviour
         _timer += Time.deltaTime;
         if (_timer > secondsForSpawn && canSpawn)
         {
-            Enemy mob = Instantiate(originalMob) as Enemy;
+            Ufo mob = Instantiate(ufoPrefab) as Ufo;
             _mobSpawned++;
             _timer = 0;
         }
