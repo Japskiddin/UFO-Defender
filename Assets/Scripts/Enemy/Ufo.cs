@@ -102,7 +102,6 @@ public class Ufo : MonoBehaviour
         float posX = (_directionHorizontal == _directionRight ? -1 : 1) * speed * Time.deltaTime;
         float posY = (_directionVertical == _directionBottom ? -1 : 1) * speed * Time.deltaTime;
         transform.Translate(posX, posY, 0);
-        Debug.Log("UFO Move = " + transform.position + " Screen width = " + Screen.width);
     }
 
     private void OnGamePause(bool value)

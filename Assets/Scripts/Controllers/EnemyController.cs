@@ -20,6 +20,8 @@ public class EnemyController : MonoBehaviour
         _pause = false;
         Messenger<bool>.AddListener(GameEvent.GAME_PAUSE, OnGamePause);
         Messenger.AddListener(GameEvent.ENEMY_MOB_KILLED, OnEnemyMobKilled);
+        int level = Managers.Mission.CurrentLevel;
+        mobTotal *= level;
         _uiController.UpdateMobTotal(mobTotal);
     }
 

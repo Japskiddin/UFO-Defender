@@ -1632,7 +1632,7 @@ GameObject:
   - component: {fileID: 788658534}
   - component: {fileID: 788658533}
   m_Layer: 0
-  m_Name: level1
+  m_Name: Level background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1678,7 +1678,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0f653ce8886778648849c6cd5e9bebf8, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1686,7 +1686,7 @@ SpriteRenderer:
   m_Size: {x: 19.2, y: 10.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &788658534
@@ -1701,7 +1701,7 @@ Transform:
   m_LocalScale: {x: 0.92, y: 0.92, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &789299897
 GameObject:
@@ -1767,90 +1767,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 789299897}
   m_CullTransparentMesh: 1
---- !u!1001 &902465624
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 434097698824545276, guid: ed5c739a98841b04f9b7e84f981e25d7, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 434097698824545276, guid: ed5c739a98841b04f9b7e84f981e25d7, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 434097698824545276, guid: ed5c739a98841b04f9b7e84f981e25d7, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 434097698824545276, guid: ed5c739a98841b04f9b7e84f981e25d7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -4
-      objectReference: {fileID: 0}
-    - target: {fileID: 434097698824545276, guid: ed5c739a98841b04f9b7e84f981e25d7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 434097698824545276, guid: ed5c739a98841b04f9b7e84f981e25d7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 434097698824545276, guid: ed5c739a98841b04f9b7e84f981e25d7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 434097698824545276, guid: ed5c739a98841b04f9b7e84f981e25d7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 434097698824545276, guid: ed5c739a98841b04f9b7e84f981e25d7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 434097698824545276, guid: ed5c739a98841b04f9b7e84f981e25d7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 434097698824545276, guid: ed5c739a98841b04f9b7e84f981e25d7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 434097698824545276, guid: ed5c739a98841b04f9b7e84f981e25d7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 434097698824545276, guid: ed5c739a98841b04f9b7e84f981e25d7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 434097698824545278, guid: ed5c739a98841b04f9b7e84f981e25d7, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 434097698824545279, guid: ed5c739a98841b04f9b7e84f981e25d7, type: 3}
-      propertyPath: m_Name
-      value: Home1
-      objectReference: {fileID: 0}
-    - target: {fileID: 434097698824545279, guid: ed5c739a98841b04f9b7e84f981e25d7, type: 3}
-      propertyPath: m_TagString
-      value: Homes
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ed5c739a98841b04f9b7e84f981e25d7, type: 3}
---- !u!114 &902465625 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 434097698824545275, guid: ed5c739a98841b04f9b7e84f981e25d7, type: 3}
-  m_PrefabInstance: {fileID: 902465624}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6178778f0e2ba64fa2dd362a86be7c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &957023336
 GameObject:
   m_ObjectHideFlags: 0
@@ -2143,7 +2059,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1094732620
 GameObject:
@@ -2813,9 +2729,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899bc406c86be194b9db033f9739eac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalHome: {fileID: 902465625}
   originalExplosion: {fileID: 2267417069041146920, guid: 914e9d0fc3d23fe4baca4bc8c84e7c7f, type: 3}
   homeCount: 4
+  levelBackground: {fileID: 788658533}
 --- !u!4 &1320317645
 Transform:
   m_ObjectHideFlags: 0
@@ -2828,7 +2744,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1320317646
 MonoBehaviour:
@@ -3094,7 +3010,7 @@ Transform:
   m_Children:
   - {fileID: 659526900}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1405048989
 GameObject:
@@ -3492,7 +3408,7 @@ RectTransform:
   m_Children:
   - {fileID: 789299898}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

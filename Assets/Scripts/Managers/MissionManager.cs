@@ -7,20 +7,19 @@ public class MissionManager : MonoBehaviour, IGameManager
 {
     public ManagerStatus Status { get; private set; }
     public int CurrentLevel { get; private set; }
-    public int MaxLevel { get; private set; }
+    private const int _maxLevel = 2;
 
     public void Startup()
     {
         Debug.Log("Mission manager starting...");
-        UpdateData(0, 1);
+        UpdateData(0);
 
         Status = ManagerStatus.Started;
     }
 
-    public void UpdateData(int curLevel, int maxLevel)
+    public void UpdateData(int curLevel)
     {
         CurrentLevel = curLevel;
-        MaxLevel = maxLevel;
     }
 
     public void OpenMainMenu()
@@ -29,20 +28,17 @@ public class MissionManager : MonoBehaviour, IGameManager
         string name = "MainMenu";
         Debug.Log("Loading " + name);
         SceneManager.LoadScene(name);
-        UpdateData(0, 1);
+        UpdateData(0);
     }
 
     public void GoToNext()
     {
         // Проверяем, достигнут ли последний уровень.
-        if (CurrentLevel < MaxLevel)
+        if (CurrentLevel < _maxLevel)
         {
             Managers.Audio.PlayLevelMusic();
             CurrentLevel++;
-            string name = "Level" + CurrentLevel;
-            Debug.Log("Loading " + name);
-            // Команда загрузки сцены.
-            SceneManager.LoadScene(name);
+            LoadGameLevel();
         } else
         {
             Debug.Log("Last level");
@@ -58,7 +54,12 @@ public class MissionManager : MonoBehaviour, IGameManager
 
     public void RestartCurrent()
     {
-        string name = "Level" + CurrentLevel;
+        LoadGameLevel();
+    }
+
+    private void LoadGameLevel()
+    {
+        string name = "GameLevel";
         Debug.Log("Loading " + name);
         SceneManager.LoadScene(name);
     }

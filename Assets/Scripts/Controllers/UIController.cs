@@ -88,6 +88,6 @@ public class UIController : MonoBehaviour
 
     public void OnNextLevel()
     {
-        // add code for selecting next level
+        Managers.Mission.GoToNext();
     }
 }
