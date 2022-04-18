@@ -18,8 +18,9 @@ public class Ufo : MonoBehaviour
 
     [SerializeField] private AudioClip shootSound;
     [SerializeField] private UfoBullet ufoBullet;
-    public float speed = 1.5f;
-    public int defaultHealth = 1;
+    [SerializeField] private float speed = 1.5f;
+    [SerializeField] private int defaultHealth = 1;
+    [SerializeField] private bool isBoss;
     private float _secondsForShoot;
     private bool _pause;
     private float _shootTimer;
@@ -122,7 +123,7 @@ public class Ufo : MonoBehaviour
 
     public void Die()
     {
-        Messenger.Broadcast(GameEvent.ENEMY_MOB_KILLED);
+        Messenger<Ufo>.Broadcast(GameEvent.ENEMY_MOB_KILLED, this);
         Destroy(this.gameObject);
     }
 
@@ -131,5 +132,10 @@ public class Ufo : MonoBehaviour
         UfoBullet bullet = Instantiate(ufoBullet) as UfoBullet;
         bullet.transform.position = transform.position;
         Managers.Audio.PlaySound(shootSound);
+    }
+
+    public bool IsBoss()
+    {
+        return isBoss;
     }
 }

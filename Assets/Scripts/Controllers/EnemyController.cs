@@ -5,13 +5,15 @@ using UnityEngine;
 [RequireComponent(typeof(UIController))]
 public class EnemyController : MonoBehaviour
 {
+    [SerializeField] private Ufo bossPrefab;
     [SerializeField] private Ufo ufoPrefab;
-    private float _timer;
-    public float secondsForSpawn = 3f;
-    public int enemySpawnCount = 10;
+    [SerializeField] private float secondsForSpawn = 3f;
+    [SerializeField] private int enemySpawnCount = 10;
+    [SerializeField] private int mobTotal = 20;
     private int _mobSpawned = 0;
-    public int mobTotal = 20;
-    private bool _pause;
+    private float _timer;
+    private bool _pause = false;
+    private bool _isBossSpawned = false;
     private UIController _uiController;
 
     private void Awake()
@@ -19,7 +21,7 @@ public class EnemyController : MonoBehaviour
         _uiController = GetComponent<UIController>();
         _pause = false;
         Messenger<bool>.AddListener(GameEvent.GAME_PAUSE, OnGamePause);
-        Messenger.AddListener(GameEvent.ENEMY_MOB_KILLED, OnEnemyMobKilled);
+        Messenger<Ufo>.AddListener(GameEvent.ENEMY_MOB_KILLED, OnEnemyMobKilled);
         int level = Managers.Mission.CurrentLevel;
         mobTotal *= level;
         _uiController.UpdateMobTotal(mobTotal);
@@ -28,32 +30,41 @@ public class EnemyController : MonoBehaviour
     private void OnDestroy()
     {
         Messenger<bool>.RemoveListener(GameEvent.GAME_PAUSE, OnGamePause);
-        Messenger.RemoveListener(GameEvent.ENEMY_MOB_KILLED, OnEnemyMobKilled);
+        Messenger<Ufo>.RemoveListener(GameEvent.ENEMY_MOB_KILLED, OnEnemyMobKilled);
     }
 
     private void Update()
     {
         if (!_pause)
         {
-            CheckSpawn();
+            CheckUfoSpawn();
         }
     }
 
-    private void CheckSpawn()
+    private void CheckUfoSpawn()
     {
         bool canSpawn = _mobSpawned < enemySpawnCount && _mobSpawned < mobTotal;
         _timer += Time.deltaTime;
         if (_timer > secondsForSpawn && canSpawn)
         {
-            Ufo mob = Instantiate(ufoPrefab) as Ufo;
+            if (Managers.Mission.CurrentLevel > 1 && mobTotal % 3 == 0 && !_isBossSpawned)
+            {
+                Ufo boss = Instantiate(bossPrefab) as Ufo;
+                _isBossSpawned = true;
+            }
+            else
+            {
+                Ufo mob = Instantiate(ufoPrefab) as Ufo;
+            }
             _mobSpawned++;
             _timer = 0;
         }
     }
 
-    private void OnEnemyMobKilled()
+    private void OnEnemyMobKilled(Ufo ufo)
     {
         if (_mobSpawned == 0 || mobTotal == 0) return;
+        if (ufo.IsBoss()) _isBossSpawned = false;
         _mobSpawned--;
         mobTotal--;
         _uiController.UpdateMobTotal(mobTotal);
