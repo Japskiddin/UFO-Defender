@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour, IGameManager
 {
+    [Header("Properties")]
     [SerializeField] private AudioSource music1Source;
     [SerializeField] private AudioSource music2Source;
     // ячейка переменной на панели дл€ ссылки на новый источник звука.
@@ -12,11 +13,11 @@ public class AudioManager : MonoBehaviour, IGameManager
     [SerializeField] private string mainMenuBGMusic;
     [SerializeField] private string levelBGMusic;
     [SerializeField] private string levelMenuBGMusic;
+    [SerializeField] private float crossFadeRate = 1.5f;
+
     private AudioSource _activeMusic;
     // —ледим за тем, какой из источников активен, а какой нет.
     private AudioSource _inactiveMusic;
-
-    public float crossFadeRate = 1.5f;
     // ѕереключатель, позвол€ющий избежать ошибок в процессе перехода.
     private bool _crossFading;
 

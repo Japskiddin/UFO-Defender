@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
-    public float speed = 3.0f;
     private bool _pause;
+
+    [Header("Properties")]
+    [SerializeField] private float speed = 3.0f;
 
     private void Awake()
     {

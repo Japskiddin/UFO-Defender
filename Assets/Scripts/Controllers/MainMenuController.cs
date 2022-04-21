@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
+    [Header("Properties")]
     [SerializeField] private AudioClip sound;
+    [Header("Panels")]
     [SerializeField] private Image mainMenu;
     [SerializeField] private Image settingsMenu;
     [SerializeField] private Image about;

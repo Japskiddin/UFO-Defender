@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
+    [Header("Properties")]
     [SerializeField] private AudioClip sound;
     [SerializeField] private Text mobTotal;
+    [Header("Panels")]
     [SerializeField] private Image gameOver;
     [SerializeField] private Image levelComplete;
     [SerializeField] private Image levelPause;

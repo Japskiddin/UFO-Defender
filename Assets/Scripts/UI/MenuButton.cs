@@ -6,8 +6,10 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class MenuButton : MonoBehaviour
 {
-    [SerializeField] private Sprite[] backgrounds;
     private Image _image;
+
+    [Header("Properties")]
+    [SerializeField] private Sprite[] backgrounds;
 
     private void Awake()
     {

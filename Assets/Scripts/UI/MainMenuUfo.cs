@@ -14,9 +14,11 @@ public class MainMenuUfo : MonoBehaviour
     private const float _maxPosY = 4f;
     private const float _minPosY = -4f;
 
-    public float speed = 1.5f;
     private int _directionHorizontal;
     private int _directionVertical;
+
+    [Header("Properties")]
+    [SerializeField] private float speed = 1.5f;
 
     private void Awake()
     {

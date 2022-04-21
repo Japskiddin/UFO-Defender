@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private AudioClip shootSound;
-    [SerializeField] private PlayerBullet bulletPrefab;
-    public float secondsForShoot = 0.5f;
     private float _timer;
     private bool _pause;
+
+    [Header("Properties")]
+    [SerializeField] private AudioClip shootSound;
+    [SerializeField] private PlayerBullet bulletPrefab;
+    [SerializeField] private float secondsForShoot = 0.5f;
 
     private void Awake()
     {

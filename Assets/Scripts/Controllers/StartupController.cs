@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StartupController : MonoBehaviour
 {
+    [Header("Properties")]
     [SerializeField] private ProgressBar progressBar;
 
     private void Awake()

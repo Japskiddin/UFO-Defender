@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SettingsController : MonoBehaviour
 {
+    [Header("Properties")]
     [SerializeField] private AudioClip sound;
     [SerializeField] private Slider soundsSlider;
     [SerializeField] private Slider musicSlider;

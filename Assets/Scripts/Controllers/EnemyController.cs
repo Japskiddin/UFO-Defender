@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(UIController))]
 public class EnemyController : MonoBehaviour
 {
+    [Header("Properties")]
     [SerializeField] private Ufo bossPrefab;
     [SerializeField] private Ufo ufoPrefab;
     [SerializeField] private float secondsForSpawn = 3f;
