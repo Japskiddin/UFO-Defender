@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(MissionManager))]
 [RequireComponent(typeof(AudioManager))]
@@ -17,6 +18,15 @@ public class Managers : MonoBehaviour
 
         Audio = GetComponent<AudioManager>();
         Mission = GetComponent<MissionManager>();
+
+        if (Audio == null)
+        {
+            throw new NullReferenceException("Audio manager is null");
+        }
+        if (Mission == null)
+        {
+            throw new NullReferenceException("Mission manager is null");
+        }
 
         _startSequence = new List<IGameManager>
         {

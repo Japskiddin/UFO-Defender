@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(UIController))]
 public class EnemyController : MonoBehaviour
@@ -20,6 +21,10 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {
         _uiController = GetComponent<UIController>();
+        if (_uiController == null)
+        {
+            throw new NullReferenceException("UI Controller is null");
+        }
         _pause = false;
         Messenger<bool>.AddListener(GameEvent.GAME_PAUSE, OnGamePause);
         Messenger<Ufo>.AddListener(GameEvent.ENEMY_MOB_KILLED, OnEnemyMobKilled);

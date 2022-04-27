@@ -21,10 +21,11 @@ public class Ufo : MonoBehaviour
     [SerializeField] private float speed = 1.5f;
     [SerializeField] private int defaultHealth = 1;
     [SerializeField] private bool isBoss;
-    private float _secondsForShoot;
+
     private bool _pause;
     private float _shootTimer;
     private float _directionTimer;
+    private float _secondsForShoot;
     private int _health;
     private int _directionVertical;
     private int _directionHorizontal;

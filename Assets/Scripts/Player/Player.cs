@@ -23,7 +23,6 @@ public class Player : MonoBehaviour
         Messenger<bool>.RemoveListener(GameEvent.GAME_PAUSE, OnGamePause);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!_pause)

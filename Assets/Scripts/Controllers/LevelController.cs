@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(UIController))]
 public class LevelController : MonoBehaviour
@@ -20,6 +21,10 @@ public class LevelController : MonoBehaviour
     private void Awake()
     {
         _uiController = GetComponent<UIController>();
+        if (_uiController == null)
+        {
+        throw new NullReferenceException("UI Controller is null");
+        }
         _homeAlive = homeCount;
         PrepareLevel();
         Messenger<Vector3>.AddListener(GameEvent.CREATE_EXPLOSION, OnCreateExplosion);

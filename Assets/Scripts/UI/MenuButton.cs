@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 [RequireComponent(typeof(Image))]
 public class MenuButton : MonoBehaviour
@@ -14,6 +15,10 @@ public class MenuButton : MonoBehaviour
     private void Awake()
     {
         _image = GetComponent<Image>();
+        if (_image == null)
+        {
+            throw new NullReferenceException("Component Image is null");
+        }
     }
 
     void Start()

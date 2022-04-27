@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class Home : MonoBehaviour
@@ -8,7 +9,7 @@ public class Home : MonoBehaviour
     [Header("Properties")]
     [SerializeField] private Sprite[] sprites;
     private const int _defaultHp = 4;
-    private SpriteRenderer sprite;
+    private SpriteRenderer _sprite;
     private int _health;
     public bool IsDead
     {
@@ -20,14 +21,18 @@ public class Home : MonoBehaviour
 
     private void Awake()
     {
-        sprite = GetComponent<SpriteRenderer>();
+        _sprite = GetComponent<SpriteRenderer>();
+        if (_sprite == null)
+        {
+            throw new NullReferenceException("Component SpriteRenderer is null");
+        }
         _health = _defaultHp;
         UpdateData();
     }
 
     private void UpdateData()
     {
-        sprite.sprite = sprites[_health];
+        _sprite.sprite = sprites[_health];
     }
 
     public void TakeDamage()
