@@ -8,22 +8,6 @@ public class UfoBullet : MonoBehaviour
     [SerializeField] private float minAngle = 130;
     [SerializeField] private float maxAngle = 230;
     [SerializeField] private float speed = 1.0f;
-    private bool _pause = false;
-
-    private void Awake()
-    {
-        _pause = false;
-    }
-
-    private void OnEnable()
-    {
-        UIController.OnGamePauseEvent += OnGamePause;
-    }
-
-    private void OnDisable()
-    {
-        UIController.OnGamePauseEvent -= OnGamePause;
-    }
 
     private void Start()
     {
@@ -34,7 +18,10 @@ public class UfoBullet : MonoBehaviour
 
     void Update()
     {
-        if (!_pause) transform.Translate(0, speed * Time.deltaTime, 0);
+        if (Controllers.Game.GameStatus == GameStatus.Running)
+        {
+            transform.Translate(0, speed * Time.deltaTime, 0);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -53,11 +40,6 @@ public class UfoBullet : MonoBehaviour
     private void OnBecameInvisible()
     {
         Destroy(this.gameObject);
-    }
-
-    private void OnGamePause(bool value)
-    {
-        _pause = value;
     }
 
     public void Destroy()

@@ -15,8 +15,6 @@ public class UIController : MonoBehaviour
     [SerializeField] private Image levelPause;
     [SerializeField] private Image settingsMenu;
 
-    public static event Action<bool> OnGamePauseEvent;
-
     private void Awake()
     {
         gameOver.gameObject.SetActive(false);
@@ -30,19 +28,17 @@ public class UIController : MonoBehaviour
         mobTotal.text = value.ToString();
     }
 
-    public void OnGameOver()
+    public void ShowGameOverWindow()
     {
         gameOver.gameObject.SetActive(true);
-        OnGamePauseEvent?.Invoke(true);
     }
 
-    public void OnLevelComplete()
+    public void ShowLevelCompleteWindow()
     {
         levelComplete.gameObject.SetActive(true);
-        OnGamePauseEvent?.Invoke(true);
     }
 
-    public void OnGamePause()
+    public void ShowGamePauseWindow()
     {
         if (settingsMenu.gameObject.activeSelf
             || levelComplete.gameObject.activeSelf
@@ -51,23 +47,14 @@ public class UIController : MonoBehaviour
             return;
         }
 
-        if (levelPause.gameObject.activeSelf)
-        {
-            OnGameResume();
-        }
-        else
-        {
-            Managers.Audio.PlaySound(sound);
-            levelPause.gameObject.SetActive(true);
-            OnGamePauseEvent?.Invoke(true);
-        }
+        Managers.Audio.PlaySound(sound);
+        levelPause.gameObject.SetActive(true);
     }
 
-    public void OnGameResume()
+    public void HideGamePauseWindow()
     {
         Managers.Audio.PlaySound(sound);
         levelPause.gameObject.SetActive(false);
-        OnGamePauseEvent?.Invoke(false);
     }
 
     public void OnSettingsClick()
@@ -77,7 +64,7 @@ public class UIController : MonoBehaviour
         settingsMenu.gameObject.SetActive(true);
     }
 
-    public void OnSettingsClose()
+    public void OnSettingsCloseClick()
     {
         Managers.Audio.PlaySound(sound);
         levelPause.gameObject.SetActive(true);
@@ -87,11 +74,10 @@ public class UIController : MonoBehaviour
     public void OnExitClick()
     {
         Managers.Audio.PlaySound(sound);
-        OnGamePauseEvent?.Invoke(false);
         Managers.Mission.OpenMainMenu();
     }
 
-    public void OnNextLevel()
+    public void OnNextLevelClick()
     {
         Managers.Mission.GoToNext();
     }

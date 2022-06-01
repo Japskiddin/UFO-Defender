@@ -5,31 +5,15 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private float _timer;
-    private bool _pause;
 
     [Header("Properties")]
     [SerializeField] private AudioClip shootSound;
     [SerializeField] private PlayerBullet bulletPrefab;
     [SerializeField] private float secondsForShoot = 0.5f;
 
-    private void Awake()
-    {
-        _pause = false;
-    }
-
-    private void OnEnable()
-    {
-        UIController.OnGamePauseEvent += OnGamePause;
-    }
-
-    private void OnDisable()
-    {
-        UIController.OnGamePauseEvent -= OnGamePause;
-    }
-
     void Update()
     {
-        if (!_pause)
+        if (Controllers.Game.GameStatus == GameStatus.Running)
         {
             CheckPlayerShoot();
         }
@@ -52,10 +36,5 @@ public class Player : MonoBehaviour
             Managers.Audio.PlaySound(shootSound);
             _timer = 0;
         }
-    }
-
-    private void OnGamePause(bool value)
-    {
-        _pause = value;
     }
 }

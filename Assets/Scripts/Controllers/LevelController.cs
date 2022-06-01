@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[RequireComponent(typeof(UIController))]
 public class LevelController : MonoBehaviour
 {
     private const float _offsetX = 2.5f;
     private const float _homeStartX = -4f;
     private const float _homeStartY = -3.7f;
     private int _homeAlive;
-    private UIController _uiController;
     [Header("Prefabs")]
     [SerializeField] private Explosion originalExplosion;
     [Header("Properties")]
@@ -20,11 +18,6 @@ public class LevelController : MonoBehaviour
 
     private void Awake()
     {
-        _uiController = GetComponent<UIController>();
-        if (_uiController == null)
-        {
-        throw new NullReferenceException("UI Controller is null");
-        }
         _homeAlive = homeCount;
         PrepareLevel();
         Messenger<Vector3>.AddListener(GameEvent.CREATE_EXPLOSION, OnCreateExplosion);
@@ -35,14 +28,6 @@ public class LevelController : MonoBehaviour
     {
         Messenger<Vector3>.RemoveListener(GameEvent.CREATE_EXPLOSION, OnCreateExplosion);
         Messenger.RemoveListener(GameEvent.HOME_DESTROYED, OnHomeDestroyed);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            _uiController.OnGamePause();
-        }
     }
 
     private void PrepareLevel()
@@ -83,7 +68,7 @@ public class LevelController : MonoBehaviour
         _homeAlive--;
         if (_homeAlive <= 0)
         {
-            _uiController.OnGameOver();
+            Controllers.Game.GameOver();
         }
     }
 }

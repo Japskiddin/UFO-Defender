@@ -17,6 +17,7 @@ public class MainMenuController : MonoBehaviour
         mainMenu.gameObject.SetActive(true);
         settingsMenu.gameObject.SetActive(false);
         about.gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void OnExitClick()

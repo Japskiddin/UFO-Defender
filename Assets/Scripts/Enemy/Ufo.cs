@@ -23,7 +23,6 @@ public class Ufo : MonoBehaviour
     [SerializeField] private int defaultHealth = 1;
     [SerializeField] private bool isBoss;
 
-    private bool _pause;
     private float _shootTimer;
     private float _directionTimer;
     private float _secondsForShoot;
@@ -31,11 +30,8 @@ public class Ufo : MonoBehaviour
     private int _directionVertical;
     private int _directionHorizontal;
 
-    public static event Action<Ufo> OnEnemyDiedEvent;
-
     private void Awake()
     {
-        _pause = false;
         transform.position = new Vector3(_startPosX, UnityEngine.Random.Range(_minPosY, _maxPosY), transform.position.z);
         _directionHorizontal = _directionLeft;
         _directionVertical = UnityEngine.Random.Range(0, 1) == 1 ? _directionTop : _directionBottom;
@@ -43,19 +39,9 @@ public class Ufo : MonoBehaviour
         _secondsForShoot = UnityEngine.Random.Range(2f, 3f);
     }
 
-    private void OnEnable()
-    {
-        UIController.OnGamePauseEvent += OnGamePause;
-    }
-
-    private void OnDisable()
-    {
-        UIController.OnGamePauseEvent -= OnGamePause;
-    }
-
     void Update()
     {
-        if (!_pause)
+        if (Controllers.Game.GameStatus == GameStatus.Running)
         {
             CheckScreenEdges();
             Move();
@@ -113,11 +99,6 @@ public class Ufo : MonoBehaviour
         transform.Translate(posX, posY, 0);
     }
 
-    private void OnGamePause(bool value)
-    {
-        _pause = value;
-    }
-
     public void TakeDamage()
     {
         Messenger<Vector3>.Broadcast(GameEvent.CREATE_EXPLOSION, transform.position);
@@ -131,7 +112,7 @@ public class Ufo : MonoBehaviour
 
     private void Die()
     {
-        OnEnemyDiedEvent?.Invoke(this);
+        Messenger<Ufo>.Broadcast(GameEvent.ENEMY_MOB_KILLED, this);
         Destroy(this.gameObject);
     }
 

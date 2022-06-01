@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[RequireComponent(typeof(UIController))]
 public class EnemyController : MonoBehaviour
 {
     [Header("Properties")]
@@ -14,41 +13,31 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private int mobTotal = 20;
     private int _mobSpawned = 0;
     private float _timer;
-    private bool _pause = false;
     private bool _isBossSpawned = false;
-    private UIController _uiController;
 
     private void Awake()
     {
-        _uiController = GetComponent<UIController>();
-        if (_uiController == null)
-        {
-            throw new NullReferenceException("UI Controller is null");
-        }
-        _pause = false;
+        Messenger<Ufo>.AddListener(GameEvent.ENEMY_MOB_KILLED, OnEnemyMobKilled);
         int level = Managers.Mission.CurrentLevel;
         mobTotal *= level;
-        _uiController.UpdateMobTotal(mobTotal);
     }
 
-    private void OnEnable()
+    private void OnDestroy()
     {
-        UIController.OnGamePauseEvent += OnGamePause;
-        Ufo.OnEnemyDiedEvent += OnEnemyMobKilled;
-    }
-
-    private void OnDisable()
-    {
-        UIController.OnGamePauseEvent -= OnGamePause;
-        Ufo.OnEnemyDiedEvent -= OnEnemyMobKilled;
+        Messenger<Ufo>.RemoveListener(GameEvent.ENEMY_MOB_KILLED, OnEnemyMobKilled);
     }
 
     private void Update()
     {
-        if (!_pause)
+        if (Controllers.Game.GameStatus == GameStatus.Running)
         {
             CheckUfoSpawn();
         }
+    }
+
+    public void Prepare()
+    {
+        Controllers.UI.UpdateMobTotal(mobTotal);
     }
 
     private void CheckUfoSpawn()
@@ -74,15 +63,16 @@ public class EnemyController : MonoBehaviour
     private void OnEnemyMobKilled(Ufo ufo)
     {
         if (_mobSpawned == 0 || mobTotal == 0) return;
-        if (ufo.IsBoss()) _isBossSpawned = false;
+        if (ufo.IsBoss())
+        {
+            _isBossSpawned = false;
+        }
         _mobSpawned--;
         mobTotal--;
-        _uiController.UpdateMobTotal(mobTotal);
-        if (mobTotal == 0) _uiController.OnLevelComplete();
-    }
-
-    private void OnGamePause(bool value)
-    {
-        _pause = value;
+        Controllers.UI.UpdateMobTotal(mobTotal);
+        if (mobTotal == 0)
+        {
+            Controllers.Game.LevelComplete();
+        }
     }
 }
