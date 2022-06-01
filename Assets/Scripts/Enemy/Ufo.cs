@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Ufo : MonoBehaviour
@@ -30,20 +31,26 @@ public class Ufo : MonoBehaviour
     private int _directionVertical;
     private int _directionHorizontal;
 
+    public static event Action<Ufo> OnEnemyDiedEvent;
+
     private void Awake()
     {
         _pause = false;
-        Messenger<bool>.AddListener(GameEvent.GAME_PAUSE, OnGamePause);
-        transform.position = new Vector3(_startPosX, Random.Range(_minPosY, _maxPosY), transform.position.z);
+        transform.position = new Vector3(_startPosX, UnityEngine.Random.Range(_minPosY, _maxPosY), transform.position.z);
         _directionHorizontal = _directionLeft;
-        _directionVertical = Random.Range(0, 1) == 1 ? _directionTop : _directionBottom;
+        _directionVertical = UnityEngine.Random.Range(0, 1) == 1 ? _directionTop : _directionBottom;
         _health = defaultHealth;
-        _secondsForShoot = Random.Range(2f, 3f);
+        _secondsForShoot = UnityEngine.Random.Range(2f, 3f);
     }
 
-    private void OnDestroy()
+    private void OnEnable()
     {
-        Messenger<bool>.RemoveListener(GameEvent.GAME_PAUSE, OnGamePause);
+        UIController.OnGamePauseEvent += OnGamePause;
+    }
+
+    private void OnDisable()
+    {
+        UIController.OnGamePauseEvent -= OnGamePause;
     }
 
     void Update()
@@ -69,7 +76,7 @@ public class Ufo : MonoBehaviour
         {
             if (_directionTimer > _secondsForDirection)
             {
-                if (Random.value < 0.5f)
+                if (UnityEngine.Random.value < 0.5f)
                 {
                     _directionVertical = _directionBottom;
                 } else
@@ -122,13 +129,13 @@ public class Ufo : MonoBehaviour
         }
     }
 
-    public void Die()
+    private void Die()
     {
-        Messenger<Ufo>.Broadcast(GameEvent.ENEMY_MOB_KILLED, this);
+        OnEnemyDiedEvent?.Invoke(this);
         Destroy(this.gameObject);
     }
 
-    public void Shoot()
+    private void Shoot()
     {
         UfoBullet bullet = Instantiate(ufoBullet) as UfoBullet;
         bullet.transform.position = transform.position;

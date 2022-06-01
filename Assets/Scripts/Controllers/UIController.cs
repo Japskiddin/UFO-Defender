@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,8 @@ public class UIController : MonoBehaviour
     [SerializeField] private Image levelComplete;
     [SerializeField] private Image levelPause;
     [SerializeField] private Image settingsMenu;
+
+    public static event Action<bool> OnGamePauseEvent;
 
     private void Awake()
     {
@@ -30,13 +33,13 @@ public class UIController : MonoBehaviour
     public void OnGameOver()
     {
         gameOver.gameObject.SetActive(true);
-        Messenger<bool>.Broadcast(GameEvent.GAME_PAUSE, true);
+        OnGamePauseEvent?.Invoke(true);
     }
 
     public void OnLevelComplete()
     {
         levelComplete.gameObject.SetActive(true);
-        Messenger<bool>.Broadcast(GameEvent.GAME_PAUSE, true);
+        OnGamePauseEvent?.Invoke(true);
     }
 
     public void OnGamePause()
@@ -56,7 +59,7 @@ public class UIController : MonoBehaviour
         {
             Managers.Audio.PlaySound(sound);
             levelPause.gameObject.SetActive(true);
-            Messenger<bool>.Broadcast(GameEvent.GAME_PAUSE, true);
+            OnGamePauseEvent?.Invoke(true);
         }
     }
 
@@ -64,7 +67,7 @@ public class UIController : MonoBehaviour
     {
         Managers.Audio.PlaySound(sound);
         levelPause.gameObject.SetActive(false);
-        Messenger<bool>.Broadcast(GameEvent.GAME_PAUSE, false);
+        OnGamePauseEvent?.Invoke(false);
     }
 
     public void OnSettingsClick()
@@ -84,7 +87,7 @@ public class UIController : MonoBehaviour
     public void OnExitClick()
     {
         Managers.Audio.PlaySound(sound);
-        Messenger<bool>.Broadcast(GameEvent.GAME_PAUSE, false);
+        OnGamePauseEvent?.Invoke(false);
         Managers.Mission.OpenMainMenu();
     }
 

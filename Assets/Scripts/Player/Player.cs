@@ -15,12 +15,16 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         _pause = false;
-        Messenger<bool>.AddListener(GameEvent.GAME_PAUSE, OnGamePause);
     }
 
-    private void OnDestroy()
+    private void OnEnable()
     {
-        Messenger<bool>.RemoveListener(GameEvent.GAME_PAUSE, OnGamePause);
+        UIController.OnGamePauseEvent += OnGamePause;
+    }
+
+    private void OnDisable()
+    {
+        UIController.OnGamePauseEvent -= OnGamePause;
     }
 
     void Update()

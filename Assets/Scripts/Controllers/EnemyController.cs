@@ -26,17 +26,21 @@ public class EnemyController : MonoBehaviour
             throw new NullReferenceException("UI Controller is null");
         }
         _pause = false;
-        Messenger<bool>.AddListener(GameEvent.GAME_PAUSE, OnGamePause);
-        Messenger<Ufo>.AddListener(GameEvent.ENEMY_MOB_KILLED, OnEnemyMobKilled);
         int level = Managers.Mission.CurrentLevel;
         mobTotal *= level;
         _uiController.UpdateMobTotal(mobTotal);
     }
 
-    private void OnDestroy()
+    private void OnEnable()
     {
-        Messenger<bool>.RemoveListener(GameEvent.GAME_PAUSE, OnGamePause);
-        Messenger<Ufo>.RemoveListener(GameEvent.ENEMY_MOB_KILLED, OnEnemyMobKilled);
+        UIController.OnGamePauseEvent += OnGamePause;
+        Ufo.OnEnemyDiedEvent += OnEnemyMobKilled;
+    }
+
+    private void OnDisable()
+    {
+        UIController.OnGamePauseEvent -= OnGamePause;
+        Ufo.OnEnemyDiedEvent -= OnEnemyMobKilled;
     }
 
     private void Update()

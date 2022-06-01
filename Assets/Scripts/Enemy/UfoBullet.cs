@@ -13,12 +13,16 @@ public class UfoBullet : MonoBehaviour
     private void Awake()
     {
         _pause = false;
-        Messenger<bool>.AddListener(GameEvent.GAME_PAUSE, OnGamePause);
     }
 
-    private void OnDestroy()
+    private void OnEnable()
     {
-        Messenger<bool>.RemoveListener(GameEvent.GAME_PAUSE, OnGamePause);
+        UIController.OnGamePauseEvent += OnGamePause;
+    }
+
+    private void OnDisable()
+    {
+        UIController.OnGamePauseEvent -= OnGamePause;
     }
 
     private void Start()
