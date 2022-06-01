@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {
         Messenger<Ufo>.AddListener(GameEvent.ENEMY_MOB_KILLED, OnEnemyMobKilled);
-        int level = Managers.Mission.CurrentLevel;
+        int level = Managers.Scene.CurrentLevel;
         mobTotal *= level;
     }
 
@@ -46,7 +46,7 @@ public class EnemyController : MonoBehaviour
         _timer += Time.deltaTime;
         if (_timer > secondsForSpawn && canSpawn)
         {
-            if (Managers.Mission.CurrentLevel > 1 && mobTotal % 3 == 0 && !_isBossSpawned)
+            if (Managers.Scene.CurrentLevel > 1 && mobTotal % 3 == 0 && !_isBossSpawned)
             {
                 Ufo boss = Instantiate(bossPrefab) as Ufo;
                 _isBossSpawned = true;

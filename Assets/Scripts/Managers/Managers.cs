@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[RequireComponent(typeof(MissionManager))]
+[RequireComponent(typeof(SceneManager))]
 [RequireComponent(typeof(AudioManager))]
 public class Managers : MonoBehaviour
 {
     public static AudioManager Audio { get; private set; }
-    public static MissionManager Mission { get; private set; }
+    public static SceneManager Scene { get; private set; }
     // —писок диспетчеров, который просматриваетс€ в цикле во врем€ стартовой последовательности.
     private List<IGameManager> _startSequence;
 
@@ -17,20 +17,20 @@ public class Managers : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         Audio = GetComponent<AudioManager>();
-        Mission = GetComponent<MissionManager>();
+        Scene = GetComponent<SceneManager>();
 
         if (Audio == null)
         {
             throw new NullReferenceException("Audio manager is null");
         }
-        if (Mission == null)
+        if (Scene == null)
         {
-            throw new NullReferenceException("Mission manager is null");
+            throw new NullReferenceException("Scene manager is null");
         }
 
         _startSequence = new List<IGameManager>
         {
-            Mission,
+            Scene,
             Audio
         };
 

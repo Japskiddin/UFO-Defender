@@ -29,6 +29,6 @@ public class StartupController : MonoBehaviour
     private void OnManagersStarted()
     {
         // После загрузки диспетчеров загружаем следующую сцену.
-        Managers.Mission.OpenMainMenu();
+        Managers.Scene.OpenMainMenu();
     }
 }

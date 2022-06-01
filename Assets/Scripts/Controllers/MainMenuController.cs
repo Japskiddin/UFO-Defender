@@ -29,7 +29,7 @@ public class MainMenuController : MonoBehaviour
     public void OnStartClick()
     {
         Managers.Audio.PlaySound(sound);
-        Managers.Mission.GoToNext();
+        Managers.Scene.GoToNext();
     }
 
     public void OnSettingsClick()
@@ -39,10 +39,10 @@ public class MainMenuController : MonoBehaviour
         settingsMenu.gameObject.SetActive(true);
     }
 
-    public void OnSettingsClose()
+    public void OnSettingsCloseClick()
     {
+        Managers.Audio.PlaySound(sound);
         mainMenu.gameObject.SetActive(true);
         settingsMenu.gameObject.SetActive(false);
-        Managers.Audio.PlaySound(sound);
     }
 }

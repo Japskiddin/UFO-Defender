@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MissionManager : MonoBehaviour, IGameManager
+public class SceneManager : MonoBehaviour, IGameManager
 {
     public ManagerStatus Status { get; private set; }
     public int CurrentLevel { get; private set; }
@@ -27,7 +27,7 @@ public class MissionManager : MonoBehaviour, IGameManager
         Managers.Audio.PlayMainMenuMusic();
         string name = "MainMenu";
         Debug.Log("Loading " + name);
-        SceneManager.LoadScene(name);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(name);
         UpdateData(0);
     }
 
@@ -46,12 +46,6 @@ public class MissionManager : MonoBehaviour, IGameManager
         }
     }
 
-    public void ReachObjective()
-    {
-        // «десь может быть код обработки нескольких целей.
-        Messenger.Broadcast(GameEvent.LEVEL_COMPLETE);
-    }
-
     public void RestartCurrent()
     {
         LoadGameLevel();
@@ -61,6 +55,6 @@ public class MissionManager : MonoBehaviour, IGameManager
     {
         string name = "GameLevel";
         Debug.Log("Loading " + name);
-        SceneManager.LoadScene(name);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(name);
     }
 }

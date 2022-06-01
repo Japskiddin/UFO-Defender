@@ -32,7 +32,7 @@ public class LevelController : MonoBehaviour
 
     private void PrepareLevel()
     {
-        int level = Managers.Mission.CurrentLevel;
+        int level = Managers.Scene.CurrentLevel;
         Debug.Log("Current level = " + level);
         CreateHouses(level);
         CreateBackground(level);

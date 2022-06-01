@@ -74,11 +74,11 @@ public class UIController : MonoBehaviour
     public void OnExitClick()
     {
         Managers.Audio.PlaySound(sound);
-        Managers.Mission.OpenMainMenu();
+        Managers.Scene.OpenMainMenu();
     }
 
     public void OnNextLevelClick()
     {
-        Managers.Mission.GoToNext();
+        Managers.Scene.GoToNext();
     }
 }
