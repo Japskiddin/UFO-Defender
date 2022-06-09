@@ -16,11 +16,6 @@ public class Controllers : MonoBehaviour
 
     private void Awake()
     {
-        UI = GetComponent<UIController>();
-        if (UI == null)
-        {
-            throw new NullReferenceException("UI controller is null");
-        }
         Game = GetComponent<GameController>();
         if (Game == null)
         {
@@ -36,7 +31,10 @@ public class Controllers : MonoBehaviour
         {
             throw new NullReferenceException("Level controller is null");
         }
-
-        Enemy.Prepare();
+        UI = GetComponent<UIController>();
+        if (UI == null)
+        {
+            throw new NullReferenceException("UI controller is null");
+        }
     }
 }

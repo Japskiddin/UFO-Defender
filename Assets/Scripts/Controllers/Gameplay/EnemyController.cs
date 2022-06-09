@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// Controller which spawns enemies on level.
+/// </summary>
 public class EnemyController : MonoBehaviour
 {
-    [Header("Properties")]
+    [Header("Prefabs")]
     [SerializeField] private Ufo bossPrefab;
     [SerializeField] private Ufo ufoPrefab;
+    [Header("Properties")]
     [SerializeField] private float secondsForSpawn = 3f;
     [SerializeField] private int enemySpawnCount = 10;
     [SerializeField] private int mobTotal = 20;
@@ -22,6 +26,11 @@ public class EnemyController : MonoBehaviour
         mobTotal *= level;
     }
 
+    private void Start()
+    {
+        Controllers.UI.UpdateMobTotal(mobTotal);
+    }
+
     private void OnDestroy()
     {
         Messenger<Ufo>.RemoveListener(GameEvent.ENEMY_MOB_KILLED, OnEnemyMobKilled);
@@ -33,11 +42,6 @@ public class EnemyController : MonoBehaviour
         {
             CheckUfoSpawn();
         }
-    }
-
-    public void Prepare()
-    {
-        Controllers.UI.UpdateMobTotal(mobTotal);
     }
 
     private void CheckUfoSpawn()

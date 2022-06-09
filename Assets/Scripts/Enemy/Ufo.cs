@@ -55,17 +55,20 @@ public class Ufo : MonoBehaviour
         if (transform.position.y >= _maxPosY)
         {
             _directionVertical = _directionBottom;
-        } else if (transform.position.y <= _minPosY)
+        }
+        else if (transform.position.y <= _minPosY)
         {
             _directionVertical = _directionTop;
-        } else
+        }
+        else
         {
             if (_directionTimer > _secondsForDirection)
             {
                 if (UnityEngine.Random.value < 0.5f)
                 {
                     _directionVertical = _directionBottom;
-                } else
+                }
+                else
                 {
                     _directionVertical = _directionTop;
                 }
@@ -76,7 +79,8 @@ public class Ufo : MonoBehaviour
         if (transform.position.x >= _maxPosX)
         {
             _directionHorizontal = _directionRight;
-        } else if (transform.position.x <= _minPosX)
+        }
+        else if (transform.position.x <= _minPosX)
         {
             _directionHorizontal = _directionLeft;
         }
@@ -103,7 +107,7 @@ public class Ufo : MonoBehaviour
     {
         Messenger<Vector3>.Broadcast(GameEvent.CREATE_EXPLOSION, transform.position);
         _health--;
-        Debug.Log("UFO Mob take damage, hp - " + _health);
+        Debug.Log($"UFO Mob take damage, hp - {_health}");
         if (_health <= 0)
         {
             Die();

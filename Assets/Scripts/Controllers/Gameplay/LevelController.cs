@@ -33,7 +33,7 @@ public class LevelController : MonoBehaviour
     private void PrepareLevel()
     {
         int level = Managers.Scene.CurrentLevel;
-        Debug.Log("Current level = " + level);
+        Debug.Log($"Current level = {level}");
         CreateHouses(level);
         CreateBackground(level);
     }
@@ -60,7 +60,7 @@ public class LevelController : MonoBehaviour
     {
         Explosion explosion = Instantiate(originalExplosion) as Explosion;
         explosion.transform.position = new Vector3(position.x, position.y, position.z - 1);
-        Debug.Log("EXPLOSION!!! at " + explosion.transform.position);
+        Debug.Log($"EXPLOSION!!! at {explosion.transform.position}");
     }
 
     private void OnHomeDestroyed()
