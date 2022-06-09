@@ -7,7 +7,6 @@ using System;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Home : MonoBehaviour
 {
-    [Header("Properties")]
     private const int _defaultHp = 4;
     private SpriteRenderer _sprite;
     private BoxCollider2D _collider;
@@ -42,6 +41,7 @@ public class Home : MonoBehaviour
 
     private void UpdateData()
     {
+        Debug.Log($"Current home health - {_health}");
         _sprite.sprite = Controllers.Level.HomeSprites[_health];
         Vector2 size = _sprite.bounds.size / 0.6f;
         _collider.size = size;

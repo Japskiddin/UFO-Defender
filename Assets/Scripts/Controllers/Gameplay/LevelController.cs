@@ -7,7 +7,7 @@ public class LevelController : MonoBehaviour
 {
     private const float _offsetX = 2.5f;
     private const float _homeStartX = -4f;
-    private const float _homeStartY = -3.7f;
+    private const float _homeStartY = -4f;
     private int _homeAlive;
     [Header("Prefabs")]
     [SerializeField] private GameObject explosionPrefab;
