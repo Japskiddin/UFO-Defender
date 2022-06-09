@@ -275,7 +275,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: -52}
+  m_AnchoredPosition: {x: 0.000030517578, y: 58}
   m_SizeDelta: {x: 332.959, y: 72.466}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &119126929
@@ -2033,7 +2033,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: 58}
+  m_AnchoredPosition: {x: 0.000030517578, y: -52}
   m_SizeDelta: {x: 332.959, y: 72.466}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &957023338
@@ -2960,7 +2960,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899bc406c86be194b9db033f9739eac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalExplosion: {fileID: 2267417069041146920, guid: 914e9d0fc3d23fe4baca4bc8c84e7c7f, type: 3}
+  explosionPrefab: {fileID: 647455436944153474, guid: 914e9d0fc3d23fe4baca4bc8c84e7c7f, type: 3}
+  homePrefab: {fileID: 434097698824545279, guid: ed5c739a98841b04f9b7e84f981e25d7, type: 3}
   homeCount: 4
   levelBackground: {fileID: 788658533}
 --- !u!4 &1320317645

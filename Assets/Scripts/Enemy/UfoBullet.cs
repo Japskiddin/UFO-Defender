@@ -29,7 +29,7 @@ public class UfoBullet : MonoBehaviour
         if (collision.CompareTag("Homes"))
         {
             Home home = collision.GetComponent<Home>();
-            if (home != null && !home.IsDead)
+            if (home != null && !home.IsDestroyed)
             {
                 home.TakeDamage();
                 Destroy(this.gameObject);

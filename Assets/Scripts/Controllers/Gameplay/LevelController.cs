@@ -10,14 +10,24 @@ public class LevelController : MonoBehaviour
     private const float _homeStartY = -3.7f;
     private int _homeAlive;
     [Header("Prefabs")]
-    [SerializeField] private Explosion originalExplosion;
+    [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private GameObject homePrefab;
     [Header("Properties")]
     [SerializeField] private int homeCount = 4;
     [Header("Background")]
     [SerializeField] private SpriteRenderer levelBackground;
+    public Sprite[] HomeSprites { get; private set; }
 
     private void Awake()
     {
+        if (explosionPrefab.GetComponent<Explosion>() == null)
+        {
+            throw new InvalidCastException("Explosion prefab must contain Explosion component.");
+        }
+        if (homePrefab.GetComponent<Home>() == null)
+        {
+            throw new InvalidCastException("Home prefab must contain Home component.");
+        }
         _homeAlive = homeCount;
         PrepareLevel();
         Messenger<Vector3>.AddListener(GameEvent.CREATE_EXPLOSION, OnCreateExplosion);
@@ -34,11 +44,22 @@ public class LevelController : MonoBehaviour
     {
         int level = Managers.Scene.CurrentLevel;
         Debug.Log($"Current level = {level}");
+        LoadBackground(level);
+        LoadHomeSprites(level);
         CreateHouses(level);
-        CreateBackground(level);
     }
 
-    private void CreateBackground(int level)
+    private void LoadHomeSprites(int level)
+    {
+        HomeSprites = new Sprite[5];
+        HomeSprites[0] = Resources.Load("Homes/home_" + level + "_0", typeof(Sprite)) as Sprite;
+        HomeSprites[1] = Resources.Load("Homes/home_" + level + "_33", typeof(Sprite)) as Sprite;
+        HomeSprites[2] = Resources.Load("Homes/home_" + level + "_66", typeof(Sprite)) as Sprite;
+        HomeSprites[3] = Resources.Load("Homes/home_" + level + "_99", typeof(Sprite)) as Sprite;
+        HomeSprites[4] = Resources.Load("Homes/home_" + level + "_100", typeof(Sprite)) as Sprite;
+    }
+
+    private void LoadBackground(int level)
     {
         Sprite background = Resources.Load("Level backgrounds/level" + level, typeof(Sprite)) as Sprite;
         levelBackground.sprite = background;
@@ -46,20 +67,17 @@ public class LevelController : MonoBehaviour
 
     private void CreateHouses(int level)
     {
-        Home homePrefab = Resources.Load("Prefabs/home" + level, typeof(Home)) as Home;
         for (int i = 0; i < homeCount; i++)
         {
-            Home home = Instantiate(homePrefab) as Home;
             float posX = (_offsetX * i) + _homeStartX;
             float posY = _homeStartY;
-            home.transform.position = new Vector3(posX, posY, 0);
+            Instantiate(homePrefab, new Vector3(posX, posY, 0), transform.rotation);
         }
     }
 
     private void OnCreateExplosion(Vector3 position)
     {
-        Explosion explosion = Instantiate(originalExplosion) as Explosion;
-        explosion.transform.position = new Vector3(position.x, position.y, position.z - 1);
+        GameObject explosion = Instantiate(explosionPrefab, new Vector3(position.x, position.y, position.z - 1), transform.rotation);
         Debug.Log($"EXPLOSION!!! at {explosion.transform.position}");
     }
 
