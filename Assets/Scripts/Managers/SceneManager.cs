@@ -33,13 +33,14 @@ public class SceneManager : MonoBehaviour, IGameManager
 
     public void GoToNext()
     {
-        // Проверяем, достигнут ли последний уровень.
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
         if (CurrentLevel < _maxLevel)
         {
             Managers.Audio.PlayLevelMusic();
             CurrentLevel++;
             LoadGameLevel();
-        } else
+        }
+        else
         {
             Debug.Log("Last level");
             Messenger.Broadcast(GameEvent.GAME_COMPLETE);

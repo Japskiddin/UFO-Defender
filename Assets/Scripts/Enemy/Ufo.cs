@@ -17,11 +17,13 @@ public class Ufo : MonoBehaviour
     private const float _startPosX = 10.5f;
     private const float _secondsForDirection = 1f;
 
+    [Header("Sound FX")]
     [SerializeField] private AudioClip shootSound;
-    [SerializeField] private UfoBullet ufoBullet;
+    [Header("Prefab")]
+    [SerializeField] private GameObject ufoBullet;
+    [Header("Properties")]
     [SerializeField] private float speed = 1.5f;
     [SerializeField] private int defaultHealth = 1;
-    [SerializeField] private bool isBoss;
 
     private float _shootTimer;
     private float _directionTimer;
@@ -32,6 +34,10 @@ public class Ufo : MonoBehaviour
 
     private void Awake()
     {
+        if (ufoBullet.GetComponent<UfoBullet>() == null)
+        {
+            throw new InvalidCastException("Ufo bullet must contain UfoBullet component.");
+        }
         transform.position = new Vector3(_startPosX, UnityEngine.Random.Range(_minPosY, _maxPosY), transform.position.z);
         _directionHorizontal = _directionLeft;
         _directionVertical = UnityEngine.Random.Range(0, 1) == 1 ? _directionTop : _directionBottom;
@@ -122,13 +128,7 @@ public class Ufo : MonoBehaviour
 
     private void Shoot()
     {
-        UfoBullet bullet = Instantiate(ufoBullet) as UfoBullet;
-        bullet.transform.position = transform.position;
+        Instantiate(ufoBullet, transform.position, transform.rotation);
         Managers.Audio.PlaySound(shootSound);
-    }
-
-    public bool IsBoss()
-    {
-        return isBoss;
     }
 }
