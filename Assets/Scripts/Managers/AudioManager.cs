@@ -7,22 +7,22 @@ public class AudioManager : MonoBehaviour, IGameManager
     [Header("Properties")]
     [SerializeField] private AudioSource music1Source;
     [SerializeField] private AudioSource music2Source;
-    // Ячейка переменной на панели для ссылки на новый источник звука.
+    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
     [SerializeField] private AudioSource soundSource;
-    // Строки указывают имена музыкальных клипов.
+    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.
     [SerializeField] private string mainMenuBGMusic;
     [SerializeField] private string levelBGMusic;
     [SerializeField] private string levelMenuBGMusic;
     [SerializeField] private float crossFadeRate = 1.5f;
 
     private AudioSource _activeMusic;
-    // Следим за тем, какой из источников активен, а какой нет.
+    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ.
     private AudioSource _inactiveMusic;
-    // Переключатель, позволяющий избежать ошибок в процессе перехода.
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
     private bool _crossFading;
 
     public ManagerStatus Status { get; private set; }
-    // Непосредственный доступ к закрытой переменной невозможен, только через функцию задания свойства.
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
     private float _musicVolume;
     public float MusicVolume
     {
@@ -36,9 +36,9 @@ public class AudioManager : MonoBehaviour, IGameManager
 
             if (music1Source != null && !_crossFading)
             {
-                // Напрямую регулируем громкость источника звука.
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
                 music1Source.volume = _musicVolume;
-                // Регулировка громкости обоих источников звука.
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
                 music2Source.volume = _musicVolume;
             }
         }
@@ -52,7 +52,7 @@ public class AudioManager : MonoBehaviour, IGameManager
             {
                 return music1Source.mute;
             }
-            // Значение по умолчанию если AudioSource отсутствует.
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ AudioSource пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
             return false;
         }
         set
@@ -67,15 +67,15 @@ public class AudioManager : MonoBehaviour, IGameManager
 
     public float SoundVolume
     {
-        // Свойство для громкости с функцией чтения и функцией доступа.
-        // Реализуем функции чтения/доступа с помощью AudioListener.
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ AudioListener.
         get { return AudioListener.volume; }
         set { AudioListener.volume = value; }
     }
 
     public bool SoundMute
-    { 
-        // Добавляем аналогичное свойство для выключения звука.
+    {
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
         get { return AudioListener.pause; }
         set { AudioListener.pause = value; }
     }
@@ -84,17 +84,17 @@ public class AudioManager : MonoBehaviour, IGameManager
     {
         Debug.Log("Audio manager starting...");
 
-        // Свойства заставляют AudioSource игнорировать громкость компонента AudioListener.
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ AudioSource пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ AudioListener.
         music1Source.ignoreListenerVolume = true;
         music1Source.ignoreListenerPause = true;
         music2Source.ignoreListenerVolume = true;
         music2Source.ignoreListenerPause = true;
 
-        // 1 - полная громкость.
+        // 1 - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
         MusicVolume = 1f;
         SoundVolume = 1f;
 
-        // Инициализируем один из источников как активный.
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
         _activeMusic = music1Source;
         _inactiveMusic = music2Source;
 
@@ -102,14 +102,14 @@ public class AudioManager : MonoBehaviour, IGameManager
     }
 
     public void PlaySound(AudioClip clip)
-    { 
-        // Воспроизводим звуки, не имеющие другого источника.
+    {
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
         soundSource.PlayOneShot(clip);
     }
 
     public void PlayMainMenuMusic()
-    { 
-        // Загрузка музыки intro из папки Resources.
+    {
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ intro пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ Resources.
         PlayMusic(Resources.Load("Music/" + mainMenuBGMusic) as AudioClip);
     }
 
@@ -119,15 +119,15 @@ public class AudioManager : MonoBehaviour, IGameManager
     }
 
     public void PlayLevelMusic()
-    { 
-        // Загрузка основной музыки из папки Resources.
+    {
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ Resources.
         PlayMusic(Resources.Load("Music/" + levelBGMusic) as AudioClip);
     }
 
     private void PlayMusic(AudioClip clip)
     {
         if (_crossFading) return;
-        // При изменении музыкальной композиции вызываем сопрограмму.
+        // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
         StartCoroutine(CrossFadeMusic(clip));
     }
 
@@ -145,11 +145,11 @@ public class AudioManager : MonoBehaviour, IGameManager
             _activeMusic.volume -= scaledRate * Time.deltaTime;
             _inactiveMusic.volume += scaledRate * Time.deltaTime;
 
-            // Оператор yield останавливает операции на один кадр.
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ yield пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ.
             yield return null;
         }
 
-        // Временная переменная, используемая когда мы меняем местами _active и _inactive.
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ _active пїЅ _inactive.
         AudioSource temp = _activeMusic;
 
         _activeMusic = _inactiveMusic;
