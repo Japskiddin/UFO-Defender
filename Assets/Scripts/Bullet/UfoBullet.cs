@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UfoBullet : MonoBehaviour
+public class UfoBullet : BaseBullet
 {
     [Header("Properties")]
     [SerializeField] private float minAngle = 130;
     [SerializeField] private float maxAngle = 230;
     [SerializeField] private float speed = 1.0f;
+
+    private void Awake()
+    {
+        Init(speed);
+    }
 
     private void Start()
     {
@@ -16,14 +21,6 @@ public class UfoBullet : MonoBehaviour
         if (Debug.isDebugBuild)
         {
             Debug.Log($"UFO Bullet angle - {angle}");
-        }
-    }
-
-    void Update()
-    {
-        if (Controllers.Game.GameStatus == GameStatus.Running)
-        {
-            transform.Translate(0, speed * Time.deltaTime, 0);
         }
     }
 
@@ -38,11 +35,6 @@ public class UfoBullet : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
-    }
-
-    private void OnBecameInvisible()
-    {
-        Destroy(this.gameObject);
     }
 
     public void Destroy()

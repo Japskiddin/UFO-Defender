@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 
 public class Ufo : MonoBehaviour
@@ -36,18 +35,18 @@ public class Ufo : MonoBehaviour
     {
         if (ufoBullet.GetComponent<UfoBullet>() == null)
         {
-            throw new InvalidCastException("Ufo bullet must contain UfoBullet component.");
+            throw new System.NullReferenceException("Ufo bullet must contain UfoBullet component.");
         }
-        transform.position = new Vector3(_startPosX, UnityEngine.Random.Range(_minPosY, _maxPosY), transform.position.z);
+        transform.position = new Vector3(_startPosX, Random.Range(_minPosY, _maxPosY), transform.position.z);
         _directionHorizontal = _directionLeft;
-        _directionVertical = UnityEngine.Random.Range(0, 1) == 1 ? _directionTop : _directionBottom;
+        _directionVertical = Random.Range(0, 1) == 1 ? _directionTop : _directionBottom;
         _health = defaultHealth;
-        _secondsForShoot = UnityEngine.Random.Range(2f, 3f);
+        _secondsForShoot = Random.Range(2f, 3f);
     }
 
     void Update()
     {
-        if (Controllers.Game.GameStatus == GameStatus.Running)
+        if (Controllers.Gameplay.GameStatus == GameStatus.Running)
         {
             CheckScreenEdges();
             Move();
@@ -70,7 +69,7 @@ public class Ufo : MonoBehaviour
         {
             if (_directionTimer > _secondsForDirection)
             {
-                if (UnityEngine.Random.value < 0.5f)
+                if (Random.value < 0.5f)
                 {
                     _directionVertical = _directionBottom;
                 }
@@ -102,7 +101,7 @@ public class Ufo : MonoBehaviour
         }
     }
 
-    public void Move()
+    private void Move()
     {
         float posX = (_directionHorizontal == _directionRight ? -1 : 1) * speed * Time.deltaTime;
         float posY = (_directionVertical == _directionBottom ? -1 : 1) * speed * Time.deltaTime;

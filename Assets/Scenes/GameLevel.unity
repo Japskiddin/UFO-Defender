@@ -1091,8 +1091,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1320317647}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+      - m_Target: {fileID: 1320317653}
+        m_TargetAssemblyTypeName: LevelPauseModal, Assembly-CSharp
         m_MethodName: OnExitClick
         m_Mode: 1
         m_Arguments:
@@ -1705,8 +1705,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1320317647}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+      - m_Target: {fileID: 1320317654}
+        m_TargetAssemblyTypeName: SettingsModal, Assembly-CSharp
         m_MethodName: OnSettingsCloseClick
         m_Mode: 1
         m_Arguments:
@@ -2079,8 +2079,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1320317647}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+      - m_Target: {fileID: 1320317653}
+        m_TargetAssemblyTypeName: LevelPauseModal, Assembly-CSharp
         m_MethodName: OnSettingsClick
         m_Mode: 1
         m_Arguments:
@@ -2550,8 +2550,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1320317647}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+      - m_Target: {fileID: 1320317650}
+        m_TargetAssemblyTypeName: LevelCompleteModal, Assembly-CSharp
         m_MethodName: OnExitClick
         m_Mode: 1
         m_Arguments:
@@ -2922,9 +2922,13 @@ GameObject:
   - component: {fileID: 1320317645}
   - component: {fileID: 1320317644}
   - component: {fileID: 1320317646}
-  - component: {fileID: 1320317647}
   - component: {fileID: 1320317648}
   - component: {fileID: 1320317649}
+  - component: {fileID: 1320317651}
+  - component: {fileID: 1320317650}
+  - component: {fileID: 1320317652}
+  - component: {fileID: 1320317653}
+  - component: {fileID: 1320317654}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -2979,24 +2983,6 @@ MonoBehaviour:
   secondsForSpawn: 3
   enemySpawnCount: 10
   mobTotal: 20
---- !u!114 &1320317647
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1320317643}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fe14f314b17f444fad1a23ae7650b9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sound: {fileID: 8300000, guid: 759a9806d90707f4ab67ae7fd3920046, type: 3}
-  mobTotal: {fileID: 217189700}
-  gameOver: {fileID: 1840248123}
-  levelComplete: {fileID: 1224690163}
-  levelPause: {fileID: 300199643}
-  settingsMenu: {fileID: 1094732623}
 --- !u!114 &1320317648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3021,6 +3007,75 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdeb17606da6a5d4299b3df37eb10138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1320317650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320317643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e08cc76317a3d444bd20d995eb5a534, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 759a9806d90707f4ab67ae7fd3920046, type: 3}
+  levelComplete: {fileID: 1224690163}
+--- !u!114 &1320317651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320317643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2da253631774e54a894863c851e1962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mobTotal: {fileID: 217189700}
+--- !u!114 &1320317652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320317643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21cb71c76c1598841bc29a2063828e01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 759a9806d90707f4ab67ae7fd3920046, type: 3}
+  gameOver: {fileID: 1840248123}
+--- !u!114 &1320317653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320317643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a488d224a6df3d14db78c8901f3c5be1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 759a9806d90707f4ab67ae7fd3920046, type: 3}
+  levelPause: {fileID: 300199643}
+--- !u!114 &1320317654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320317643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f901242c6a772d4388aa52f9c170ca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 8300000, guid: 759a9806d90707f4ab67ae7fd3920046, type: 3}
+  settingsMenu: {fileID: 1094732623}
 --- !u!1 &1403591613
 GameObject:
   m_ObjectHideFlags: 0
@@ -3120,8 +3175,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1320317647}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+      - m_Target: {fileID: 1320317652}
+        m_TargetAssemblyTypeName: GameOverModal, Assembly-CSharp
         m_MethodName: OnExitClick
         m_Mode: 1
         m_Arguments:
@@ -3448,8 +3503,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1320317647}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+      - m_Target: {fileID: 1320317650}
+        m_TargetAssemblyTypeName: LevelCompleteModal, Assembly-CSharp
         m_MethodName: OnNextLevelClick
         m_Mode: 1
         m_Arguments:

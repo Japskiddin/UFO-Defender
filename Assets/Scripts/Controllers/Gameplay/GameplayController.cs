@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class GameplayController : MonoBehaviour
 {
     public GameStatus GameStatus { get; private set; }
 
@@ -19,18 +19,30 @@ public class GameController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (GameStatus == GameStatus.Paused)
+                if (!Controllers.Settings.Visible()
+                && !Controllers.LevelComplete.Visible()
+                && !Controllers.GameOver.Visible())
                 {
-                    OnGameResume();
-                }
-                else
-                {
-                    OnGamePause();
+                    if (GameStatus == GameStatus.Paused)
+                    {
+                        OnGameResume();
+                    }
+                    else
+                    {
+                        OnGamePause();
+                    }
                 }
             }
-            if (Debug.isDebugBuild && Input.GetKeyDown(KeyCode.N))
+            if (Debug.isDebugBuild)
             {
-                LevelComplete();
+                if (Input.GetKeyDown(KeyCode.N))
+                {
+                    LevelComplete();
+                }
+                if (Input.GetKeyDown(KeyCode.G))
+                {
+                    GameOver();
+                }
             }
         }
     }
@@ -39,27 +51,29 @@ public class GameController : MonoBehaviour
     {
         GameStatus = GameStatus.Running;
         Time.timeScale = 1;
-        Controllers.UI.HideGamePauseWindow();
+        Controllers.LevelPause.PlaySound();
+        Controllers.LevelPause.Hide();
     }
 
     public void OnGamePause()
     {
         GameStatus = GameStatus.Paused;
         Time.timeScale = 0;
-        Controllers.UI.ShowGamePauseWindow();
+        Controllers.LevelPause.PlaySound();
+        Controllers.LevelPause.Show();
     }
 
     public void GameOver()
     {
         GameStatus = GameStatus.GameOver;
         Time.timeScale = 0;
-        Controllers.UI.ShowGameOverWindow();
+        Controllers.GameOver.Show();
     }
 
     public void LevelComplete()
     {
         GameStatus = GameStatus.Completed;
         Time.timeScale = 0;
-        Controllers.UI.ShowLevelCompleteWindow();
+        Controllers.LevelComplete.Show();
     }
 }

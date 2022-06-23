@@ -40,7 +40,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
-        Controllers.UI.UpdateMobTotal(mobTotal);
+        Controllers.HUD.UpdateMobTotal(mobTotal);
     }
 
     private void OnDestroy()
@@ -50,7 +50,7 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        if (Controllers.Game.GameStatus == GameStatus.Running)
+        if (Controllers.Gameplay.GameStatus == GameStatus.Running)
         {
             CheckUfoSpawn();
         }
@@ -89,10 +89,10 @@ public class EnemyController : MonoBehaviour
         if (_mobSpawned == 0 || mobTotal == 0) return;
         _mobSpawned--;
         mobTotal--;
-        Controllers.UI.UpdateMobTotal(mobTotal);
+        Controllers.HUD.UpdateMobTotal(mobTotal);
         if (mobTotal == 0)
         {
-            Controllers.Game.LevelComplete();
+            Controllers.Gameplay.LevelComplete();
         }
     }
 }

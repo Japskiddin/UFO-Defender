@@ -92,7 +92,7 @@ public class LevelController : MonoBehaviour
         _homeAlive--;
         if (_homeAlive <= 0)
         {
-            Controllers.Game.GameOver();
+            Controllers.Gameplay.GameOver();
         }
     }
 }

@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBullet : MonoBehaviour
+public class PlayerBullet : BaseBullet
 {
     [Header("Properties")]
     [SerializeField] private float speed = 3.0f;
 
-    void Update()
+    private void Awake()
     {
-        if (Controllers.Game.GameStatus == GameStatus.Running)
-        {
-            transform.Translate(0, speed * Time.deltaTime, 0);
-        }
+        Init(speed);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -25,7 +22,8 @@ public class PlayerBullet : MonoBehaviour
                 mob.TakeDamage();
                 Destroy(this.gameObject);
             }
-        } else if (collision.CompareTag("EnemyBullet"))
+        }
+        else if (collision.CompareTag("EnemyBullet"))
         {
             UfoBullet bullet = collision.GetComponent<UfoBullet>();
             if (bullet != null)
@@ -34,10 +32,5 @@ public class PlayerBullet : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
-    }
-
-    private void OnBecameInvisible()
-    {
-        Destroy(this.gameObject);
     }
 }
