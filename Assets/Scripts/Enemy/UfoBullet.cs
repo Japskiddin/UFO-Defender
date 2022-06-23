@@ -13,7 +13,10 @@ public class UfoBullet : MonoBehaviour
     {
         float angle = Random.Range(minAngle, maxAngle);
         transform.Rotate(0, 0, angle);
-        Debug.Log($"UFO Bullet angle - {angle}");
+        if (Debug.isDebugBuild)
+        {
+            Debug.Log($"UFO Bullet angle - {angle}");
+        }
     }
 
     void Update()

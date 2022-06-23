@@ -28,6 +28,10 @@ public class GameController : MonoBehaviour
                     OnGamePause();
                 }
             }
+            if (Debug.isDebugBuild && Input.GetKeyDown(KeyCode.N))
+            {
+                LevelComplete();
+            }
         }
     }
 

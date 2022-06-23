@@ -82,7 +82,10 @@ public class AudioManager : MonoBehaviour, IGameManager
 
     public void Startup()
     {
-        Debug.Log("Audio manager starting...");
+        if (Debug.isDebugBuild)
+        {
+            Debug.Log("Audio manager starting...");
+        }
 
         // �������� ���������� AudioSource ������������ ��������� ���������� AudioListener.
         music1Source.ignoreListenerVolume = true;

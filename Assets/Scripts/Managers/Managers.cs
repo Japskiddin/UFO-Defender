@@ -9,11 +9,12 @@ public class Managers : MonoBehaviour
 {
     public static AudioManager Audio { get; private set; }
     public static SceneManager Scene { get; private set; }
-    // Список диспетчеров, который просматривается в цикле во время стартовой последовательности.
+    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
     private List<IGameManager> _startSequence;
 
-    private void Awake() {
-        // Команда Unity для сохранения объекта между сценами.
+    private void Awake()
+    {
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Unity пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
         DontDestroyOnLoad(gameObject);
 
         Audio = GetComponent<AudioManager>();
@@ -34,12 +35,14 @@ public class Managers : MonoBehaviour
             Audio
         };
 
-        // Асинхронно загружаем стартовую последовательность.
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
         StartCoroutine(StartupManagers());
     }
 
-    private IEnumerator StartupManagers() {
-        foreach(IGameManager manager in _startSequence) {
+    private IEnumerator StartupManagers()
+    {
+        foreach (IGameManager manager in _startSequence)
+        {
             manager.Startup();
         }
 
@@ -48,29 +51,39 @@ public class Managers : MonoBehaviour
         int numModules = _startSequence.Count;
         int numReady = 0;
 
-        // Продолжаем цикл, пока не начнут работать все диспетчеры.
-        while (numReady < numModules) {
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
+        while (numReady < numModules)
+        {
             int lastReady = numReady;
             numReady = 0;
 
-            foreach(IGameManager manager in _startSequence) {
-                if (manager.Status == ManagerStatus.Started) {
+            foreach (IGameManager manager in _startSequence)
+            {
+                if (manager.Status == ManagerStatus.Started)
+                {
                     numReady++;
                 }
             }
 
-            if (numReady > lastReady) {
-                Debug.Log("Progress: " + numReady + "/" + numModules);
-                // Событие загрузки рассылается вместе с параметрами.
+            if (numReady > lastReady)
+            {
+                if (Debug.isDebugBuild)
+                {
+                    Debug.Log("Progress: " + numReady + "/" + numModules);
+                }
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
                 Messenger<int, int>.Broadcast(StartupEvent.MANAGERS_PROGRESS, numReady, numModules);
             }
 
-            // Остановка на один кадр перед следующей проверкой.
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
             yield return null;
         }
 
-        Debug.Log("All managers started up");
-        // Событие загрузки рассылается без параметров.
+        if (Debug.isDebugBuild)
+        {
+            Debug.Log("All managers started up");
+        }
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
         Messenger.Broadcast(StartupEvent.MANAGERS_STARTED);
     }
 }

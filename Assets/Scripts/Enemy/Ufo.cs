@@ -113,7 +113,10 @@ public class Ufo : MonoBehaviour
     {
         Messenger<Vector3>.Broadcast(GameEvent.CREATE_EXPLOSION, transform.position);
         _health--;
-        Debug.Log($"UFO Mob take damage, hp - {_health}");
+        if (Debug.isDebugBuild)
+        {
+            Debug.Log($"UFO Mob take damage, hp - {_health}");
+        }
         if (_health <= 0)
         {
             Die();

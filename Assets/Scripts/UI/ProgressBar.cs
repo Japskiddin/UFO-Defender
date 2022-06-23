@@ -21,9 +21,12 @@ public class ProgressBar : MonoBehaviour
         }
         else
         {
-            Debug.Log("{GameLog} => [ProgressBar] - (<color=red>Error</color>) -> Components Parameters Are Incorrectly Configured! \n " +
-                "Required Type Filled \n" +
-                "Required FillMethod Horizontal");
+            if (Debug.isDebugBuild)
+            {
+                Debug.Log("{GameLog} => [ProgressBar] - (<color=red>Error</color>) -> Components Parameters Are Incorrectly Configured! \n " +
+                    "Required Type Filled \n" +
+                    "Required FillMethod Horizontal");
+            }
         }
     }
 

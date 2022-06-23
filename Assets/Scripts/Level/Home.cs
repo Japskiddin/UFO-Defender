@@ -41,7 +41,10 @@ public class Home : MonoBehaviour
 
     private void UpdateData()
     {
-        Debug.Log($"Current home health - {_health}");
+        if (Debug.isDebugBuild)
+        {
+            Debug.Log($"Current home health - {_health}");
+        }
         _sprite.sprite = Controllers.Level.HomeSprites[_health];
         Vector2 size = _sprite.bounds.size / 0.6f;
         _collider.size = size;

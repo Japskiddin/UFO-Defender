@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 
 public class PlayerView : MonoBehaviour
@@ -19,7 +18,7 @@ public class PlayerView : MonoBehaviour
     {
         if (bulletPrefab.GetComponent<PlayerBullet>() == null)
         {
-            throw new InvalidCastException("Bullet prefab must contain PlayerBullet component!");
+            throw new System.NullReferenceException("Bullet prefab must contain PlayerBullet component!");
         }
         _controller = new PlayerController(this, secondsForShoot);
     }

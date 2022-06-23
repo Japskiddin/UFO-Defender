@@ -7,11 +7,14 @@ public class SceneManager : MonoBehaviour, IGameManager
 {
     public ManagerStatus Status { get; private set; }
     public int CurrentLevel { get; private set; }
-    private const int _maxLevel = 2;
+    private const int _maxLevel = 10;
 
     public void Startup()
     {
-        Debug.Log("Mission manager starting...");
+        if (Debug.isDebugBuild)
+        {
+            Debug.Log("Mission manager starting...");
+        }
         UpdateData(0);
 
         Status = ManagerStatus.Started;
@@ -26,7 +29,10 @@ public class SceneManager : MonoBehaviour, IGameManager
     {
         Managers.Audio.PlayMainMenuMusic();
         string name = "MainMenu";
-        Debug.Log("Loading " + name);
+        if (Debug.isDebugBuild)
+        {
+            Debug.Log("Loading " + name);
+        }
         UnityEngine.SceneManagement.SceneManager.LoadScene(name);
         UpdateData(0);
     }
@@ -42,7 +48,10 @@ public class SceneManager : MonoBehaviour, IGameManager
         }
         else
         {
-            Debug.Log("Last level");
+            if (Debug.isDebugBuild)
+            {
+                Debug.Log("Last level");
+            }
             Messenger.Broadcast(GameEvent.GAME_COMPLETE);
         }
     }
@@ -55,7 +64,10 @@ public class SceneManager : MonoBehaviour, IGameManager
     private void LoadGameLevel()
     {
         string name = "GameLevel";
-        Debug.Log("Loading " + name);
+        if (Debug.isDebugBuild)
+        {
+            Debug.Log("Loading " + name);
+        }
         UnityEngine.SceneManagement.SceneManager.LoadScene(name);
     }
 }
