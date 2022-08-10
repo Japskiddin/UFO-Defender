@@ -6,12 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Startup.unity
+    path: Assets/UFO Defense/Scenes/Startup.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
+    path: Assets/UFO Defense/Scenes/MainMenu.unity
     guid: 07f3565cc5a630b47b92b1809d4469d4
   - enabled: 1
-    path: Assets/Scenes/GameLevel.unity
+    path: Assets/UFO Defense/Scenes/GameLevel.unity
     guid: 325a9605a7267b846a222804438b320a
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: e9262701ac7d13f43bf03f4ce33feeef, type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: 3587dd87d26d0a14dbe58f3cea10a04a, type: 2}
