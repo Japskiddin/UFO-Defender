@@ -42,7 +42,7 @@ public class SettingsController : MonoBehaviour
 
     private void UpdateString(string res, TextMeshProUGUI text)
     {
-        var settings = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("My text", res);
+        var settings = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("UI", res);
         if (settings.IsDone)
         {
             text.text = settings.Result;
