@@ -30,13 +30,13 @@ public class SettingsController : MonoBehaviour
 
     private void UpdateSoundButtonTitle()
     {
-        string settingsSoundRes = Managers.Audio.SoundMute ? "Settings Sound On" : "Settings Sound Off";
+        string settingsSoundRes = Managers.Audio.SoundMute ? "Sound On" : "Sound Off";
         UpdateString(settingsSoundRes, textSounds);
     }
 
     private void UpdateMusicButtonTitle()
     {
-        string settingsMusicRes = Managers.Audio.MusicMute ? "Settings Music On" : "Settings Music Off";
+        string settingsMusicRes = Managers.Audio.MusicMute ? "Music On" : "Music Off";
         UpdateString(settingsMusicRes, textMusic);
     }
 

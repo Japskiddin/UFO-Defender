@@ -18,20 +18,20 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 1351953301504
+  - m_Id: 37017571442688
     m_Localized: Start
     m_Metadata:
       m_Items: []
-  - m_Id: 2037541650432
-    m_Localized: Settings
+  - m_Id: 37347969351680
+    m_Localized: Close
     m_Metadata:
       m_Items: []
-  - m_Id: 2304337133568
+  - m_Id: 37312137412608
     m_Localized: Exit
     m_Metadata:
       m_Items: []
-  - m_Id: 7270078496768
-    m_Localized: Close
+  - m_Id: 37277907697664
+    m_Localized: Settings
     m_Metadata:
       m_Items: []
   - m_Id: 12052159676416
