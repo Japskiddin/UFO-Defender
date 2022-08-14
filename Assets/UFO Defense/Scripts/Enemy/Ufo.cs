@@ -21,12 +21,13 @@ public class Ufo : MonoBehaviour
     [Header("Prefab")]
     [SerializeField] private GameObject ufoBullet;
     [Header("Properties")]
-    [SerializeField] private float speed = 1.5f;
+    [SerializeField] private float defaultSpeed = 1.5f;
     [SerializeField] private int defaultHealth = 1;
 
     private float _shootTimer;
     private float _directionTimer;
     private float _secondsForShoot;
+    private float _speed;
     private int _health;
     private int _directionVertical;
     private int _directionHorizontal;
@@ -42,6 +43,7 @@ public class Ufo : MonoBehaviour
         _directionVertical = Random.Range(0, 1) == 1 ? _directionTop : _directionBottom;
         _health = defaultHealth;
         _secondsForShoot = Random.Range(2f, 3f);
+        _speed = defaultSpeed + Random.Range(0f, 0.5f);
     }
 
     void Update()
@@ -103,8 +105,8 @@ public class Ufo : MonoBehaviour
 
     private void Move()
     {
-        float posX = (_directionHorizontal == _directionRight ? -1 : 1) * speed * Time.deltaTime;
-        float posY = (_directionVertical == _directionBottom ? -1 : 1) * speed * Time.deltaTime;
+        var posX = (_directionHorizontal == _directionRight ? -1 : 1) * _speed * Time.deltaTime;
+        var posY = (_directionVertical == _directionBottom ? -1 : 1) * _speed * Time.deltaTime;
         transform.Translate(posX, posY, 0);
     }
 
