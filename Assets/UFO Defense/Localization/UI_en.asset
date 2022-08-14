@@ -42,6 +42,30 @@ MonoBehaviour:
     m_Localized: Sound
     m_Metadata:
       m_Items: []
+  - m_Id: 1275312624254976
+    m_Localized: Game Over
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1275410422841344
+    m_Localized: Level completed!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1275492555702272
+    m_Localized: Next
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1275553175977984
+    m_Localized: Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1275593151889408
+    m_Localized: Game is paused
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1275682880634880
+    m_Localized: Resume
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

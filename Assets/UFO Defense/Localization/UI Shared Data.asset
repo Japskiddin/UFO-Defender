@@ -39,6 +39,30 @@ MonoBehaviour:
     m_Key: Close
     m_Metadata:
       m_Items: []
+  - m_Id: 1275312624254976
+    m_Key: Game Over
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1275410422841344
+    m_Key: Level Completed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1275492555702272
+    m_Key: Next
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1275553175977984
+    m_Key: Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1275593151889408
+    m_Key: Game Paused
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1275682880634880
+    m_Key: Resume
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
