@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
 
 public class SettingsController : MonoBehaviour
 {
@@ -12,8 +9,8 @@ public class SettingsController : MonoBehaviour
     [SerializeField] private AudioClip sound;
     [SerializeField] private Slider soundsSlider;
     [SerializeField] private Slider musicSlider;
-    [SerializeField] private TextMeshProUGUI textMusic;
-    [SerializeField] private TextMeshProUGUI textSounds;
+    [SerializeField] private MenuCheckbox musicCheckbox;
+    [SerializeField] private MenuCheckbox soundCheckbox;
 
     private void Awake()
     {
@@ -24,40 +21,20 @@ public class SettingsController : MonoBehaviour
     {
         soundsSlider.value = Managers.Audio.SoundVolume;
         musicSlider.value = Managers.Audio.MusicVolume;
-        UpdateSoundButtonTitle();
-        UpdateMusicButtonTitle();
+        UpdateCheckbox(musicCheckbox, Managers.Audio.MusicMute);
+        UpdateCheckbox(soundCheckbox, Managers.Audio.SoundMute);
     }
 
-    private void UpdateSoundButtonTitle()
+    private void UpdateCheckbox(MenuCheckbox checkbox, bool check)
     {
-        string settingsSoundRes = Managers.Audio.SoundMute ? "Sound On" : "Sound Off";
-        UpdateString(settingsSoundRes, textSounds);
-    }
-
-    private void UpdateMusicButtonTitle()
-    {
-        string settingsMusicRes = Managers.Audio.MusicMute ? "Music On" : "Music Off";
-        UpdateString(settingsMusicRes, textMusic);
-    }
-
-    private void UpdateString(string res, TextMeshProUGUI text)
-    {
-        var settings = LocalizationSettings.StringDatabase.GetLocalizedStringAsync("UI", res);
-        if (settings.IsDone)
-        {
-            text.text = settings.Result;
-        }
-        else
-        {
-            settings.Completed += (settings) => text.text = settings.Result;
-        }
+        checkbox.SetChecked(check);
     }
 
     public void OnSoundToggle()
     {
         Managers.Audio.SoundMute = !Managers.Audio.SoundMute;
         Managers.Audio.PlaySound(sound);
-        UpdateSoundButtonTitle();
+        UpdateCheckbox(soundCheckbox, Managers.Audio.SoundMute);
     }
 
     public void OnSoundValue(float volume)
@@ -69,7 +46,7 @@ public class SettingsController : MonoBehaviour
     {
         Managers.Audio.MusicMute = !Managers.Audio.MusicMute;
         Managers.Audio.PlaySound(sound);
-        UpdateMusicButtonTitle();
+        UpdateCheckbox(musicCheckbox, Managers.Audio.MusicMute);
     }
 
     public void OnMusicValue(float volume)

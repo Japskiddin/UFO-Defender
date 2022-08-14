@@ -35,19 +35,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 12052159676416
-    m_Localized: Music on
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12187602141184
-    m_Localized: Music off
+    m_Localized: Music
     m_Metadata:
       m_Items: []
   - m_Id: 12248906088448
-    m_Localized: Sound on
-    m_Metadata:
-      m_Items: []
-  - m_Id: 12323178823680
-    m_Localized: Sound off
+    m_Localized: Sound
     m_Metadata:
       m_Items: []
   references:
