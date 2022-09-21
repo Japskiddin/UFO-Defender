@@ -21,6 +21,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        var screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        var spriteWidth = transform.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+        var spriteHeight = transform.GetComponent<SpriteRenderer>().bounds.size.y / 2;
+        transform.position = new Vector3(screenBounds.x * 0.05f + spriteWidth, screenBounds.y * 0.05f + spriteHeight, transform.position.z);
+    }
+
     private void Update()
     {
         CheckPlayerShoot();
@@ -33,7 +41,7 @@ public class Player : MonoBehaviour
 
     private void CreateBullet(Quaternion bulletRotation)
     {
-        GameObject bullet = Instantiate(bulletPrefab);
+        var bullet = Instantiate(bulletPrefab);
         bullet.transform.position = gun.transform.position;
         bullet.transform.rotation = bulletRotation;
     }
@@ -48,9 +56,9 @@ public class Player : MonoBehaviour
         if (Controllers.Gameplay.GameStatus == GameStatus.Running)
         {
             _timer += Time.deltaTime;
-            Vector3 mousePos = Input.mousePosition;
-            float angle = Mathf.Clamp(Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg, 0, 90);
-            Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            var mousePos = Input.mousePosition;
+            var angle = Mathf.Clamp(Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg, 0, 90);
+            var rotation = Quaternion.Euler(new Vector3(0, 0, angle));
             ChangeRotation(rotation);
 
             if (Input.GetMouseButtonDown(0) && _timer > secondsForShoot)
@@ -62,7 +70,7 @@ public class Player : MonoBehaviour
 
     private void Shoot(float angle)
     {
-        Quaternion bulletRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
+        var bulletRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
         CreateBullet(bulletRotation);
         PlayShootSound();
         _timer = 0;

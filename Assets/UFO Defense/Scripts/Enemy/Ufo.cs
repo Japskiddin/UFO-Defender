@@ -9,11 +9,6 @@ public class Ufo : MonoBehaviour
     private const int _directionTop = 2;
     private const int _directionBottom = 3;
 
-    private const float _maxPosX = 8f;
-    private const float _minPosX = -8f;
-    private const float _maxPosY = 4.33f;
-    private const float _minPosY = 0.78f;
-    private const float _startPosX = 10.5f;
     private const float _secondsForDirection = 1f;
 
     [Header("Sound FX")]
@@ -28,9 +23,14 @@ public class Ufo : MonoBehaviour
     private float _directionTimer;
     private float _secondsForShoot;
     private float _speed;
+    private float _spriteWidth;
+    private float _spriteHeight;
+    private float _minPosY;
+    private float _maxPosY;
     private int _health;
     private int _directionVertical;
     private int _directionHorizontal;
+    private Vector3 _screenBounds;
 
     private void Awake()
     {
@@ -38,12 +38,21 @@ public class Ufo : MonoBehaviour
         {
             throw new System.NullReferenceException("Ufo bullet must contain UfoBullet component.");
         }
-        transform.position = new Vector3(_startPosX, Random.Range(_minPosY, _maxPosY), transform.position.z);
         _directionHorizontal = _directionLeft;
         _directionVertical = Random.Range(0, 1) == 1 ? _directionTop : _directionBottom;
         _health = defaultHealth;
         _secondsForShoot = Random.Range(2f, 3f);
         _speed = defaultSpeed + Random.Range(0f, 0.5f);
+    }
+
+    private void Start()
+    {
+        _screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        _spriteWidth = transform.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+        _spriteHeight = transform.GetComponent<SpriteRenderer>().bounds.size.y / 2;
+        _minPosY = _screenBounds.y * 0.4f + _spriteHeight;
+        _maxPosY = _screenBounds.y - _spriteHeight;
+        transform.position = new Vector3(_screenBounds.x + _spriteWidth, Random.Range(_minPosY, _maxPosY), transform.position.z);
     }
 
     void Update()
@@ -83,11 +92,11 @@ public class Ufo : MonoBehaviour
             }
         }
 
-        if (transform.position.x >= _maxPosX)
+        if (transform.position.x >= _screenBounds.x - _spriteWidth)
         {
             _directionHorizontal = _directionRight;
         }
-        else if (transform.position.x <= _minPosX)
+        else if (transform.position.x <= _spriteWidth)
         {
             _directionHorizontal = _directionLeft;
         }

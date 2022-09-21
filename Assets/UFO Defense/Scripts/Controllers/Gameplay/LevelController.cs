@@ -5,9 +5,6 @@ using System;
 
 public class LevelController : MonoBehaviour
 {
-    private const float _offsetX = 2.5f;
-    private const float _homeStartX = -4f;
-    private const float _homeStartY = -4f;
     private int _homeAlive;
     [Header("Prefabs")]
     [SerializeField] private GameObject explosionPrefab;
@@ -42,7 +39,7 @@ public class LevelController : MonoBehaviour
 
     private void PrepareLevel()
     {
-        int level = Managers.Scene.CurrentLevel;
+        var level = Managers.Scene.CurrentLevel;
         if (Debug.isDebugBuild)
         {
             Debug.Log($"Current level = {level}");
@@ -64,23 +61,26 @@ public class LevelController : MonoBehaviour
 
     private void LoadBackground(int level)
     {
-        Sprite background = Resources.Load("Level backgrounds/level" + level, typeof(Sprite)) as Sprite;
+        var background = Resources.Load("Level backgrounds/level" + level, typeof(Sprite)) as Sprite;
         levelBackground.sprite = background;
     }
 
     private void CreateHouses(int level)
     {
+        var screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        var spriteWidth = homePrefab.transform.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+        var spriteHeight = homePrefab.transform.GetComponent<SpriteRenderer>().bounds.size.y / 2;
+        var offset = 2.5f;
+        var startPosX = screenBounds.x * 0.3f;
         for (int i = 0; i < homeCount; i++)
         {
-            float posX = (_offsetX * i) + _homeStartX;
-            float posY = _homeStartY;
-            Instantiate(homePrefab, new Vector3(posX, posY, 0), transform.rotation);
+            Instantiate(homePrefab, new Vector3(startPosX + (offset * i), screenBounds.y * 0.05f + spriteHeight, 1), transform.rotation);
         }
     }
 
     private void OnCreateExplosion(Vector3 position)
     {
-        GameObject explosion = Instantiate(explosionPrefab, new Vector3(position.x, position.y, position.z - 1), transform.rotation);
+        var explosion = Instantiate(explosionPrefab, new Vector3(position.x, position.y, position.z - 1), transform.rotation);
         if (Debug.isDebugBuild)
         {
             Debug.Log($"EXPLOSION!!! at {explosion.transform.position}");
