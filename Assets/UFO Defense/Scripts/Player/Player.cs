@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
         var screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         var spriteWidth = transform.GetComponent<SpriteRenderer>().bounds.size.x / 2;
         var spriteHeight = transform.GetComponent<SpriteRenderer>().bounds.size.y / 2;
-        transform.position = new Vector3(screenBounds.x * 0.05f + spriteWidth, screenBounds.y * 0.05f + spriteHeight, transform.position.z);
+        transform.position = new Vector3(screenBounds.x * 0.02f + spriteWidth, screenBounds.y * 0.05f + spriteHeight, transform.position.z);
     }
 
     private void Update()

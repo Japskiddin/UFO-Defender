@@ -9,13 +9,13 @@ public class MainMenuUfo : MonoBehaviour
     private const int _directionTop = 2;
     private const int _directionBottom = 3;
 
-    private const float _maxPosX = 7f;
-    private const float _minPosX = -7f;
-    private const float _maxPosY = 4f;
-    private const float _minPosY = -4f;
-
     private int _directionHorizontal;
     private int _directionVertical;
+    private float _spriteWidth;
+    private float _spriteHeight;
+    private float _minPosY;
+    private float _maxPosY;
+    private Vector3 _screenBounds;
 
     [Header("Properties")]
     [SerializeField] private float speed = 1.5f;
@@ -26,8 +26,21 @@ public class MainMenuUfo : MonoBehaviour
         _directionVertical = Random.Range(0, 1) == 1 ? _directionTop : _directionBottom;
     }
 
+    private void Start()
+    {
+        _screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        _spriteWidth = transform.GetComponent<SpriteRenderer>().bounds.size.x / 2;
+        _spriteHeight = transform.GetComponent<SpriteRenderer>().bounds.size.y / 2;
+        _minPosY = _screenBounds.y * 0.1f + _spriteHeight;
+        _maxPosY = _screenBounds.y * 0.9f - _spriteHeight;
+        var minPosX = _screenBounds.x * 0.1f + _spriteWidth;
+        var maxPosX = _screenBounds.x * 0.9f - _spriteWidth;
+        transform.position = new Vector3(Random.Range(minPosX, maxPosX), Random.Range(_minPosY, _maxPosY), transform.position.z);
+    }
+
     void Update()
     {
+        Debug.Log(_screenBounds);
         CheckScreenEdges();
         Move();
     }
@@ -42,12 +55,12 @@ public class MainMenuUfo : MonoBehaviour
         {
             _directionVertical = _directionTop;
         }
-       
-        if (transform.position.x >= _maxPosX)
+
+        if (transform.position.x >= _screenBounds.x - _spriteWidth)
         {
             _directionHorizontal = _directionRight;
         }
-        else if (transform.position.x <= _minPosX)
+        else if (transform.position.x <= _spriteWidth)
         {
             _directionHorizontal = _directionLeft;
         }
