@@ -8,9 +8,9 @@ public class MainMenuController : MonoBehaviour
     [Header("Properties")]
     [SerializeField] private AudioClip sound;
     [Header("Panels")]
-    [SerializeField] private Image mainMenu;
-    [SerializeField] private Image settingsMenu;
-    [SerializeField] private Image about;
+    [SerializeField] private RectTransform mainMenu;
+    [SerializeField] private RectTransform settingsMenu;
+    [SerializeField] private RectTransform about;
 
     private void Awake()
     {

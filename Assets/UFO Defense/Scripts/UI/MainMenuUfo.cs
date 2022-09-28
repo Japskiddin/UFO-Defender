@@ -11,10 +11,10 @@ public class MainMenuUfo : MonoBehaviour
 
     private int _directionHorizontal;
     private int _directionVertical;
-    private float _spriteWidth;
-    private float _spriteHeight;
     private float _minPosY;
     private float _maxPosY;
+    private float _minPosX;
+    private float _maxPosX;
     private Vector3 _screenBounds;
 
     [Header("Properties")]
@@ -28,24 +28,32 @@ public class MainMenuUfo : MonoBehaviour
 
     private void Start()
     {
-        _screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        _spriteWidth = transform.GetComponent<SpriteRenderer>().bounds.size.x / 2;
-        _spriteHeight = transform.GetComponent<SpriteRenderer>().bounds.size.y / 2;
-        _minPosY = _screenBounds.y * 0.1f + _spriteHeight;
-        _maxPosY = _screenBounds.y * 0.9f - _spriteHeight;
-        var minPosX = _screenBounds.x * 0.1f + _spriteWidth;
-        var maxPosX = _screenBounds.x * 0.9f - _spriteWidth;
-        transform.position = new Vector3(Random.Range(minPosX, maxPosX), Random.Range(_minPosY, _maxPosY), transform.position.z);
+        CheckScreenEdges();
+        transform.position = new Vector3(Random.Range(_minPosX, _maxPosX), Random.Range(_minPosY, _maxPosY), transform.position.z);
     }
 
     void Update()
     {
-        Debug.Log(_screenBounds);
         CheckScreenEdges();
+        CheckEdgesCollision();
         Move();
     }
 
     private void CheckScreenEdges()
+    {
+        var cameraPos = new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z);
+        Debug.Log(Camera.main.transform.position);
+        _screenBounds = Camera.main.ScreenToWorldPoint(cameraPos);
+        var spriteRenderer = transform.GetComponent<SpriteRenderer>();
+        var spriteWidth = spriteRenderer.bounds.size.x;
+        var spriteHeight = spriteRenderer.bounds.size.y;
+        _minPosY = spriteHeight / 2f;
+        _maxPosY = _screenBounds.y - spriteHeight / 2f;
+        _minPosX = spriteWidth / 2f;
+        _maxPosX = _screenBounds.x - spriteWidth / 2f;
+    }
+
+    private void CheckEdgesCollision()
     {
         if (transform.position.y >= _maxPosY)
         {
@@ -56,11 +64,11 @@ public class MainMenuUfo : MonoBehaviour
             _directionVertical = _directionTop;
         }
 
-        if (transform.position.x >= _screenBounds.x - _spriteWidth)
+        if (transform.position.x >= _maxPosX)
         {
             _directionHorizontal = _directionRight;
         }
-        else if (transform.position.x <= _spriteWidth)
+        else if (transform.position.x <= _minPosX)
         {
             _directionHorizontal = _directionLeft;
         }

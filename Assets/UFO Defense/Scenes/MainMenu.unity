@@ -922,25 +922,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 8300000, guid: 759a9806d90707f4ab67ae7fd3920046, type: 3}
-  mainMenu: {fileID: 0}
-  settingsMenu: {fileID: 980769255}
-  about: {fileID: 2007515464}
+  mainMenu: {fileID: 1712704265}
+  settingsMenu: {fileID: 980769254}
+  about: {fileID: 2007515462}
 --- !u!224 &980769254 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7959106555718343276, guid: 93aa4dcc914e32940bde0a04ad50a70d, type: 3}
   m_PrefabInstance: {fileID: 7959106556629762954}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &980769255 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7959106555718343277, guid: 93aa4dcc914e32940bde0a04ad50a70d, type: 3}
-  m_PrefabInstance: {fileID: 7959106556629762954}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1185297602
 GameObject:
   m_ObjectHideFlags: 0
