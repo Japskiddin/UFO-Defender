@@ -5,15 +5,16 @@ using System;
 
 public class LevelController : MonoBehaviour
 {
-    private int _homeAlive;
     [Header("Prefabs")]
     [SerializeField] private GameObject explosionPrefab;
-    [SerializeField] private GameObject homePrefab;
+    [SerializeField] private Home homePrefab;
     [Header("Properties")]
     [SerializeField] private int homeCount = 4;
     [Header("Background")]
     [SerializeField] private SpriteRenderer levelBackground;
     public Sprite[] HomeSprites { get; private set; }
+    private int _homeAlive;
+    private Home[] _homes = new Home[4];
 
     private void Awake()
     {
@@ -29,6 +30,11 @@ public class LevelController : MonoBehaviour
         PrepareLevel();
         Messenger<Vector3>.AddListener(GameEvent.CREATE_EXPLOSION, OnCreateExplosion);
         Messenger.AddListener(GameEvent.HOME_DESTROYED, OnHomeDestroyed);
+    }
+
+    private void Update()
+    {
+        CalculatePosition();
     }
 
     private void OnDestroy()
@@ -67,14 +73,27 @@ public class LevelController : MonoBehaviour
 
     private void CreateHouses(int level)
     {
-        var screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        var spriteWidth = homePrefab.transform.GetComponent<SpriteRenderer>().bounds.size.x / 2;
-        var spriteHeight = homePrefab.transform.GetComponent<SpriteRenderer>().bounds.size.y / 2;
-        var offset = 2.5f;
-        var startPosX = screenBounds.x * 0.3f;
         for (int i = 0; i < homeCount; i++)
         {
-            Instantiate(homePrefab, new Vector3(startPosX + (offset * i), screenBounds.y * 0.05f + spriteHeight, 1), transform.rotation);
+            Home home = Instantiate(homePrefab) as Home;
+            home.transform.rotation = transform.rotation;
+            _homes[i] = home;
+        }
+    }
+
+    private void CalculatePosition()
+    {
+        var cameraPos = new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z);
+        var screenBounds = Camera.main.ScreenToWorldPoint(cameraPos);
+        var spriteRenderer = homePrefab.transform.GetComponent<SpriteRenderer>();
+        var spriteWidth = spriteRenderer.bounds.size.x;
+        var spriteHeight = spriteRenderer.bounds.size.y;
+        var offset = screenBounds.x * 0.15f + spriteWidth;
+        var homePosX = -screenBounds.x * 0.5f;
+        for (int i = 0; i < _homes.Length; i++)
+        {
+            Home home = _homes[i];
+            home.transform.position = new Vector3(homePosX + (offset * i), -screenBounds.y + (screenBounds.y * 0.2f), 1);
         }
     }
 

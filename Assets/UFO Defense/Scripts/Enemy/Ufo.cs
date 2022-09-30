@@ -23,14 +23,13 @@ public class Ufo : MonoBehaviour
     private float _directionTimer;
     private float _secondsForShoot;
     private float _speed;
-    private float _spriteWidth;
-    private float _spriteHeight;
     private float _minPosY;
     private float _maxPosY;
+    private float _minPosX;
+    private float _maxPosX;
     private int _health;
     private int _directionVertical;
     private int _directionHorizontal;
-    private Vector3 _screenBounds;
 
     private void Awake()
     {
@@ -47,25 +46,34 @@ public class Ufo : MonoBehaviour
 
     private void Start()
     {
-        _screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        _spriteWidth = transform.GetComponent<SpriteRenderer>().bounds.size.x / 2;
-        _spriteHeight = transform.GetComponent<SpriteRenderer>().bounds.size.y / 2;
-        _minPosY = _screenBounds.y * 0.4f + _spriteHeight;
-        _maxPosY = _screenBounds.y - _spriteHeight;
-        transform.position = new Vector3(_screenBounds.x + _spriteWidth, Random.Range(_minPosY, _maxPosY), transform.position.z);
+        CalculateScreenEdges();
+        transform.position = new Vector3(_maxPosX + transform.GetComponent<SpriteRenderer>().bounds.size.x, Random.Range(_minPosY, _maxPosY), transform.position.z);
     }
 
     void Update()
     {
         if (Controllers.Gameplay.GameStatus == GameStatus.Running)
         {
-            CheckScreenEdges();
+            CheckEdgesCollision();
             Move();
             CheckShoot();
         }
     }
 
-    private void CheckScreenEdges()
+    private void CalculateScreenEdges()
+    {
+        var cameraPos = new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z);
+        var screenBounds = Camera.main.ScreenToWorldPoint(cameraPos);
+        var spriteRenderer = transform.GetComponent<SpriteRenderer>();
+        var spriteWidth = spriteRenderer.bounds.size.x;
+        var spriteHeight = spriteRenderer.bounds.size.y;
+        _minPosY = -screenBounds.y * 0.2f + spriteHeight;
+        _maxPosY = screenBounds.y - spriteHeight;
+        _minPosX = -screenBounds.x + spriteWidth / 2f;
+        _maxPosX = screenBounds.x - spriteWidth / 2f;
+    }
+
+    private void CheckEdgesCollision()
     {
         _directionTimer += Time.deltaTime;
         if (transform.position.y >= _maxPosY)
@@ -92,11 +100,11 @@ public class Ufo : MonoBehaviour
             }
         }
 
-        if (transform.position.x >= _screenBounds.x - _spriteWidth)
+        if (transform.position.x >= _maxPosX)
         {
             _directionHorizontal = _directionRight;
         }
-        else if (transform.position.x <= _spriteWidth)
+        else if (transform.position.x <= _minPosX)
         {
             _directionHorizontal = _directionLeft;
         }

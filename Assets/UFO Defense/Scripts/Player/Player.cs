@@ -21,17 +21,20 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        var screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        var spriteWidth = transform.GetComponent<SpriteRenderer>().bounds.size.x / 2;
-        var spriteHeight = transform.GetComponent<SpriteRenderer>().bounds.size.y / 2;
-        transform.position = new Vector3(screenBounds.x * 0.02f + spriteWidth, screenBounds.y * 0.05f + spriteHeight, transform.position.z);
-    }
-
     private void Update()
     {
+        CalculatePosition();
         CheckPlayerShoot();
+    }
+
+    private void CalculatePosition()
+    {
+        var cameraPos = new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z);
+        var screenBounds = Camera.main.ScreenToWorldPoint(cameraPos);
+        var spriteRenderer = transform.GetComponent<SpriteRenderer>();
+        var spriteWidth = spriteRenderer.bounds.size.x;
+        var spriteHeight = spriteRenderer.bounds.size.y;
+        transform.position = new Vector3(-screenBounds.x * 0.98f + spriteWidth / 2f, -screenBounds.y * 0.9f + spriteHeight / 2f, transform.position.z);
     }
 
     private void ChangeRotation(Quaternion rotation)
