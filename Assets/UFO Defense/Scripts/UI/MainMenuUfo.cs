@@ -15,7 +15,6 @@ public class MainMenuUfo : MonoBehaviour
     private float _maxPosY;
     private float _minPosX;
     private float _maxPosX;
-    private Vector3 _screenBounds;
 
     [Header("Properties")]
     [SerializeField] private float speed = 1.5f;
@@ -42,15 +41,14 @@ public class MainMenuUfo : MonoBehaviour
     private void CheckScreenEdges()
     {
         var cameraPos = new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z);
-        Debug.Log(Camera.main.transform.position);
-        _screenBounds = Camera.main.ScreenToWorldPoint(cameraPos);
+        var screenBounds = Camera.main.ScreenToWorldPoint(cameraPos);
         var spriteRenderer = transform.GetComponent<SpriteRenderer>();
         var spriteWidth = spriteRenderer.bounds.size.x;
         var spriteHeight = spriteRenderer.bounds.size.y;
-        _minPosY = spriteHeight / 2f;
-        _maxPosY = _screenBounds.y - spriteHeight / 2f;
-        _minPosX = spriteWidth / 2f;
-        _maxPosX = _screenBounds.x - spriteWidth / 2f;
+        _minPosY = -screenBounds.y + spriteHeight / 2f;
+        _maxPosY = screenBounds.y - spriteHeight / 2f;
+        _minPosX = -screenBounds.x + spriteWidth / 2f;
+        _maxPosX = screenBounds.x - spriteWidth / 2f;
     }
 
     private void CheckEdgesCollision()
