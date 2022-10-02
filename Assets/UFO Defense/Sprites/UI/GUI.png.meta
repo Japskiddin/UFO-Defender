@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bafc4b94eb491b746bc203b3549abc63
+guid: 19cafa9f923bbbc49a8075301c46dd1d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -128,13 +128,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Menu Button_0
+      name: home_button
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 300
-        height: 89
+        y: 800
+        width: 153
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,18 +142,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f18562ef09c161347ba097e15208e046
-      internalID: -560693131
+      spriteID: c476fc1ab69d15248969385000cc0fce
+      internalID: -1086266697
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Menu Button_1
+      name: button_normal
       rect:
         serializedVersion: 2
-        x: 300
-        y: 0
+        x: 153
+        y: 911
         width: 300
         height: 89
       alignment: 0
@@ -163,8 +163,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f28b64eaab4585f4790eb112a7fe354c
-      internalID: 2039183120
+      spriteID: 1a023089b944d564691db27b02f5471d
+      internalID: -1400723416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: button_pressed
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 911
+        width: 300
+        height: 89
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51790de6cb9196d49a7a75254bceca90
+      internalID: -665890732
       vertices: []
       indices: 
       edges: []
@@ -180,8 +201,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Menu Button_0: -560693131
-      Menu Button_1: 2039183120
+      button_normal: -1400723416
+      home_button: -1086266697
+      button_pressed: -665890732
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

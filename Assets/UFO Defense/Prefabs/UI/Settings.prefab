@@ -1172,7 +1172,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -560693131, guid: bafc4b94eb491b746bc203b3549abc63, type: 3}
+  m_Sprite: {fileID: -1400723416, guid: 19cafa9f923bbbc49a8075301c46dd1d, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1251,8 +1251,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgrounds:
-  - {fileID: -560693131, guid: bafc4b94eb491b746bc203b3549abc63, type: 3}
-  - {fileID: 2039183120, guid: bafc4b94eb491b746bc203b3549abc63, type: 3}
+  - {fileID: -1400723416, guid: 19cafa9f923bbbc49a8075301c46dd1d, type: 3}
+  - {fileID: -665890732, guid: 19cafa9f923bbbc49a8075301c46dd1d, type: 3}
 --- !u!1 &7959106555484629993
 GameObject:
   m_ObjectHideFlags: 0
