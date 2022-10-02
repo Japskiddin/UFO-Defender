@@ -31,6 +31,7 @@ public class Home : MonoBehaviour
             throw new System.NullReferenceException("Component SpriteRenderer is null");
         }
         _health = _defaultHp;
+        _collider.enabled = true;
     }
 
     private void Start()
@@ -53,11 +54,15 @@ public class Home : MonoBehaviour
     public void TakeDamage()
     {
         if (IsDestroyed) return;
-        Messenger<Vector3>.Broadcast(GameEvent.CREATE_EXPLOSION, transform.position);
         _health--;
+        if (Debug.isDebugBuild)
+        {
+            Debug.Log($"Home take damage, health - {_health}");
+        }
         UpdateState();
         if (IsDestroyed)
         {
+            _collider.enabled = false;
             Messenger.Broadcast(GameEvent.HOME_DESTROYED);
         }
     }

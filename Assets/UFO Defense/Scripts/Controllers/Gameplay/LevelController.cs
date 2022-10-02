@@ -57,12 +57,7 @@ public class LevelController : MonoBehaviour
 
     private void LoadHomeSprites(int level)
     {
-        HomeSprites = new Sprite[5];
-        HomeSprites[0] = Resources.Load("Homes/home_" + level + "_0", typeof(Sprite)) as Sprite;
-        HomeSprites[1] = Resources.Load("Homes/home_" + level + "_33", typeof(Sprite)) as Sprite;
-        HomeSprites[2] = Resources.Load("Homes/home_" + level + "_66", typeof(Sprite)) as Sprite;
-        HomeSprites[3] = Resources.Load("Homes/home_" + level + "_99", typeof(Sprite)) as Sprite;
-        HomeSprites[4] = Resources.Load("Homes/home_" + level + "_100", typeof(Sprite)) as Sprite;
+        HomeSprites = Resources.LoadAll<Sprite>("Homes/home_" + level);
     }
 
     private void LoadBackground(int level)

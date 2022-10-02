@@ -32,7 +32,7 @@ public class UfoBullet : BaseBullet
             if (home != null && !home.IsDestroyed)
             {
                 home.TakeDamage();
-                Destroy(this.gameObject);
+                Destroy();
             }
         }
     }
