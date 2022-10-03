@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
@@ -11,12 +8,16 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private RectTransform mainMenu;
     [SerializeField] private RectTransform settingsMenu;
     [SerializeField] private RectTransform about;
+    [SerializeField] private RectTransform homeButton;
+    [SerializeField] private RectTransform exitButton;
 
     private void Awake()
     {
         mainMenu.gameObject.SetActive(true);
         settingsMenu.gameObject.SetActive(false);
         about.gameObject.SetActive(false);
+        homeButton.gameObject.SetActive(false);
+        exitButton.gameObject.SetActive(true);
         Time.timeScale = 1;
     }
 
@@ -37,12 +38,18 @@ public class MainMenuController : MonoBehaviour
         Managers.Audio.PlaySound(sound);
         mainMenu.gameObject.SetActive(false);
         settingsMenu.gameObject.SetActive(true);
+        about.gameObject.SetActive(false);
+        homeButton.gameObject.SetActive(true);
+        exitButton.gameObject.SetActive(false);
     }
 
-    public void OnSettingsCloseClick()
+    public void OnHomeClick()
     {
         Managers.Audio.PlaySound(sound);
         mainMenu.gameObject.SetActive(true);
         settingsMenu.gameObject.SetActive(false);
+        about.gameObject.SetActive(false);
+        homeButton.gameObject.SetActive(false);
+        exitButton.gameObject.SetActive(true);
     }
 }
