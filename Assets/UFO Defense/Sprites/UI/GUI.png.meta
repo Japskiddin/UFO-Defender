@@ -241,7 +241,7 @@ TextureImporter:
         width: 153
         height: 200
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -262,7 +262,7 @@ TextureImporter:
         width: 153
         height: 200
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -270,6 +270,111 @@ TextureImporter:
       bones: []
       spriteID: b95cbd89f8fde0a4ab3b20bfdfa854b6
       internalID: -1205011745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sound_on
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 406
+        width: 228
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c3f7db9f4446084fa6b49b1759e2812
+      internalID: 1738468014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: music_on
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 212
+        width: 228
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6f50664e123a874d816ed52f1dad2c0
+      internalID: -709602412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sound_off
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 406
+        width: 228
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8128954200b64f4db25ffab658eabbf
+      internalID: 888446822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: music_off
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 212
+        width: 228
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f679322a8385563459ce4f582b8c4a17
+      internalID: 1140177520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slider_handler
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 854
+        width: 36
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c306c54af87039340b05b3fbba43e674
+      internalID: -1353889920
       vertices: []
       indices: 
       edges: []
@@ -287,10 +392,15 @@ TextureImporter:
     nameFileIdTable:
       home_button_normal: -1086266697
       button_normal: -1400723416
+      sound_off: 888446822
+      slider_handler: -1353889920
       exit_normal: -1758088909
+      music_off: 1140177520
       exit_pressed: -1205011745
       background_menu: 1525438175
+      music_on: -709602412
       button_pressed: -665890732
+      sound_on: 1738468014
       home_button_pressed: -175254305
   spritePackingTag: 
   pSDRemoveMatte: 0
