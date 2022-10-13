@@ -388,7 +388,7 @@ TextureImporter:
         width: 148
         height: 148
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -409,7 +409,7 @@ TextureImporter:
         width: 237
         height: 63
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -417,6 +417,90 @@ TextureImporter:
       bones: []
       spriteID: 34709b101ecf6d44992355d7e8782eaf
       internalID: 1696809445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: button_settings
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 0
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d7b5518bae317f46b673d3a047b0d63
+      internalID: -1745338561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: button_resume
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 0
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c066208510800e445bcf5de203a51001
+      internalID: -533156500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: button_levels
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 0
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2e7f19fef90bdd4d9e578dc6e7f1207
+      internalID: 237870904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: button_restart
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 0
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80965c4d556ecf941b5ed352c6bc35ec
+      internalID: -1206935196
       vertices: []
       indices: 
       edges: []
@@ -434,6 +518,7 @@ TextureImporter:
     nameFileIdTable:
       home_button_normal: -1086266697
       button_normal: -1400723416
+      button_levels: 237870904
       sound_off: 888446822
       slider_handler: -1353889920
       exit_normal: -1758088909
@@ -443,9 +528,12 @@ TextureImporter:
       exit_pressed: -1205011745
       background_menu: 1525438175
       music_on: -709602412
+      button_resume: -533156500
       button_pressed: -665890732
       sound_on: 1738468014
       home_button_pressed: -175254305
+      button_restart: -1206935196
+      button_settings: -1745338561
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
