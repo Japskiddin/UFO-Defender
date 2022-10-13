@@ -17,12 +17,16 @@ public class SettingsController : MonoBehaviour
         Refresh();
     }
 
+    private void Start()
+    {
+        UpdateCheckbox(musicCheckbox, Managers.Audio.MusicMute);
+        UpdateCheckbox(soundCheckbox, Managers.Audio.SoundMute);
+    }
+
     public void Refresh()
     {
         soundsSlider.value = Managers.Audio.SoundVolume;
         musicSlider.value = Managers.Audio.MusicVolume;
-        UpdateCheckbox(musicCheckbox, Managers.Audio.MusicMute);
-        UpdateCheckbox(soundCheckbox, Managers.Audio.SoundMute);
     }
 
     private void UpdateCheckbox(MenuCheckbox checkbox, bool check)
