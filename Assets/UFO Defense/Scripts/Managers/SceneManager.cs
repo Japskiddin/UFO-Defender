@@ -69,5 +69,6 @@ public class SceneManager : MonoBehaviour, IGameManager
             Debug.Log("Loading " + name);
         }
         UnityEngine.SceneManagement.SceneManager.LoadScene(name);
+        Messenger<int>.Broadcast(GameEvent.LEVEL_UPDATED, CurrentLevel);
     }
 }

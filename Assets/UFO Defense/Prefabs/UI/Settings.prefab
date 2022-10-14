@@ -1052,6 +1052,8 @@ GameObject:
   - component: {fileID: 7959106555718343266}
   - component: {fileID: 7959106555718343277}
   - component: {fileID: 7959106555718343267}
+  - component: {fileID: 6371544264215736237}
+  - component: {fileID: 5238425743877310213}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -1140,6 +1142,31 @@ MonoBehaviour:
   musicSlider: {fileID: 7959106555484629999}
   musicCheckbox: {fileID: 2620582133100012702}
   soundCheckbox: {fileID: 1021298071965439604}
+--- !u!225 &6371544264215736237
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7959106555718343279}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!114 &5238425743877310213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7959106555718343279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b09df86b99baa014b8c325f3ce5d5892, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visible: 0
 --- !u!1 &7959106556024283148
 GameObject:
   m_ObjectHideFlags: 0

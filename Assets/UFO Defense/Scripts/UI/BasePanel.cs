@@ -17,17 +17,17 @@ public class BasePanel : MonoBehaviour
 
     public void Show()
     {
-        _panel.gameObject.SetActive(true);
+        _panel.gameObject.GetComponent<CanvasElementVisibility>().Visible = true;
     }
 
     public void Hide()
     {
-        _panel.gameObject.SetActive(false);
+        _panel.gameObject.GetComponent<CanvasElementVisibility>().Visible = false;
     }
 
     public bool Visible()
     {
-        return _panel.gameObject.activeSelf;
+        return _panel.gameObject.GetComponent<CanvasElementVisibility>().Visible;
     }
 
     public void PlaySound()

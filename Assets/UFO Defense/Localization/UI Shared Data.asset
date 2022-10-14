@@ -63,6 +63,10 @@ MonoBehaviour:
     m_Key: Resume
     m_Metadata:
       m_Items: []
+  - m_Id: 23562758690848768
+    m_Key: Level Num
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

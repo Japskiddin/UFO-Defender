@@ -13,9 +13,9 @@ public class MainMenuController : MonoBehaviour
 
     private void Awake()
     {
-        mainMenu.gameObject.SetActive(true);
-        settingsMenu.gameObject.SetActive(false);
-        about.gameObject.SetActive(false);
+        mainMenu.gameObject.GetComponent<CanvasElementVisibility>().Visible = true;
+        settingsMenu.gameObject.GetComponent<CanvasElementVisibility>().Visible = false;
+        about.gameObject.GetComponent<CanvasElementVisibility>().Visible = false;
         homeButton.gameObject.SetActive(false);
         exitButton.gameObject.SetActive(true);
         Time.timeScale = 1;
@@ -36,9 +36,9 @@ public class MainMenuController : MonoBehaviour
     public void OnSettingsClick()
     {
         Managers.Audio.PlaySound(sound);
-        mainMenu.gameObject.SetActive(false);
-        settingsMenu.gameObject.SetActive(true);
-        about.gameObject.SetActive(false);
+        mainMenu.gameObject.GetComponent<CanvasElementVisibility>().Visible = false;
+        settingsMenu.gameObject.GetComponent<CanvasElementVisibility>().Visible = true;
+        about.gameObject.GetComponent<CanvasElementVisibility>().Visible = false;
         homeButton.gameObject.SetActive(true);
         exitButton.gameObject.SetActive(false);
     }
@@ -46,9 +46,9 @@ public class MainMenuController : MonoBehaviour
     public void OnHomeClick()
     {
         Managers.Audio.PlaySound(sound);
-        mainMenu.gameObject.SetActive(true);
-        settingsMenu.gameObject.SetActive(false);
-        about.gameObject.SetActive(false);
+        mainMenu.gameObject.GetComponent<CanvasElementVisibility>().Visible = true;
+        settingsMenu.gameObject.GetComponent<CanvasElementVisibility>().Visible = false;
+        about.gameObject.GetComponent<CanvasElementVisibility>().Visible = false;
         homeButton.gameObject.SetActive(false);
         exitButton.gameObject.SetActive(true);
     }

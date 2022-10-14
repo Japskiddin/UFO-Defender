@@ -6,4 +6,5 @@ public static class GameEvent
     public const string CREATE_EXPLOSION = "CREATE_EXPLOSION";
     public const string ENEMY_MOB_KILLED = "ENEMY_MOB_KILLED";
     public const string HOME_DESTROYED = "HOME_DESTROYED";
+    public const string LEVEL_UPDATED = "LEVEL_UPDATED";
 }
