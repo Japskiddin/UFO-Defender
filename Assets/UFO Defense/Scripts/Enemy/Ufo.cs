@@ -65,7 +65,7 @@ namespace UFO_Defense.Scripts.Enemy
 
         private void CalculateScreenEdges()
         {
-            Camera mainCamera = Camera.main;
+            var mainCamera = Camera.main;
             if (mainCamera == null)
             {
                 throw new System.NullReferenceException("Camera is null!");
@@ -124,11 +124,9 @@ namespace UFO_Defense.Scripts.Enemy
         private void CheckShoot()
         {
             _shootTimer += Time.deltaTime;
-            if (_shootTimer > _secondsForShoot)
-            {
-                Shoot();
-                _shootTimer = 0;
-            }
+            if (!(_shootTimer > _secondsForShoot)) return;
+            Shoot();
+            _shootTimer = 0;
         }
 
         private void Move()

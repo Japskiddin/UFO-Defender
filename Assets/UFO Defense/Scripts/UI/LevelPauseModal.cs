@@ -46,8 +46,7 @@ namespace UFO_Defense.Scripts.UI
         private void OnRefreshLevel(int level)
         {
             Debug.Log("OnRefreshLevel - level = " + level);
-            var levelNumString = levelString.StringReference["level_num"] as IntVariable;
-            if (levelNumString == null) return;
+            if (levelString.StringReference["level_num"] is not IntVariable levelNumString) return;
             levelNumString.Value = level;
             levelString.RefreshString();
         }

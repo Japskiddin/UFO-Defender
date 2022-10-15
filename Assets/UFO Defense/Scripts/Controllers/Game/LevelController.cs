@@ -103,7 +103,7 @@ namespace UFO_Defense.Scripts.Controllers.Game
             {
                 var home = _homes[i];
                 home.transform.position =
-                    new Vector3(homePosX + (offset * i), -screenBounds.y + (screenBounds.y * 0.2f), 1);
+                    new Vector3(homePosX + offset * i, -screenBounds.y + screenBounds.y * 0.2f, 1);
             }
         }
 

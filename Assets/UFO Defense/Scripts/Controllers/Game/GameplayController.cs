@@ -44,7 +44,7 @@ namespace UFO_Defense.Scripts.Controllers.Game
             }
         }
 
-        public void OnGameResume()
+        private void OnGameResume()
         {
             Status = GameStatus.Running;
             Time.timeScale = 1;

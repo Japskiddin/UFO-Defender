@@ -35,7 +35,7 @@ namespace UFO_Defense.Scripts.Controllers.Game
             }
 
             Messenger<Ufo>.AddListener(GameEvent.EnemyMobKilled, OnEnemyMobKilled);
-            int level = Manager.Scene.CurrentLevel;
+            var level = Manager.Scene.CurrentLevel;
             mobTotal *= level;
             if (level > 1)
             {

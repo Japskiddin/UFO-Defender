@@ -34,7 +34,7 @@ namespace UFO_Defense.Scripts.UI
                 transform.position.z);
         }
 
-        void Update()
+        private void Update()
         {
             CheckScreenEdges();
             CheckEdgesCollision();
@@ -81,7 +81,7 @@ namespace UFO_Defense.Scripts.UI
             }
         }
 
-        public void Move()
+        private void Move()
         {
             var posX = (_directionHorizontal == DirectionRight ? -1 : 1) * speed * Time.deltaTime;
             var posY = (_directionVertical == DirectionBottom ? -1 : 1) * speed * Time.deltaTime;

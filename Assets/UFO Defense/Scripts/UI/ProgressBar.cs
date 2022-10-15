@@ -12,7 +12,7 @@ namespace UFO_Defense.Scripts.UI
         private int value;
 
         [SerializeField] private int maxValue = 100;
-        [SerializeField] private bool isCorrectConfigured = false;
+        [SerializeField] private bool isCorrectConfigured;
 
         private void Awake()
         {

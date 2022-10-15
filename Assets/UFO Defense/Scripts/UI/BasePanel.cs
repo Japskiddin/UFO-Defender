@@ -10,7 +10,7 @@ namespace UFO_Defense.Scripts.UI
         private Image _panel;
         private CanvasElementVisibility _canvas;
 
-        public void Init(Image panel, AudioClip sound)
+        protected void Init(Image panel, AudioClip sound)
         {
             _panel = panel;
             _sound = sound;
