@@ -1,172 +1,151 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class AudioManager : MonoBehaviour, IGameManager
+namespace UFO_Defense.Scripts.Managers
 {
-    [Header("Properties")]
-    [SerializeField] private AudioSource music1Source;
-    [SerializeField] private AudioSource music2Source;
-    // ������ ���������� �� ������ ��� ������ �� ����� �������� �����.
-    [SerializeField] private AudioSource soundSource;
-    // ������ ��������� ����� ����������� ������.
-    [SerializeField] private string mainMenuBGMusic;
-    [SerializeField] private string levelBGMusic;
-    [SerializeField] private string levelMenuBGMusic;
-    [SerializeField] private float crossFadeRate = 1.5f;
-
-    private AudioSource _activeMusic;
-    // ������ �� ���, ����� �� ���������� �������, � ����� ���.
-    private AudioSource _inactiveMusic;
-    // �������������, ����������� �������� ������ � �������� ��������.
-    private bool _crossFading;
-
-    public ManagerStatus Status { get; private set; }
-    // ���������������� ������ � �������� ���������� ����������, ������ ����� ������� ������� ��������.
-    private float _musicVolume;
-    public float MusicVolume
+    public class AudioManager : MonoBehaviour, IGameManager
     {
-        get
-        {
-            return _musicVolume;
-        }
-        set
-        {
-            _musicVolume = value;
+        [Header("Properties")] [SerializeField]
+        private AudioSource music1Source;
 
-            if (music1Source != null && !_crossFading)
+        [SerializeField] private AudioSource music2Source;
+        [SerializeField] private AudioSource soundSource;
+
+        [FormerlySerializedAs("mainMenuBGMusic")] [SerializeField]
+        private string mainMenuBgMusic;
+
+        [FormerlySerializedAs("levelBGMusic")] [SerializeField]
+        private string levelBgMusic;
+
+        [FormerlySerializedAs("levelMenuBGMusic")] [SerializeField]
+        private string levelMenuBgMusic;
+
+        [SerializeField] private float crossFadeRate = 1.5f;
+
+        private AudioSource _activeMusic;
+        private AudioSource _inactiveMusic;
+        private bool _crossFading;
+
+        public ManagerStatus Status { get; private set; }
+        private float _musicVolume;
+
+        public float MusicVolume
+        {
+            get => _musicVolume;
+            set
             {
-                // �������� ���������� ��������� ��������� �����.
+                _musicVolume = value;
+                if (music1Source == null || _crossFading) return;
                 music1Source.volume = _musicVolume;
-                // ����������� ��������� ����� ���������� �����.
                 music2Source.volume = _musicVolume;
             }
         }
-    }
 
-    public bool MusicMute
-    {
-        get
+        public bool MusicMute
         {
-            if (music1Source != null)
+            get => music1Source != null && music1Source.mute;
+            set
             {
-                return music1Source.mute;
-            }
-            // �������� �� ��������� ���� AudioSource �����������.
-            return false;
-        }
-        set
-        {
-            if (music1Source != null)
-            {
+                if (music1Source == null) return;
                 music1Source.mute = value;
                 music2Source.mute = value;
             }
         }
-    }
 
-    public float SoundVolume
-    {
-        // �������� ��� ��������� � �������� ������ � �������� �������.
-        // ��������� ������� ������/������� � ������� AudioListener.
-        get { return AudioListener.volume; }
-        set { AudioListener.volume = value; }
-    }
-
-    public bool SoundMute
-    {
-        // ��������� ����������� �������� ��� ���������� �����.
-        get { return AudioListener.pause; }
-        set { AudioListener.pause = value; }
-    }
-
-    public void Startup()
-    {
-        if (Debug.isDebugBuild)
+        public static float SoundVolume
         {
-            Debug.Log("Audio manager starting...");
+            get => AudioListener.volume;
+            set => AudioListener.volume = value;
         }
 
-        // �������� ���������� AudioSource ������������ ��������� ���������� AudioListener.
-        music1Source.ignoreListenerVolume = true;
-        music1Source.ignoreListenerPause = true;
-        music2Source.ignoreListenerVolume = true;
-        music2Source.ignoreListenerPause = true;
-
-        // 1 - ������ ���������.
-        MusicVolume = 1f;
-        SoundVolume = 1f;
-
-        // �������������� ���� �� ���������� ��� ��������.
-        _activeMusic = music1Source;
-        _inactiveMusic = music2Source;
-
-        Status = ManagerStatus.Started;
-    }
-
-    public void PlaySound(AudioClip clip)
-    {
-        // ������������� �����, �� ������� ������� ���������.
-        soundSource.PlayOneShot(clip);
-    }
-
-    public void PlayMainMenuMusic()
-    {
-        // �������� ������ intro �� ����� Resources.
-        PlayMusic(Resources.Load("Music/" + mainMenuBGMusic) as AudioClip);
-    }
-
-    public void PlayLevelMenuMusic()
-    {
-        PlayMusic(Resources.Load("Music/" + levelMenuBGMusic) as AudioClip);
-    }
-
-    public void PlayLevelMusic()
-    {
-        // �������� �������� ������ �� ����� Resources.
-        PlayMusic(Resources.Load("Music/" + levelBGMusic) as AudioClip);
-    }
-
-    private void PlayMusic(AudioClip clip)
-    {
-        if (_crossFading) return;
-        // ��� ��������� ����������� ���������� �������� �����������.
-        StartCoroutine(CrossFadeMusic(clip));
-    }
-
-    private IEnumerator CrossFadeMusic(AudioClip clip)
-    {
-        _crossFading = true;
-
-        _inactiveMusic.clip = clip;
-        _inactiveMusic.volume = 0;
-        _inactiveMusic.Play();
-
-        float scaledRate = crossFadeRate * _musicVolume;
-        while (_activeMusic.volume > 0)
+        public static bool SoundMute
         {
-            _activeMusic.volume -= scaledRate * Time.deltaTime;
-            _inactiveMusic.volume += scaledRate * Time.deltaTime;
-
-            // �������� yield ������������� �������� �� ���� ����.
-            yield return null;
+            get => AudioListener.pause;
+            set => AudioListener.pause = value;
         }
 
-        // ��������� ����������, ������������ ����� �� ������ ������� _active � _inactive.
-        AudioSource temp = _activeMusic;
+        public void Startup()
+        {
+            if (Debug.isDebugBuild)
+            {
+                Debug.Log("Audio manager starting...");
+            }
 
-        _activeMusic = _inactiveMusic;
-        _activeMusic.volume = _musicVolume;
+            music1Source.ignoreListenerVolume = true;
+            music1Source.ignoreListenerPause = true;
+            music2Source.ignoreListenerVolume = true;
+            music2Source.ignoreListenerPause = true;
 
-        _inactiveMusic = temp;
-        _inactiveMusic.Stop();
+            MusicVolume = 1f;
+            SoundVolume = 1f;
 
-        _crossFading = false;
-    }
+            _activeMusic = music1Source;
+            _inactiveMusic = music2Source;
 
-    public void StopMusic()
-    {
-        _activeMusic.Stop();
-        _inactiveMusic.Stop();
+            Status = ManagerStatus.Started;
+        }
+
+        public void PlaySound(AudioClip clip)
+        {
+            soundSource.PlayOneShot(clip);
+        }
+
+        public void PlayMainMenuMusic()
+        {
+            var path = string.Concat("Music/", mainMenuBgMusic);
+            PlayMusic(Resources.Load(path) as AudioClip);
+        }
+
+        public void PlayLevelMenuMusic()
+        {
+            var path = string.Concat("Music/", levelMenuBgMusic);
+            PlayMusic(Resources.Load(path) as AudioClip);
+        }
+
+        public void PlayLevelMusic()
+        {
+            var path = string.Concat("Music/", levelBgMusic);
+            PlayMusic(Resources.Load(path) as AudioClip);
+        }
+
+        private void PlayMusic(AudioClip clip)
+        {
+            if (_crossFading) return;
+            StartCoroutine(CrossFadeMusic(clip));
+        }
+
+        private IEnumerator CrossFadeMusic(AudioClip clip)
+        {
+            _crossFading = true;
+
+            _inactiveMusic.clip = clip;
+            _inactiveMusic.volume = 0;
+            _inactiveMusic.Play();
+
+            var scaledRate = crossFadeRate * _musicVolume;
+            while (_activeMusic.volume > 0)
+            {
+                _activeMusic.volume -= scaledRate * Time.deltaTime;
+                _inactiveMusic.volume += scaledRate * Time.deltaTime;
+                yield return null;
+            }
+
+            var temp = _activeMusic;
+
+            _activeMusic = _inactiveMusic;
+            _activeMusic.volume = _musicVolume;
+
+            _inactiveMusic = temp;
+            _inactiveMusic.Stop();
+
+            _crossFading = false;
+        }
+
+        public void StopMusic()
+        {
+            _activeMusic.Stop();
+            _inactiveMusic.Stop();
+        }
     }
 }

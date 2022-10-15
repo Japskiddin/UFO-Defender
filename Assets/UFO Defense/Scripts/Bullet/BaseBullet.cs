@@ -1,26 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
+using UFO_Defense.Scripts.Controllers.Game;
 using UnityEngine;
 
-public class BaseBullet : MonoBehaviour
+namespace UFO_Defense.Scripts.Bullet
 {
-    private float _speed;
-
-    public virtual void Init(float speed)
+    public class BaseBullet : MonoBehaviour
     {
-        _speed = speed;
-    }
+        private float _speed;
 
-    void Update()
-    {
-        if (Controllers.Gameplay.GameStatus == GameStatus.Running)
+        protected void Init(float speed)
         {
-            transform.Translate(0, _speed * Time.deltaTime, 0);
+            _speed = speed;
         }
-    }
 
-    private void OnBecameInvisible()
-    {
-        Destroy(this.gameObject);
+        private void Update()
+        {
+            if (Controller.Gameplay.Status == GameStatus.Running)
+            {
+                transform.Translate(0, _speed * Time.deltaTime, 0);
+            }
+        }
+
+        private void OnBecameInvisible()
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

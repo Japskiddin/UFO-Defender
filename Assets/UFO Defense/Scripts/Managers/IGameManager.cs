@@ -1,6 +1,8 @@
-public interface IGameManager
+namespace UFO_Defense.Scripts.Managers
 {
-    // Перечисление, которое нужно обрабатывать.
-    ManagerStatus Status { get; }
-    void Startup();
+    public interface IGameManager
+    {
+        ManagerStatus Status { get; }
+        void Startup();
+    }
 }

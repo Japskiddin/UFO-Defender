@@ -1,34 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
+using UFO_Defense.Scripts.Managers;
+using UFO_Defense.Scripts.UI;
 using UnityEngine;
 
-public class StartupController : MonoBehaviour
+namespace UFO_Defense.Scripts.Controllers
 {
-    [Header("Properties")]
-    [SerializeField] private ProgressBar progressBar;
-
-    private void Awake()
+    public class StartupController : MonoBehaviour
     {
-        Messenger<int, int>.AddListener(StartupEvent.MANAGERS_PROGRESS, OnManagersProgress);
-        Messenger.AddListener(StartupEvent.MANAGERS_STARTED, OnManagersStarted);
-    }
+        [Header("Properties")] [SerializeField]
+        private ProgressBar progressBar;
 
-    private void OnDestroy()
-    {
-        Messenger<int, int>.RemoveListener(StartupEvent.MANAGERS_PROGRESS, OnManagersProgress);
-        Messenger.RemoveListener(StartupEvent.MANAGERS_STARTED, OnManagersStarted);
-    }
+        private void Awake()
+        {
+            Messenger<int, int>.AddListener(StartupEvent.ManagersProgress, OnManagersProgress);
+            Messenger.AddListener(StartupEvent.ManagersStarted, OnManagersStarted);
+        }
 
-    private void OnManagersProgress(int numReady, int numModules)
-    {
-        // Обновляем ползунок данными о процессе загрузки.
-        progressBar.SetMaxValue(numModules);
-        progressBar.SetValue(numReady);
-    }
+        private void OnDestroy()
+        {
+            Messenger<int, int>.RemoveListener(StartupEvent.ManagersProgress, OnManagersProgress);
+            Messenger.RemoveListener(StartupEvent.ManagersStarted, OnManagersStarted);
+        }
 
-    private void OnManagersStarted()
-    {
-        // После загрузки диспетчеров загружаем следующую сцену.
-        Managers.Scene.OpenMainMenu();
+        private void OnManagersProgress(int numReady, int numModules)
+        {
+            progressBar.SetMaxValue(numModules);
+            progressBar.SetValue(numReady);
+        }
+
+        private static void OnManagersStarted()
+        {
+            Manager.Scene.OpenMainMenu();
+        }
     }
 }

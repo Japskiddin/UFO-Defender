@@ -1,22 +1,26 @@
 using System.Collections;
-using System.Collections.Generic;
+using UFO_Defense.Scripts.Managers;
 using UnityEngine;
 
-public class Explosion : MonoBehaviour
+namespace UFO_Defense.Scripts.Level
 {
-    [Header("Properties")]
-    [SerializeField] private AudioClip explosionSound;
-    [SerializeField] private float explodeTime = 0.5f;
-
-    void Start()
+    public class Explosion : MonoBehaviour
     {
-        Managers.Audio.PlaySound(explosionSound);
-        StartCoroutine(Explode());
-    }
+        [Header("Properties")] [SerializeField]
+        private AudioClip explosionSound;
 
-    private IEnumerator Explode()
-    {
-        yield return new WaitForSeconds(explodeTime);
-        Destroy(this.gameObject);
+        [SerializeField] private float explodeTime = 0.5f;
+
+        private void Start()
+        {
+            Manager.Audio.PlaySound(explosionSound);
+            StartCoroutine(Explode());
+        }
+
+        private IEnumerator Explode()
+        {
+            yield return new WaitForSeconds(explodeTime);
+            Destroy(this.gameObject);
+        }
     }
 }

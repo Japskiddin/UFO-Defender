@@ -1,4 +1,7 @@
-public class UIEvent
+namespace UFO_Defense.Scripts.UI
 {
-    public const string SETTINGS_CLOSED = "SETTINGS_CLOSED";
+    public class UIEvent
+    {
+        public const string SettingsClosed = "SETTINGS_CLOSED";
+    }
 }

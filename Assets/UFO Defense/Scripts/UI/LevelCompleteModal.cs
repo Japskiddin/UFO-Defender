@@ -1,28 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
+using UFO_Defense.Scripts.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelCompleteModal : BasePanel
+namespace UFO_Defense.Scripts.UI
 {
-    [Header("Properties")]
-    [SerializeField] private AudioClip sound;
-    [Header("Panel")]
-    [SerializeField] private Image levelComplete;
-
-    private void Awake()
+    public class LevelCompleteModal : BasePanel
     {
-        Init(levelComplete, sound);
-    }
+        [Header("Properties")] [SerializeField]
+        private AudioClip sound;
 
-    public void OnExitClick()
-    {
-        PlaySound();
-        Managers.Scene.OpenMainMenu();
-    }
+        [Header("Panel")] [SerializeField] private Image levelComplete;
 
-    public void OnNextLevelClick()
-    {
-        Managers.Scene.GoToNext();
+        private void Awake()
+        {
+            Init(levelComplete, sound);
+        }
+
+        public void OnExitClick()
+        {
+            PlaySound();
+            Manager.Scene.OpenMainMenu();
+        }
+
+        public void OnNextLevelClick()
+        {
+            Manager.Scene.GoToNext();
+        }
     }
 }

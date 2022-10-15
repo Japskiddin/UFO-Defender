@@ -1,24 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
+using UFO_Defense.Scripts.Controllers.Game;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsModal : BasePanel
+namespace UFO_Defense.Scripts.UI
 {
-    [Header("Properties")]
-    [SerializeField] private AudioClip sound;
-    [Header("Panel")]
-    [SerializeField] private Image settingsMenu;
-
-    private void Awake()
+    public class SettingsModal : BasePanel
     {
-        Init(settingsMenu, sound);
-    }
+        [Header("Properties")] [SerializeField]
+        private AudioClip sound;
 
-    public void OnSettingsCloseClick()
-    {
-        PlaySound();
-        Controllers.LevelPause.Show();
-        Hide();
+        [Header("Panel")] [SerializeField] private Image settingsMenu;
+
+        private void Awake()
+        {
+            Init(settingsMenu, sound);
+        }
+
+        public void OnSettingsCloseClick()
+        {
+            PlaySound();
+            Controller.LevelPause.Show();
+            Hide();
+        }
     }
 }

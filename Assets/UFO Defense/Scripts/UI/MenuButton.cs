@@ -1,38 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
-[RequireComponent(typeof(Image))]
-public class MenuButton : MonoBehaviour
+namespace UFO_Defense.Scripts.UI
 {
-    private Image _image;
-
-    [Header("Properties")]
-    [SerializeField] private Sprite[] backgrounds;
-
-    private void Awake()
+    [RequireComponent(typeof(Image))]
+    public class MenuButton : MonoBehaviour
     {
-        _image = GetComponent<Image>();
-        if (_image == null)
+        private Image _image;
+
+        [Header("Properties")] [SerializeField]
+        private Sprite[] backgrounds;
+
+        private void Awake()
         {
-            throw new NullReferenceException("Component Image is null");
+            _image = GetComponent<Image>();
+            if (_image == null)
+            {
+                throw new NullReferenceException("Component Image is null");
+            }
         }
-    }
 
-    void Start()
-    {
-        _image.sprite = backgrounds[0];
-    }
+        private void Start()
+        {
+            _image.sprite = backgrounds[0];
+        }
 
-    private void OnMouseUp()
-    {
-        _image.sprite = backgrounds[0];
-    }
+        private void OnMouseUp()
+        {
+            _image.sprite = backgrounds[0];
+        }
 
-    private void OnMouseDown()
-    {
-        _image.sprite = backgrounds[1];
+        private void OnMouseDown()
+        {
+            _image.sprite = backgrounds[1];
+        }
     }
 }

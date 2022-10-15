@@ -1,48 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ProgressBar : MonoBehaviour
+namespace UFO_Defense.Scripts.UI
 {
-    [Header("UI Elements")]
-    [SerializeField] private Image image;
-
-    [Header("Properties")]
-    [SerializeField] private int value;
-    [SerializeField] private int maxValue = 100;
-    [SerializeField] private bool isCorrectConfigured = false;
-
-    private void Awake()
+    public class ProgressBar : MonoBehaviour
     {
-        if (image.type == Image.Type.Filled && image.fillMethod == Image.FillMethod.Horizontal)
+        [Header("UI Elements")] [SerializeField]
+        private Image image;
+
+        [Header("Properties")] [SerializeField]
+        private int value;
+
+        [SerializeField] private int maxValue = 100;
+        [SerializeField] private bool isCorrectConfigured = false;
+
+        private void Awake()
         {
-            isCorrectConfigured = true;
-        }
-        else
-        {
-            if (Debug.isDebugBuild)
+            if (image.type == Image.Type.Filled && image.fillMethod == Image.FillMethod.Horizontal)
             {
-                Debug.Log("{GameLog} => [ProgressBar] - (<color=red>Error</color>) -> Components Parameters Are Incorrectly Configured! \n " +
-                    "Required Type Filled \n" +
-                    "Required FillMethod Horizontal");
+                isCorrectConfigured = true;
+            }
+            else
+            {
+                if (Debug.isDebugBuild)
+                {
+                    Debug.Log(
+                        "{GameLog} => [ProgressBar] - (<color=red>Error</color>) -> Components Parameters Are Incorrectly Configured! \n " +
+                        "Required Type Filled \n" +
+                        "Required FillMethod Horizontal");
+                }
             }
         }
-    }
 
-    private void LateUpdate()
-    {
-        if (!isCorrectConfigured) return;
-        image.fillAmount = (float)value / maxValue;
-    }
+        private void LateUpdate()
+        {
+            if (!isCorrectConfigured) return;
+            image.fillAmount = (float)value / maxValue;
+        }
 
-    public void SetValue(int value)
-    {
-        this.value = value;
-    }
+        public void SetValue(int newValue)
+        {
+            value = newValue;
+        }
 
-    public void SetMaxValue(int maxValue)
-    {
-        this.maxValue = maxValue;
+        public void SetMaxValue(int newMaxValue)
+        {
+            maxValue = newMaxValue;
+        }
     }
 }

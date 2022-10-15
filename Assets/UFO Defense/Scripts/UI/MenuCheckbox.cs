@@ -1,26 +1,29 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
-[RequireComponent(typeof(Image))]
-public class MenuCheckbox : MonoBehaviour
+namespace UFO_Defense.Scripts.UI
 {
-    private Image _image;
-
-    [Header("Properties")]
-    [SerializeField] private Sprite[] images;
-
-    private void Awake()
+    [RequireComponent(typeof(Image))]
+    public class MenuCheckbox : MonoBehaviour
     {
-        _image = GetComponent<Image>();
-        if (_image == null)
+        private Image _image;
+
+        [Header("Properties")] [SerializeField]
+        private Sprite[] images;
+
+        private void Awake()
         {
-            throw new NullReferenceException("Component Image is null");
+            _image = GetComponent<Image>();
+            if (_image == null)
+            {
+                throw new NullReferenceException("Component Image is null");
+            }
         }
-    }
 
-    public void SetChecked(bool check)
-    {
-        _image.sprite = check ? images[0] : images[1];
+        public void SetChecked(bool check)
+        {
+            _image.sprite = check ? images[0] : images[1];
+        }
     }
 }

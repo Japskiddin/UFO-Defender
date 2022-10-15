@@ -1,45 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CanvasGroup))]
-[ExecuteAlways]
-public class CanvasElementVisibility : MonoBehaviour
+namespace UFO_Defense.Scripts.UI
 {
-    private CanvasGroup canvasGroup;
-
-    [SerializeField]
-    private bool visible;
-    public bool Visible
+    [RequireComponent(typeof(CanvasGroup))]
+    [ExecuteAlways]
+    public class CanvasElementVisibility : MonoBehaviour
     {
-        get => visible;
-        set
+        [SerializeField] private bool visible;
+
+        private CanvasGroup _canvasGroup;
+
+        public bool Visible
         {
-            visible = value;
-            if (visible) ShowElement();
+            get => visible;
+            set
+            {
+                visible = value;
+                if (visible) ShowElement();
+                else HideElement();
+            }
+        }
+
+        private void OnValidate()
+        {
+            if (Visible) ShowElement();
             else HideElement();
         }
-    }
 
-    private void OnValidate()
-    {
-        if (Visible) ShowElement();
-        else HideElement();
-    }
+        private void ShowElement()
+        {
+            if (!_canvasGroup) _canvasGroup = GetComponent<CanvasGroup>();
+            _canvasGroup.alpha = 1;
+            _canvasGroup.interactable = true;
+            _canvasGroup.blocksRaycasts = true;
+        }
 
-    private void ShowElement()
-    {
-        if (!canvasGroup) canvasGroup = GetComponent<CanvasGroup>();
-        canvasGroup.alpha = 1;
-        canvasGroup.interactable = true;
-        canvasGroup.blocksRaycasts = true;
-    }
-
-    private void HideElement()
-    {
-        if (!canvasGroup) canvasGroup = GetComponent<CanvasGroup>();
-        canvasGroup.alpha = 0;
-        canvasGroup.interactable = false;
-        canvasGroup.blocksRaycasts = false;
+        private void HideElement()
+        {
+            if (!_canvasGroup) _canvasGroup = GetComponent<CanvasGroup>();
+            _canvasGroup.alpha = 0;
+            _canvasGroup.interactable = false;
+            _canvasGroup.blocksRaycasts = false;
+        }
     }
 }

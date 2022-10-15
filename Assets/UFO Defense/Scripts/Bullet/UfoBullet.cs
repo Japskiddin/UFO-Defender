@@ -1,45 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
+using UFO_Defense.Scripts.Level;
+using UFO_Defense.Scripts.Managers;
 using UnityEngine;
 
-public class UfoBullet : BaseBullet
+namespace UFO_Defense.Scripts.Bullet
 {
-    [Header("Properties")]
-    [SerializeField] private float minAngle = 130;
-    [SerializeField] private float maxAngle = 230;
-    [SerializeField] private float speed = 1.0f;
-
-    private void Awake()
+    public class UfoBullet : BaseBullet
     {
-        Init(speed);
-    }
+        [Header("Properties")] [SerializeField]
+        private float minAngle = 130;
 
-    private void Start()
-    {
-        float angle = Random.Range(minAngle, maxAngle);
-        transform.Rotate(0, 0, angle);
-        if (Debug.isDebugBuild)
+        [SerializeField] private float maxAngle = 230;
+        [SerializeField] private float speed = 1.0f;
+
+        private void Awake()
         {
-            Debug.Log($"UFO Bullet angle - {angle}");
+            Init(speed);
         }
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Homes"))
+        private void Start()
         {
-            Home home = collision.GetComponent<Home>();
-            if (home != null && !home.IsDestroyed)
+            var angle = Random.Range(minAngle, maxAngle);
+            transform.Rotate(0, 0, angle);
+            if (Debug.isDebugBuild)
             {
-                home.TakeDamage();
-                Destroy();
+                Debug.Log($"UFO Bullet angle - {angle}");
             }
         }
-    }
 
-    public void Destroy()
-    {
-        Messenger<Vector3>.Broadcast(GameEvent.CREATE_EXPLOSION, transform.position);
-        Destroy(this.gameObject);
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (!collision.CompareTag("Homes")) return;
+            var home = collision.GetComponent<Home>();
+            if (home == null || home.IsDestroyed) return;
+            home.TakeDamage();
+            Destroy();
+        }
+
+        public void Destroy()
+        {
+            Messenger<Vector3>.Broadcast(GameEvent.CreateExplosion, transform.position);
+            Destroy(this.gameObject);
+        }
     }
 }

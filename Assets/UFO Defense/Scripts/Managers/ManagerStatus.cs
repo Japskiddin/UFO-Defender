@@ -1,6 +1,9 @@
-public enum ManagerStatus
+namespace UFO_Defense.Scripts.Managers
 {
-    Shutdown,
-    Initializing,
-    Started
+    public enum ManagerStatus
+    {
+        Shutdown,
+        Initializing,
+        Started
+    }
 }

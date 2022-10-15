@@ -1,37 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
+using UFO_Defense.Scripts.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BasePanel : MonoBehaviour
+namespace UFO_Defense.Scripts.UI
 {
-    private AudioClip _sound;
-    private Image _panel;
-
-    public virtual void Init(Image panel, AudioClip sound)
+    public class BasePanel : MonoBehaviour
     {
-        _panel = panel;
-        _sound = sound;
-        Hide();
-    }
+        private AudioClip _sound;
+        private Image _panel;
+        private CanvasElementVisibility _canvas;
 
-    public void Show()
-    {
-        _panel.gameObject.GetComponent<CanvasElementVisibility>().Visible = true;
-    }
+        public void Init(Image panel, AudioClip sound)
+        {
+            _panel = panel;
+            _sound = sound;
+            _canvas = _panel.gameObject.GetComponent<CanvasElementVisibility>();
+            Hide();
+        }
 
-    public void Hide()
-    {
-        _panel.gameObject.GetComponent<CanvasElementVisibility>().Visible = false;
-    }
+        public void Show()
+        {
+            _canvas.Visible = true;
+        }
 
-    public bool Visible()
-    {
-        return _panel.gameObject.GetComponent<CanvasElementVisibility>().Visible;
-    }
+        public void Hide()
+        {
+            _canvas.Visible = false;
+        }
 
-    public void PlaySound()
-    {
-        Managers.Audio.PlaySound(_sound);
+        public bool Visible()
+        {
+            return _canvas.Visible;
+        }
+
+        public void PlaySound()
+        {
+            Manager.Audio.PlaySound(_sound);
+        }
     }
 }

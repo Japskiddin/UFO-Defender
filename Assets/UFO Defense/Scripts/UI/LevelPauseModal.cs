@@ -1,52 +1,55 @@
-using System.Collections;
-using System.Collections.Generic;
+using UFO_Defense.Scripts.Controllers.Game;
+using UFO_Defense.Scripts.Managers;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.Localization.Components;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
+using UnityEngine.UI;
 
-public class LevelPauseModal : BasePanel
+namespace UFO_Defense.Scripts.UI
 {
-    [Header("Properties")]
-    [SerializeField] private AudioClip sound;
-    [Header("Panel")]
-    [SerializeField] private Image levelPause;
-    [Header("Strings")]
-    [SerializeField] private LocalizeStringEvent levelString;
-
-    private void Awake()
+    public class LevelPauseModal : BasePanel
     {
-        Init(levelPause, sound);
-    }
+        [Header("Properties")] [SerializeField]
+        private AudioClip sound;
 
-    private void OnEnable()
-    {
-        Messenger<int>.AddListener(GameEvent.LEVEL_UPDATED, OnRefreshLevel);
-    }
+        [Header("Panel")] [SerializeField] private Image levelPause;
+        [Header("Strings")] [SerializeField] private LocalizeStringEvent levelString;
 
-    private void OnDisable()
-    {
-        Messenger<int>.RemoveListener(GameEvent.LEVEL_UPDATED, OnRefreshLevel);
-    }
+        private void Awake()
+        {
+            Init(levelPause, sound);
+        }
 
-    public void OnExitClick()
-    {
-        PlaySound();
-        Managers.Scene.OpenMainMenu();
-    }
+        private void OnEnable()
+        {
+            Messenger<int>.AddListener(GameEvent.LevelUpdated, OnRefreshLevel);
+        }
 
-    public void OnSettingsClick()
-    {
-        PlaySound();
-        Hide();
-        Controllers.Settings.Show();
-    }
+        private void OnDisable()
+        {
+            Messenger<int>.RemoveListener(GameEvent.LevelUpdated, OnRefreshLevel);
+        }
 
-    private void OnRefreshLevel(int level)
-    {
-        Debug.Log("OnRefreshLevel - level = " + level);
-        (levelString.StringReference["level_num"] as IntVariable).Value = level;
-        levelString.RefreshString();
+        public void OnExitClick()
+        {
+            PlaySound();
+            Manager.Scene.OpenMainMenu();
+        }
+
+        public void OnSettingsClick()
+        {
+            PlaySound();
+            Hide();
+            Controller.Settings.Show();
+        }
+
+        private void OnRefreshLevel(int level)
+        {
+            Debug.Log("OnRefreshLevel - level = " + level);
+            var levelNumString = levelString.StringReference["level_num"] as IntVariable;
+            if (levelNumString == null) return;
+            levelNumString.Value = level;
+            levelString.RefreshString();
+        }
     }
 }

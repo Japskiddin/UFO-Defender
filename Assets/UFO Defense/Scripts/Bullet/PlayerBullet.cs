@@ -1,33 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
+using UFO_Defense.Scripts.Enemy;
 using UnityEngine;
 
-public class PlayerBullet : BaseBullet
+namespace UFO_Defense.Scripts.Bullet
 {
-    [Header("Properties")]
-    [SerializeField] private float speed = 3.0f;
-
-    private void Awake()
+    public class PlayerBullet : BaseBullet
     {
-        Init(speed);
-    }
+        [Header("Properties")] [SerializeField]
+        private float speed = 3.0f;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Enemy"))
+        private void Awake()
         {
-            Ufo mob = collision.GetComponent<Ufo>();
-            if (mob != null)
+            Init(speed);
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Enemy"))
             {
+                var mob = collision.GetComponent<Ufo>();
+                if (mob == null) return;
                 mob.TakeDamage();
                 Destroy(this.gameObject);
             }
-        }
-        else if (collision.CompareTag("EnemyBullet"))
-        {
-            UfoBullet bullet = collision.GetComponent<UfoBullet>();
-            if (bullet != null)
+            else if (collision.CompareTag("EnemyBullet"))
             {
+                var bullet = collision.GetComponent<UfoBullet>();
+                if (bullet == null) return;
                 bullet.Destroy();
                 Destroy(this.gameObject);
             }

@@ -1,23 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
+using UFO_Defense.Scripts.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameOverModal : BasePanel
+namespace UFO_Defense.Scripts.UI
 {
-    [Header("Properties")]
-    [SerializeField] private AudioClip sound;
-    [Header("Panel")]
-    [SerializeField] private Image gameOver;
-
-    private void Awake()
+    public class GameOverModal : BasePanel
     {
-        Init(gameOver, sound);
-    }
+        [Header("Properties")] [SerializeField]
+        private AudioClip sound;
 
-    public void OnExitClick()
-    {
-        PlaySound();
-        Managers.Scene.OpenMainMenu();
+        [Header("Panel")] [SerializeField] private Image gameOver;
+
+        private void Awake()
+        {
+            Init(gameOver, sound);
+        }
+
+        public void OnExitClick()
+        {
+            PlaySound();
+            Manager.Scene.OpenMainMenu();
+        }
     }
 }

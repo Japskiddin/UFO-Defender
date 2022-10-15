@@ -1,60 +1,64 @@
-using System.Collections;
-using System.Collections.Generic;
+using UFO_Defense.Scripts.Managers;
+using UFO_Defense.Scripts.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsController : MonoBehaviour
+namespace UFO_Defense.Scripts.Controllers
 {
-    [Header("Properties")]
-    [SerializeField] private AudioClip sound;
-    [SerializeField] private Slider soundsSlider;
-    [SerializeField] private Slider musicSlider;
-    [SerializeField] private MenuCheckbox musicCheckbox;
-    [SerializeField] private MenuCheckbox soundCheckbox;
-
-    private void Awake()
+    public class SettingsController : MonoBehaviour
     {
-        Refresh();
-    }
+        [Header("Properties")] [SerializeField]
+        private AudioClip sound;
 
-    private void Start()
-    {
-        UpdateCheckbox(musicCheckbox, Managers.Audio.MusicMute);
-        UpdateCheckbox(soundCheckbox, Managers.Audio.SoundMute);
-    }
+        [SerializeField] private Slider soundsSlider;
+        [SerializeField] private Slider musicSlider;
+        [SerializeField] private MenuCheckbox musicCheckbox;
+        [SerializeField] private MenuCheckbox soundCheckbox;
 
-    public void Refresh()
-    {
-        soundsSlider.value = Managers.Audio.SoundVolume;
-        musicSlider.value = Managers.Audio.MusicVolume;
-    }
+        private void Awake()
+        {
+            Refresh();
+        }
 
-    private void UpdateCheckbox(MenuCheckbox checkbox, bool check)
-    {
-        checkbox.SetChecked(check);
-    }
+        private void Start()
+        {
+            UpdateCheckbox(musicCheckbox, Manager.Audio.MusicMute);
+            UpdateCheckbox(soundCheckbox, AudioManager.SoundMute);
+        }
 
-    public void OnSoundToggle()
-    {
-        Managers.Audio.SoundMute = !Managers.Audio.SoundMute;
-        Managers.Audio.PlaySound(sound);
-        UpdateCheckbox(soundCheckbox, Managers.Audio.SoundMute);
-    }
+        private void Refresh()
+        {
+            soundsSlider.value = AudioManager.SoundVolume;
+            musicSlider.value = Manager.Audio.MusicVolume;
+        }
 
-    public void OnSoundValue(float volume)
-    {
-        Managers.Audio.SoundVolume = volume;
-    }
+        private static void UpdateCheckbox(MenuCheckbox checkbox, bool check)
+        {
+            checkbox.SetChecked(check);
+        }
 
-    public void OnMusicToggle()
-    {
-        Managers.Audio.MusicMute = !Managers.Audio.MusicMute;
-        Managers.Audio.PlaySound(sound);
-        UpdateCheckbox(musicCheckbox, Managers.Audio.MusicMute);
-    }
+        public void OnSoundToggle()
+        {
+            AudioManager.SoundMute = !AudioManager.SoundMute;
+            Manager.Audio.PlaySound(sound);
+            UpdateCheckbox(soundCheckbox, AudioManager.SoundMute);
+        }
 
-    public void OnMusicValue(float volume)
-    {
-        Managers.Audio.MusicVolume = volume;
+        public void OnSoundValue(float volume)
+        {
+            AudioManager.SoundVolume = volume;
+        }
+
+        public void OnMusicToggle()
+        {
+            Manager.Audio.MusicMute = !Manager.Audio.MusicMute;
+            Manager.Audio.PlaySound(sound);
+            UpdateCheckbox(musicCheckbox, Manager.Audio.MusicMute);
+        }
+
+        public void OnMusicValue(float volume)
+        {
+            Manager.Audio.MusicVolume = volume;
+        }
     }
 }

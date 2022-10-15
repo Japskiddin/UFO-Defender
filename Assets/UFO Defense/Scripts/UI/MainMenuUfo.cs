@@ -1,81 +1,91 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MainMenuUfo : MonoBehaviour
+namespace UFO_Defense.Scripts.UI
 {
-    private const int _directionLeft = 0;
-    private const int _directionRight = 1;
-    private const int _directionTop = 2;
-    private const int _directionBottom = 3;
-
-    private int _directionHorizontal;
-    private int _directionVertical;
-    private float _minPosY;
-    private float _maxPosY;
-    private float _minPosX;
-    private float _maxPosX;
-
-    [Header("Properties")]
-    [SerializeField] private float speed = 1.5f;
-
-    private void Awake()
+    public class MainMenuUfo : MonoBehaviour
     {
-        _directionHorizontal = Random.Range(0, 1) == 1 ? _directionLeft : _directionRight;
-        _directionVertical = Random.Range(0, 1) == 1 ? _directionTop : _directionBottom;
-    }
+        private const int DirectionLeft = 0;
+        private const int DirectionRight = 1;
+        private const int DirectionTop = 2;
+        private const int DirectionBottom = 3;
 
-    private void Start()
-    {
-        CheckScreenEdges();
-        transform.position = new Vector3(Random.Range(_minPosX, _maxPosX), Random.Range(_minPosY, _maxPosY), transform.position.z);
-    }
+        private int _directionHorizontal;
+        private int _directionVertical;
+        private float _minPosY;
+        private float _maxPosY;
+        private float _minPosX;
+        private float _maxPosX;
+        private SpriteRenderer _spriteRenderer;
 
-    void Update()
-    {
-        CheckScreenEdges();
-        CheckEdgesCollision();
-        Move();
-    }
+        [Header("Properties")] [SerializeField]
+        private float speed = 1.5f;
 
-    private void CheckScreenEdges()
-    {
-        var cameraPos = new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z);
-        var screenBounds = Camera.main.ScreenToWorldPoint(cameraPos);
-        var spriteRenderer = transform.GetComponent<SpriteRenderer>();
-        var spriteWidth = spriteRenderer.bounds.size.x;
-        var spriteHeight = spriteRenderer.bounds.size.y;
-        _minPosY = -screenBounds.y + spriteHeight / 2f;
-        _maxPosY = screenBounds.y - spriteHeight / 2f;
-        _minPosX = -screenBounds.x + spriteWidth / 2f;
-        _maxPosX = screenBounds.x - spriteWidth / 2f;
-    }
-
-    private void CheckEdgesCollision()
-    {
-        if (transform.position.y >= _maxPosY)
+        private void Awake()
         {
-            _directionVertical = _directionBottom;
-        }
-        else if (transform.position.y <= _minPosY)
-        {
-            _directionVertical = _directionTop;
+            _spriteRenderer = transform.GetComponent<SpriteRenderer>();
+            _directionHorizontal = Random.Range(0, 1) == 1 ? DirectionLeft : DirectionRight;
+            _directionVertical = Random.Range(0, 1) == 1 ? DirectionTop : DirectionBottom;
         }
 
-        if (transform.position.x >= _maxPosX)
+        private void Start()
         {
-            _directionHorizontal = _directionRight;
+            CheckScreenEdges();
+            transform.position = new Vector3(Random.Range(_minPosX, _maxPosX), Random.Range(_minPosY, _maxPosY),
+                transform.position.z);
         }
-        else if (transform.position.x <= _minPosX)
-        {
-            _directionHorizontal = _directionLeft;
-        }
-    }
 
-    public void Move()
-    {
-        float posX = (_directionHorizontal == _directionRight ? -1 : 1) * speed * Time.deltaTime;
-        float posY = (_directionVertical == _directionBottom ? -1 : 1) * speed * Time.deltaTime;
-        transform.Translate(posX, posY, 0);
+        void Update()
+        {
+            CheckScreenEdges();
+            CheckEdgesCollision();
+            Move();
+        }
+
+        private void CheckScreenEdges()
+        {
+            var mainCamera = Camera.main;
+            if (mainCamera == null)
+            {
+                throw new System.NullReferenceException("Camera is null!");
+            }
+
+            var cameraPos = new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z);
+            var screenBounds = mainCamera.ScreenToWorldPoint(cameraPos);
+            var bounds = _spriteRenderer.bounds;
+            var spriteWidth = bounds.size.x;
+            var spriteHeight = bounds.size.y;
+            _minPosY = -screenBounds.y + spriteHeight / 2f;
+            _maxPosY = screenBounds.y - spriteHeight / 2f;
+            _minPosX = -screenBounds.x + spriteWidth / 2f;
+            _maxPosX = screenBounds.x - spriteWidth / 2f;
+        }
+
+        private void CheckEdgesCollision()
+        {
+            if (transform.position.y >= _maxPosY)
+            {
+                _directionVertical = DirectionBottom;
+            }
+            else if (transform.position.y <= _minPosY)
+            {
+                _directionVertical = DirectionTop;
+            }
+
+            if (transform.position.x >= _maxPosX)
+            {
+                _directionHorizontal = DirectionRight;
+            }
+            else if (transform.position.x <= _minPosX)
+            {
+                _directionHorizontal = DirectionLeft;
+            }
+        }
+
+        public void Move()
+        {
+            var posX = (_directionHorizontal == DirectionRight ? -1 : 1) * speed * Time.deltaTime;
+            var posY = (_directionVertical == DirectionBottom ? -1 : 1) * speed * Time.deltaTime;
+            transform.Translate(posX, posY, 0);
+        }
     }
 }

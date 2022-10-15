@@ -1,5 +1,8 @@
-public class StartupEvent
+namespace UFO_Defense.Scripts.Managers
 {
-    public const string MANAGERS_STARTED = "MANAGERS_STARTED";
-    public const string MANAGERS_PROGRESS = "MANAGERS_PROGRESS";
+    public static class StartupEvent
+    {
+        public const string ManagersStarted = "MANAGERS_STARTED";
+        public const string ManagersProgress = "MANAGERS_PROGRESS";
+    }
 }
