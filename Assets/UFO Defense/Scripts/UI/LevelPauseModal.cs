@@ -13,21 +13,10 @@ namespace UFO_Defense.Scripts.UI
         private AudioClip sound;
 
         [Header("Panel")] [SerializeField] private Image levelPause;
-        [Header("Strings")] [SerializeField] private LocalizeStringEvent levelString;
 
         private void Awake()
         {
             Init(levelPause, sound);
-        }
-
-        private void OnEnable()
-        {
-            Messenger<int>.AddListener(GameEvent.LevelUpdated, OnRefreshLevel);
-        }
-
-        private void OnDisable()
-        {
-            Messenger<int>.RemoveListener(GameEvent.LevelUpdated, OnRefreshLevel);
         }
 
         public void OnExitClick()
@@ -41,14 +30,6 @@ namespace UFO_Defense.Scripts.UI
             PlaySound();
             Hide();
             Controller.Settings.Show();
-        }
-
-        private void OnRefreshLevel(int level)
-        {
-            Debug.Log("OnRefreshLevel - level = " + level);
-            if (levelString.StringReference["level_num"] is not IntVariable levelNumString) return;
-            levelNumString.Value = level;
-            levelString.RefreshString();
         }
     }
 }

@@ -1,3 +1,4 @@
+using UFO_Defense.Scripts.Controllers.Game;
 using UnityEngine;
 
 namespace UFO_Defense.Scripts.Managers
@@ -71,7 +72,6 @@ namespace UFO_Defense.Scripts.Managers
             }
 
             UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
-            Messenger<int>.Broadcast(GameEvent.LevelUpdated, CurrentLevel);
         }
     }
 }
