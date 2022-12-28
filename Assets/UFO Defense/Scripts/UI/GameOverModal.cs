@@ -6,10 +6,11 @@ namespace UFO_Defense.Scripts.UI
 {
     public class GameOverModal : BasePanel
     {
-        [Header("Properties")] [SerializeField]
-        private AudioClip sound;
+        [Header("Properties")]
+        [SerializeField] private AudioClip sound;
 
-        [Header("Panel")] [SerializeField] private Image gameOver;
+        [Header("Panel")]
+        [SerializeField] private Image gameOver;
 
         private void Awake()
         {

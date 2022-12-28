@@ -6,8 +6,8 @@ namespace UFO_Defense.Scripts.Bullet
 {
     public class UfoBullet : BaseBullet
     {
-        [Header("Properties")] [SerializeField]
-        private float minAngle = 130;
+        [Header("Properties")]
+        [SerializeField] private float minAngle = 130;
 
         [SerializeField] private float maxAngle = 230;
         [SerializeField] private float speed = 1.0f;

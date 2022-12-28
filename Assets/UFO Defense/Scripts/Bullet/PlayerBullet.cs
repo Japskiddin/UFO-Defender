@@ -5,8 +5,8 @@ namespace UFO_Defense.Scripts.Bullet
 {
     public class PlayerBullet : BaseBullet
     {
-        [Header("Properties")] [SerializeField]
-        private float speed = 3.0f;
+        [Header("Properties")]
+        [SerializeField] private float speed = 3.0f;
 
         private void Awake()
         {

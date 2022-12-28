@@ -6,10 +6,11 @@ namespace UFO_Defense.Scripts.UI
 {
     public class SettingsModal : BasePanel
     {
-        [Header("Properties")] [SerializeField]
-        private AudioClip sound;
+        [Header("Properties")]
+        [SerializeField] private AudioClip sound;
 
-        [Header("Panel")] [SerializeField] private Image settingsMenu;
+        [Header("Panel")]
+        [SerializeField] private Image settingsMenu;
 
         private void Awake()
         {

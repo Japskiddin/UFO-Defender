@@ -6,10 +6,11 @@ namespace UFO_Defense.Scripts.Controllers
 {
     public class MainMenuController : MonoBehaviour
     {
-        [Header("Properties")] [SerializeField]
-        private AudioClip sound;
+        [Header("Properties")]
+        [SerializeField] private AudioClip sound;
 
-        [Header("Panels")] [SerializeField] private RectTransform mainMenu;
+        [Header("Panels")]
+        [SerializeField] private RectTransform mainMenu;
         [SerializeField] private RectTransform settingsMenu;
         [SerializeField] private RectTransform about;
         [SerializeField] private RectTransform homeButton;

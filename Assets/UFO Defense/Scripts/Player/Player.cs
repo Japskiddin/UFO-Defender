@@ -7,12 +7,14 @@ namespace UFO_Defense.Scripts.Player
 {
     public class Player : MonoBehaviour
     {
-        [Header("Prefabs")] [SerializeField] private GameObject gun;
+        [Header("Prefabs")]
+        [SerializeField] private GameObject gun;
         [SerializeField] private GameObject bulletPrefab;
-        [Header("Sounds")] [SerializeField] private AudioClip shootSound;
+        [Header("Sounds")]
+        [SerializeField] private AudioClip shootSound;
 
-        [Header("Properties")] [SerializeField]
-        private float secondsForShoot = 0.5f;
+        [Header("Properties")]
+        [SerializeField] private float secondsForShoot = 0.5f;
 
         private float _timer;
         private SpriteRenderer _spriteRenderer;

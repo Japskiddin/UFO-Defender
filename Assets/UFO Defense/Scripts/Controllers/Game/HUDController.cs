@@ -10,10 +10,11 @@ namespace UFO_Defense.Scripts.Controllers.Game
 {
     public class HUDController : MonoBehaviour
     {
-        [Header("Properties")] [SerializeField]
-        private TextMeshProUGUI mobTotal;
+        [Header("Properties")]
+        [SerializeField] private TextMeshProUGUI mobTotal;
 
-        [Header("Strings")] [SerializeField] private LocalizeStringEvent pauseLevelString;
+        [Header("Strings")]
+        [SerializeField] private LocalizeStringEvent pauseLevelString;
         private LocalizedString _localizedPauseLevelString;
         private IntVariable _pauseLevel;
 

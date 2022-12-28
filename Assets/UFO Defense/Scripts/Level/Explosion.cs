@@ -6,8 +6,8 @@ namespace UFO_Defense.Scripts.Level
 {
     public class Explosion : MonoBehaviour
     {
-        [Header("Properties")] [SerializeField]
-        private AudioClip explosionSound;
+        [Header("Properties")]
+        [SerializeField] private AudioClip explosionSound;
 
         [SerializeField] private float explodeTime = 0.5f;
 

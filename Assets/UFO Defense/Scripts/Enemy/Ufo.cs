@@ -13,11 +13,13 @@ namespace UFO_Defense.Scripts.Enemy
         private const int DirectionBottom = 3;
         private const float SecondsForDirection = 1f;
 
-        [Header("Sound FX")] [SerializeField] private AudioClip shootSound;
-        [Header("Prefab")] [SerializeField] private GameObject ufoBullet;
+        [Header("Sound FX")]
+        [SerializeField] private AudioClip shootSound;
+        [Header("Prefab")]
+        [SerializeField] private GameObject ufoBullet;
 
-        [Header("Properties")] [SerializeField]
-        private float defaultSpeed = 1.5f;
+        [Header("Properties")]
+        [SerializeField] private float defaultSpeed = 1.5f;
 
         [SerializeField] private int defaultHealth = 1;
 

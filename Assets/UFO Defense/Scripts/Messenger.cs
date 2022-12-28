@@ -150,7 +150,7 @@ namespace UFO_Defense.Scripts
         }
     }
 
-// No parameters
+    // No parameters
     public static class Messenger
     {
         public static void AddListener(string eventType, Action handler)
@@ -204,7 +204,7 @@ namespace UFO_Defense.Scripts
         }
     }
 
-// One parameter
+    // One parameter
     public static class Messenger<T>
     {
         public static void AddListener(string eventType, Action<T> handler)
@@ -259,7 +259,7 @@ namespace UFO_Defense.Scripts
     }
 
 
-// Two parameters
+    // Two parameters
     public static class Messenger<T, U>
     {
         public static void AddListener(string eventType, Action<T, U> handler)
@@ -315,7 +315,7 @@ namespace UFO_Defense.Scripts
     }
 
 
-// Three parameters
+    // Three parameters
     public static class Messenger<T, U, V>
     {
         public static void AddListener(string eventType, Action<T, U, V> handler)

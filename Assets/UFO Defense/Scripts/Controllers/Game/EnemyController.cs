@@ -10,11 +10,12 @@ namespace UFO_Defense.Scripts.Controllers.Game
     /// </summary>
     public class EnemyController : MonoBehaviour
     {
-        [Header("Prefabs")] [SerializeField] private GameObject bossPrefab;
+        [Header("Prefabs")]
+        [SerializeField] private GameObject bossPrefab;
         [SerializeField] private GameObject ufoPrefab;
 
-        [Header("Properties")] [SerializeField]
-        private float secondsForSpawn = 3f;
+        [Header("Properties")]
+        [SerializeField] private float secondsForSpawn = 3f;
 
         [SerializeField] private int enemySpawnCount = 10;
         [SerializeField] private int mobTotal = 20;

@@ -9,10 +9,11 @@ namespace UFO_Defense.Scripts.UI
 {
     public class LevelPauseModal : BasePanel
     {
-        [Header("Properties")] [SerializeField]
-        private AudioClip sound;
+        [Header("Properties")]
+        [SerializeField] private AudioClip sound;
 
-        [Header("Panel")] [SerializeField] private Image levelPause;
+        [Header("Panel")]
+        [SerializeField] private Image levelPause;
 
         private void Awake()
         {

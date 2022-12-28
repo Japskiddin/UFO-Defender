@@ -5,11 +5,11 @@ namespace UFO_Defense.Scripts.UI
 {
     public class ProgressBar : MonoBehaviour
     {
-        [Header("UI Elements")] [SerializeField]
-        private Image image;
+        [Header("UI Elements")]
+        [SerializeField] private Image image;
 
-        [Header("Properties")] [SerializeField]
-        private int value;
+        [Header("Properties")]
+        [SerializeField] private int value;
 
         [SerializeField] private int maxValue = 100;
         [SerializeField] private bool isCorrectConfigured;

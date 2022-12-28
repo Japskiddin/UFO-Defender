@@ -7,8 +7,8 @@ namespace UFO_Defense.Scripts.Controllers
 {
     public class SettingsController : MonoBehaviour
     {
-        [Header("Properties")] [SerializeField]
-        private AudioClip sound;
+        [Header("Properties")]
+        [SerializeField] private AudioClip sound;
 
         [SerializeField] private Slider soundsSlider;
         [SerializeField] private Slider musicSlider;

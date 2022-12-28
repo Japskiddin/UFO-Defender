@@ -17,8 +17,8 @@ namespace UFO_Defense.Scripts.UI
         private float _maxPosX;
         private SpriteRenderer _spriteRenderer;
 
-        [Header("Properties")] [SerializeField]
-        private float speed = 1.5f;
+        [Header("Properties")]
+        [SerializeField] private float speed = 1.5f;
 
         private void Awake()
         {

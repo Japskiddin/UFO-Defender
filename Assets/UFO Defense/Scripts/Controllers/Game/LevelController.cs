@@ -6,14 +6,15 @@ namespace UFO_Defense.Scripts.Controllers.Game
 {
     public class LevelController : MonoBehaviour
     {
-        [Header("Prefabs")] [SerializeField] private GameObject explosionPrefab;
+        [Header("Prefabs")]
+        [SerializeField] private GameObject explosionPrefab;
         [SerializeField] private Home homePrefab;
 
-        [Header("Properties")] [SerializeField]
-        private int homeCount = 4;
+        [Header("Properties")]
+        [SerializeField] private int homeCount = 4;
 
-        [Header("Background")] [SerializeField]
-        private SpriteRenderer levelBackground;
+        [Header("Background")]
+        [SerializeField] private SpriteRenderer levelBackground;
 
         public Sprite[] HomeSprites { get; private set; }
         private int _homeAlive;

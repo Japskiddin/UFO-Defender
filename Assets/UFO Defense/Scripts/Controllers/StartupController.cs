@@ -6,8 +6,8 @@ namespace UFO_Defense.Scripts.Controllers
 {
     public class StartupController : MonoBehaviour
     {
-        [Header("Properties")] [SerializeField]
-        private ProgressBar progressBar;
+        [Header("Properties")]
+        [SerializeField] private ProgressBar progressBar;
 
         private void Awake()
         {

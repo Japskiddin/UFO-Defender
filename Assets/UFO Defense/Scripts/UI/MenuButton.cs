@@ -9,8 +9,8 @@ namespace UFO_Defense.Scripts.UI
     {
         private Image _image;
 
-        [Header("Properties")] [SerializeField]
-        private Sprite[] backgrounds;
+        [Header("Properties")]
+        [SerializeField] private Sprite[] backgrounds;
 
         private void Awake()
         {

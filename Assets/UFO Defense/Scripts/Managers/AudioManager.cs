@@ -6,20 +6,20 @@ namespace UFO_Defense.Scripts.Managers
 {
     public class AudioManager : MonoBehaviour, IGameManager
     {
-        [Header("Properties")] [SerializeField]
-        private AudioSource music1Source;
+        [Header("Properties")]
+        [SerializeField] private AudioSource music1Source;
 
         [SerializeField] private AudioSource music2Source;
         [SerializeField] private AudioSource soundSource;
 
-        [FormerlySerializedAs("mainMenuBGMusic")] [SerializeField]
-        private string mainMenuBgMusic;
+        [FormerlySerializedAs("mainMenuBGMusic")]
+        [SerializeField] private string mainMenuBgMusic;
 
-        [FormerlySerializedAs("levelBGMusic")] [SerializeField]
-        private string levelBgMusic;
+        [FormerlySerializedAs("levelBGMusic")]
+        [SerializeField] private string levelBgMusic;
 
-        [FormerlySerializedAs("levelMenuBGMusic")] [SerializeField]
-        private string levelMenuBgMusic;
+        [FormerlySerializedAs("levelMenuBGMusic")]
+        [SerializeField] private string levelMenuBgMusic;
 
         [SerializeField] private float crossFadeRate = 1.5f;
 
