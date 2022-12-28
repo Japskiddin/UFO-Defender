@@ -12,13 +12,8 @@ namespace UFO_Defense.Scripts.Managers
         [SerializeField] private AudioSource music2Source;
         [SerializeField] private AudioSource soundSource;
 
-        [FormerlySerializedAs("mainMenuBGMusic")]
         [SerializeField] private string mainMenuBgMusic;
-
-        [FormerlySerializedAs("levelBGMusic")]
         [SerializeField] private string levelBgMusic;
-
-        [FormerlySerializedAs("levelMenuBGMusic")]
         [SerializeField] private string levelMenuBgMusic;
 
         [SerializeField] private float crossFadeRate = 1.5f;

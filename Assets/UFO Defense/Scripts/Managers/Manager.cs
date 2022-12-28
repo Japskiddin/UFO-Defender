@@ -6,13 +6,13 @@ using UnityEngine;
 
 namespace UFO_Defense.Scripts.Managers
 {
-    [RequireComponent(typeof(SceneManager))]
+    [RequireComponent(typeof(ScenesManager))]
     [RequireComponent(typeof(AudioManager))]
     public class Manager : MonoBehaviour
     {
         public static AudioManager Audio { get; private set; }
 
-        public static SceneManager Scene { get; private set; }
+        public static ScenesManager Scene { get; private set; }
 
         private List<IGameManager> _startSequence;
 
@@ -21,7 +21,7 @@ namespace UFO_Defense.Scripts.Managers
             DontDestroyOnLoad(gameObject);
 
             Audio = GetComponent<AudioManager>();
-            Scene = GetComponent<SceneManager>();
+            Scene = GetComponent<ScenesManager>();
 
             if (Audio == null)
             {
@@ -63,7 +63,7 @@ namespace UFO_Defense.Scripts.Managers
                 {
                     if (Debug.isDebugBuild)
                     {
-                        Debug.Log("Progress: " + numReady + "/" + numModules);
+                        Debug.Log($"Progress: {numReady} / {numModules}");
                     }
 
                     Messenger<int, int>.Broadcast(StartupEvent.ManagersProgress, numReady, numModules);
