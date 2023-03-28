@@ -3,7 +3,7 @@ guid: 19cafa9f923bbbc49a8075301c46dd1d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -63,6 +63,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -430,7 +431,7 @@ TextureImporter:
         width: 200
         height: 200
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -451,7 +452,7 @@ TextureImporter:
         width: 200
         height: 200
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -472,7 +473,7 @@ TextureImporter:
         width: 200
         height: 200
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -493,7 +494,7 @@ TextureImporter:
         width: 200
         height: 200
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -501,6 +502,48 @@ TextureImporter:
       bones: []
       spriteID: 80965c4d556ecf941b5ed352c6bc35ec
       internalID: -1206935196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ufo_progress
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 560
+        width: 324
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05ca5775fe42d83489e4b6cbe50026bd
+      internalID: 1524126001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ufo_progress_filled
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 537
+        width: 312
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dadbe02110488ab459834440ce06e858
+      internalID: 1334071925
       vertices: []
       indices: 
       edges: []
@@ -516,24 +559,26 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      home_button_normal: -1086266697
-      button_normal: -1400723416
-      button_levels: 237870904
-      sound_off: 888446822
-      slider_handler: -1353889920
-      exit_normal: -1758088909
-      close: -208430226
-      title: 1696809445
-      music_off: 1140177520
-      exit_pressed: -1205011745
       background_menu: 1525438175
-      music_on: -709602412
-      button_resume: -533156500
+      button_levels: 237870904
+      button_normal: -1400723416
       button_pressed: -665890732
-      sound_on: 1738468014
-      home_button_pressed: -175254305
       button_restart: -1206935196
+      button_resume: -533156500
       button_settings: -1745338561
+      close: -208430226
+      exit_normal: -1758088909
+      exit_pressed: -1205011745
+      home_button_normal: -1086266697
+      home_button_pressed: -175254305
+      music_off: 1140177520
+      music_on: -709602412
+      slider_handler: -1353889920
+      sound_off: 888446822
+      sound_on: 1738468014
+      title: 1696809445
+      ufo_progress: 1524126001
+      ufo_progress_filled: 1334071925
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

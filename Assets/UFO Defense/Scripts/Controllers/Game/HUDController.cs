@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.SmartFormat.PersistentVariables;
+using UFO_Defense.Scripts.UI;
 
 namespace UFO_Defense.Scripts.Controllers.Game
 {
@@ -12,6 +13,7 @@ namespace UFO_Defense.Scripts.Controllers.Game
     {
         [Header("Properties")]
         [SerializeField] private TextMeshProUGUI mobTotal;
+        [SerializeField] private ProgressBar ufoProgress;
 
         [Header("Strings")]
         [SerializeField] private LocalizeStringEvent pauseLevelString;
@@ -37,7 +39,12 @@ namespace UFO_Defense.Scripts.Controllers.Game
 
         public void UpdateMobTotal(int value)
         {
-            mobTotal.text = value.ToString();
+            ufoProgress.SetMaxValue(value);
+        }
+
+        public void UpdateMobCount(int value)
+        {
+            ufoProgress.SetValue(value);
         }
     }
 }

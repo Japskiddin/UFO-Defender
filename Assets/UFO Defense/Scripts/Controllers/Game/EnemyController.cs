@@ -21,6 +21,7 @@ namespace UFO_Defense.Scripts.Controllers.Game
         [SerializeField] private int mobTotal = 20;
         private int _mobSpawned;
         private int _bossCount;
+        private int _mobCount;
         private float _timer;
 
         private void Awake()
@@ -38,6 +39,7 @@ namespace UFO_Defense.Scripts.Controllers.Game
             Messenger<Ufo>.AddListener(GameEvent.EnemyMobKilled, OnEnemyMobKilled);
             var level = Manager.Scene.CurrentLevel;
             mobTotal *= level;
+            _mobCount = mobTotal;
             if (level > 1)
             {
                 _bossCount = level * 2;
@@ -47,6 +49,7 @@ namespace UFO_Defense.Scripts.Controllers.Game
         private void Start()
         {
             Controller.HUD.UpdateMobTotal(mobTotal);
+            Controller.HUD.UpdateMobCount(_mobCount);
         }
 
         private void OnDestroy()
@@ -64,7 +67,7 @@ namespace UFO_Defense.Scripts.Controllers.Game
 
         private void CheckUfoSpawn()
         {
-            var canSpawn = _mobSpawned < enemySpawnCount && _mobSpawned < mobTotal;
+            var canSpawn = _mobSpawned < enemySpawnCount && _mobSpawned < _mobCount;
             _timer += Time.deltaTime;
             if (!(_timer > secondsForSpawn) || !canSpawn) return;
             if (_bossCount > 0)
@@ -91,11 +94,15 @@ namespace UFO_Defense.Scripts.Controllers.Game
 
         private void OnEnemyMobKilled(Ufo ufo)
         {
-            if (_mobSpawned == 0 || mobTotal == 0) return;
+            if (_mobSpawned == 0 || _mobCount == 0) return;
             _mobSpawned--;
-            mobTotal--;
-            Controller.HUD.UpdateMobTotal(mobTotal);
-            if (mobTotal == 0)
+            _mobCount--;
+            if (Debug.isDebugBuild)
+            {
+                Debug.Log($"Mob killed, count - {_mobCount}");
+            }
+            Controller.HUD.UpdateMobCount(_mobCount);
+            if (_mobCount == 0)
             {
                 Controller.Gameplay.LevelComplete();
             }

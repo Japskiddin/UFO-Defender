@@ -40,11 +40,13 @@ namespace UFO_Defense.Scripts.UI
 
         public void SetValue(int newValue)
         {
+            if (!isCorrectConfigured) return;
             value = newValue;
         }
 
         public void SetMaxValue(int newMaxValue)
         {
+            if (!isCorrectConfigured) return;
             maxValue = newMaxValue;
         }
     }
