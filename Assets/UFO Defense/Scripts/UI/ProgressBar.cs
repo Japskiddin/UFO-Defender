@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.UI;
 
 namespace UFO_Defense.Scripts.UI
@@ -7,16 +8,13 @@ namespace UFO_Defense.Scripts.UI
     {
         [Header("UI Elements")]
         [SerializeField] private Image image;
-        [SerializeField] private Image thumb;
+        [SerializeField, HideInInspector] private Image thumb;
 
         [Header("Properties")]
         [SerializeField] private int value;
         [SerializeField] private int maxValue = 100;
         [SerializeField] private bool isCorrectConfigured;
         [SerializeField] private bool hasThumb;
-
-        private const int OriginLeft = 0;
-        private const int OriginRight = 1;
 
         private void Awake()
         {
@@ -61,15 +59,15 @@ namespace UFO_Defense.Scripts.UI
         private void InitThumbPosition()
         {
             var thumbRect = thumb.GetComponent<RectTransform>();
-            if (image.fillOrigin == OriginRight)
-            {
-                thumbRect.anchorMin = new Vector2(0, 0.5f);
-                thumbRect.anchorMax = new Vector2(0, 0.5f);
-            }
-            else
+            if (image.fillOrigin == (int)Image.OriginHorizontal.Left)
             {
                 thumbRect.anchorMin = new Vector2(1, 0.5f);
                 thumbRect.anchorMax = new Vector2(1, 0.5f);
+            }
+            else
+            {
+                thumbRect.anchorMin = new Vector2(0, 0.5f);
+                thumbRect.anchorMax = new Vector2(0, 0.5f);
             }
             thumbRect.anchoredPosition = new Vector2(0, 0);
         }
@@ -80,7 +78,7 @@ namespace UFO_Defense.Scripts.UI
             var progressWidth = image.GetComponent<RectTransform>().rect.width;
             var thumbX = progressWidth - progressWidth * image.fillAmount;
             var thumbRect = thumb.GetComponent<RectTransform>();
-            thumbRect.anchoredPosition = new Vector2(thumbX * (image.fillOrigin == OriginLeft ? -1 : 1), 0);
+            thumbRect.anchoredPosition = new Vector2(thumbX * (image.fillOrigin == (int)Image.OriginHorizontal.Left ? -1 : 1), 0);
         }
 
         public void SetValue(int newValue)
@@ -93,6 +91,29 @@ namespace UFO_Defense.Scripts.UI
         {
             if (!isCorrectConfigured) return;
             maxValue = newMaxValue;
+        }
+
+        [CustomEditor(typeof(ProgressBar))]
+        public class ProgressBarEditor : Editor
+        {
+            public override void OnInspectorGUI()
+            {
+                base.OnInspectorGUI();
+                ProgressBar script = (ProgressBar)target;
+                if (script.hasThumb)
+                {
+                    script.thumb.enabled = true;
+                    EditorGUILayout.BeginHorizontal();
+                    serializedObject.Update();
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(script.thumb)), true);
+                    serializedObject.ApplyModifiedProperties();
+                    EditorGUILayout.EndHorizontal();
+                }
+                else
+                {
+                    script.thumb.enabled = false;
+                }
+            }
         }
     }
 }
