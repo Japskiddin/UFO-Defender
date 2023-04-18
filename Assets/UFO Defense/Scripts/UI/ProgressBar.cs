@@ -99,20 +99,21 @@ namespace UFO_Defense.Scripts.UI
             public override void OnInspectorGUI()
             {
                 base.OnInspectorGUI();
+                serializedObject.Update();
                 ProgressBar script = (ProgressBar)target;
-                if (script.hasThumb)
+                if (script.thumb != null)
                 {
-                    script.thumb.enabled = true;
-                    EditorGUILayout.BeginHorizontal();
-                    serializedObject.Update();
-                    EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(script.thumb)), true);
-                    serializedObject.ApplyModifiedProperties();
-                    EditorGUILayout.EndHorizontal();
+                    if (script.hasThumb)
+                    {
+                        script.thumb.enabled = true;
+                        EditorGUILayout.PropertyField(serializedObject.FindProperty(nameof(script.thumb)), true);
+                    }
+                    else
+                    {
+                        script.thumb.enabled = false;
+                    }
                 }
-                else
-                {
-                    script.thumb.enabled = false;
-                }
+                serializedObject.ApplyModifiedProperties();
             }
         }
     }
