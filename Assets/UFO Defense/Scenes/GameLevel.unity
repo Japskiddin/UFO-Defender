@@ -594,9 +594,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 1613535958}
+  thumb: {fileID: 555737176}
   value: 100
   maxValue: 100
   isCorrectConfigured: 0
+  hasThumb: 1
 --- !u!1 &555737174
 GameObject:
   m_ObjectHideFlags: 0
