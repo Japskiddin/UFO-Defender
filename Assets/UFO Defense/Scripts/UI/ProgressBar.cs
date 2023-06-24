@@ -93,6 +93,12 @@ namespace UFO_Defense.Scripts.UI
             maxValue = newMaxValue;
         }
 
+        public void SetThumbImage(Sprite sprite)
+        {
+            if (!isCorrectConfigured || !hasThumb) return;
+            thumb.sprite = sprite;
+        }
+
         [CustomEditor(typeof(ProgressBar))]
         public class ProgressBarEditor : Editor
         {

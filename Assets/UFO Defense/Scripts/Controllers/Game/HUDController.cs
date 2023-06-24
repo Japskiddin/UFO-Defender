@@ -56,5 +56,10 @@ namespace UFO_Defense.Scripts.Controllers.Game
         {
             homeProgress.SetValue(value);
         }
+
+        public void UpdateHomeProgressThumb(Sprite sprite)
+        {
+            homeProgress.SetThumbImage(sprite);
+        }
     }
 }

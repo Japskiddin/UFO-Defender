@@ -49,6 +49,7 @@ namespace UFO_Defense.Scripts.Controllers.Game
         {
             Controller.HUD.UpdateHomeTotal(_homeHpCurrent);
             Controller.HUD.UpdateHomeCount(_homeHpCurrent);
+            Controller.HUD.UpdateHomeProgressThumb(HomeSprites[4]);
         }
 
         private void Update()
