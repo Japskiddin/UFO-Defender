@@ -15,6 +15,10 @@ namespace UFO_Defense.Scripts.Level
 
         public bool IsDestroyed => _health == 0;
 
+        public int GetHealth => _health;
+
+        public int GetDefaultHealth => DefaultHp;
+
         private void Awake()
         {
             _collider = GetComponent<BoxCollider2D>();
@@ -55,6 +59,7 @@ namespace UFO_Defense.Scripts.Level
         {
             if (IsDestroyed) return;
             _health--;
+            Messenger.Broadcast(GameEvent.HomeTakeDamage);
             if (Debug.isDebugBuild)
             {
                 Debug.Log($"Home take damage, health - {_health}");

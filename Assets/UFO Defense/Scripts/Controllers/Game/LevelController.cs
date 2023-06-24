@@ -18,6 +18,8 @@ namespace UFO_Defense.Scripts.Controllers.Game
 
         public Sprite[] HomeSprites { get; private set; }
         private int _homeAlive;
+        private int _homeHpTotal;
+        private int _homeHpCurrent;
         private readonly Home[] _homes = new Home[4];
         private SpriteRenderer _homePrefabSpriteRenderer;
 
@@ -35,9 +37,18 @@ namespace UFO_Defense.Scripts.Controllers.Game
 
             _homePrefabSpriteRenderer = homePrefab.transform.GetComponent<SpriteRenderer>();
             _homeAlive = homeCount;
+            _homeHpTotal = homeCount * homePrefab.GetDefaultHealth;
+            _homeHpCurrent = _homeHpTotal;
             PrepareLevel();
             Messenger<Vector3>.AddListener(GameEvent.CreateExplosion, OnCreateExplosion);
             Messenger.AddListener(GameEvent.HomeDestroyed, OnHomeDestroyed);
+            Messenger.AddListener(GameEvent.HomeTakeDamage, OnHomeTakeDamage);
+        }
+
+        private void Start()
+        {
+            Controller.HUD.UpdateHomeTotal(_homeHpCurrent);
+            Controller.HUD.UpdateHomeCount(_homeHpCurrent);
         }
 
         private void Update()
@@ -49,6 +60,7 @@ namespace UFO_Defense.Scripts.Controllers.Game
         {
             Messenger<Vector3>.RemoveListener(GameEvent.CreateExplosion, OnCreateExplosion);
             Messenger.RemoveListener(GameEvent.HomeDestroyed, OnHomeDestroyed);
+            Messenger.RemoveListener(GameEvent.HomeTakeDamage, OnHomeTakeDamage);
         }
 
         private void PrepareLevel()
@@ -125,6 +137,12 @@ namespace UFO_Defense.Scripts.Controllers.Game
             {
                 Controller.Gameplay.GameOver();
             }
+        }
+
+        private void OnHomeTakeDamage()
+        {
+            _homeHpCurrent--;
+            Controller.HUD.UpdateHomeCount(_homeHpCurrent);
         }
     }
 }

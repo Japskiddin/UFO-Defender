@@ -1,3 +1,5 @@
+using UnityEditor;
+
 namespace UFO_Defense.Scripts.Managers
 {
     public static class GameEvent
@@ -8,5 +10,6 @@ namespace UFO_Defense.Scripts.Managers
         public const string CreateExplosion = "CREATE_EXPLOSION";
         public const string EnemyMobKilled = "ENEMY_MOB_KILLED";
         public const string HomeDestroyed = "HOME_DESTROYED";
+        public const string HomeTakeDamage = "HOME_TAKE_DAMAGE";
     }
 }

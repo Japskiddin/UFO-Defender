@@ -12,7 +12,7 @@ namespace UFO_Defense.Scripts.Controllers.Game
     public class HUDController : MonoBehaviour
     {
         [Header("Properties")]
-        [SerializeField] private TextMeshProUGUI mobTotal;
+        [SerializeField] private ProgressBar homeProgress;
         [SerializeField] private ProgressBar ufoProgress;
 
         [Header("Strings")]
@@ -45,6 +45,16 @@ namespace UFO_Defense.Scripts.Controllers.Game
         public void UpdateMobCount(int value)
         {
             ufoProgress.SetValue(value);
+        }
+
+        public void UpdateHomeTotal(int value)
+        {
+            homeProgress.SetMaxValue(value);
+        }
+
+        public void UpdateHomeCount(int value)
+        {
+            homeProgress.SetValue(value);
         }
     }
 }

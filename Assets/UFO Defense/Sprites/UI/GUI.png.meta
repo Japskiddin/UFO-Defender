@@ -548,6 +548,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: home_progress_filled
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 514
+        width: 312
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17981efe1f1a1be43884fb4f4dc39cb1
+      internalID: 1028765191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -571,6 +592,7 @@ TextureImporter:
       exit_pressed: -1205011745
       home_button_normal: -1086266697
       home_button_pressed: -175254305
+      home_progress_filled: 1028765191
       music_off: 1140177520
       music_on: -709602412
       slider_handler: -1353889920
